@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第2讲：等差数列 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际等差数列精品课程 - 搭小桥方法，轻松掌握等差数列计算">
+    <meta name="keywords" content="等差数列,搭小桥,数学教学,计算技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 搭小桥特殊样式 */
+        .bridge-illustration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .bridge-pier {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            font-weight: bold;
+            min-width: 3rem;
+            text-align: center;
+        }
+
+        .bridge-span {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 3rem !important; }
+            .hero-section h2 { font-size: 1.5rem !important; }
+            .bridge-illustration { font-size: 1rem; }
+            .bridge-pier { padding: 0.3rem 0.8rem; min-width: 2.5rem; }
+        }
+
+        /* 深色模式 */
+        .dark {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+
+        .dark .example-card {
+            background: #2d2d2d;
+            color: #e5e5e5;
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 打字机效果 - 修复闪动 */
+        .typewriter {
+            /* 移除闪烁动画，保持静态样式 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+
+
+    <!-- Hero 区域 -->
+    <section id="hero" class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第2讲：等差数列
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                搭小桥方法，轻松掌握等差数列计算
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🌉 搭小桥方法
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                class="px-8 py-4 bg-white text-purple-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-white">
+                <i class="fas fa-compass text-blue-400 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-400 mb-12 text-lg fade-in">
+                掌握等差数列的核心概念，构建完整知识体系
+            </p>
+            
+            <!-- 三列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 等差数列定义 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-blue-400 mb-4">📊</div>
+                    <h3 class="text-xl font-bold text-white mb-3">等差数列定义</h3>
+                    <p class="text-gray-300 text-sm">
+                        从第二项起，每一项与前一项的差等于同一常数的数列
+                    </p>
+                </div>
+                
+                <!-- 名词解释 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-green-400 mb-4">📝</div>
+                    <h3 class="text-xl font-bold text-white mb-3">关键术语</h3>
+                    <p class="text-gray-300 text-sm">
+                        首项、末项、项数、公差、和 - 五个基本要素
+                    </p>
+                </div>
+                
+                <!-- 通项公式 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-purple-400 mb-4">🧮</div>
+                    <h3 class="text-xl font-bold text-white mb-3">通项公式</h3>
+                    <p class="text-gray-300 text-sm">
+                        末项 = 首项 + （项数-1）× 公差
+                    </p>
+                </div>
+                
+                <!-- 项数公式 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-yellow-400 mb-4">🔢</div>
+                    <h3 class="text-xl font-bold text-white mb-3">项数公式</h3>
+                    <p class="text-gray-300 text-sm">
+                        项数 =（末项-首项）÷ 公差 + 1
+                    </p>
+                </div>
+                
+                <!-- 求和公式 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-red-400 mb-4">➕</div>
+                    <h3 class="text-xl font-bold text-white mb-3">求和公式</h3>
+                    <p class="text-gray-300 text-sm">
+                        和 =（首项 + 末项）× 项数 ÷ 2
+                    </p>
+                </div>
+                
+                <!-- 中项公式 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-orange-400 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-white mb-3">中项定理</h3>
+                    <p class="text-gray-300 text-sm">
+                        奇数项数列：和 = 中间项 × 项数
+                    </p>
+                </div>
+                
+                <!-- 搭小桥方法 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-pink-400 mb-4">🌉</div>
+                    <h3 class="text-xl font-bold text-white mb-3">搭小桥方法</h3>
+                    <p class="text-gray-300 text-sm">
+                        数当桥墩，公差当小桥，直观理解计算过程
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                四种基本题型，掌握等差数列计算精髓
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本计算技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        🍓 <span class="ml-3">基本计算技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 个数计算 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                🔢 个数计算：尾➖头➕1
+                            </h4>
+                            <p class="text-gray-600">
+                                连续数列个数的基本公式，记住要补1
+                            </p>
+                        </div>
+                        
+                        <!-- 求某项 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                🎯 第几个数：头＋（个数-1）✖️公差
+                            </h4>
+                            <p class="text-gray-600">
+                                搭小桥方法，数是桥墩，公差是小桥
+                            </p>
+                        </div>
+                        
+                        <!-- 求位置 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                📍 某数是第几个：（该数-头）➗公差+1
+                            </h4>
+                            <p class="text-gray-600">
+                                反向推理，从数值找位置
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 高级应用技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        🥝 <span class="ml-3">高级应用技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 求和计算 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                ➕ 求和：（头＋尾）✖️个数➗2
+                            </h4>
+                            <p class="text-gray-600">倒序相加法的核心应用</p>
+                        </div>
+                        
+                        <!-- 中项定理 -->
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎯 中项定理：中间数✖️个数
+                            </h4>
+                            <p class="text-gray-600">
+                                奇数项数列的特殊求和方法
+                            </p>
+                        </div>
+                        
+                        <!-- 搭小桥核心 -->
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <h4 class="font-semibold text-pink-700 mb-2">
+                                🌉 搭小桥原理：桥墩数-1=小桥数
+                            </h4>
+                            <p class="text-gray-600">
+                                间隔问题的直观理解方法
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握等差数列
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例卡片 -->
+            <div class="space-y-8">
+                <!-- 范例1：等差数列判断 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例1：等差数列判断】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>下面的数列中，哪些是等差数列？若是，请指明公差，若不是，则说明理由。</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(6,10,14,18,22,26,30\)；</p>
+                                <p>（2） \(1,2,1,2,3,4,5,6\)；</p>
+                                <p>（3） \(1,2,4,8,16,32,64\)；</p>
+                                <p>（4） \(3,3,3,3,3,3,3,3\)；</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：等差数列判断 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：等差数列判断】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>下面的数列中，哪些是等差数列？若是，请指明公差，若不是，则说明理由。</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(6,10,14,18,22,26,30\)；</p>
+                                <p>（2） \(1,2,1,2,3,4,5,6\)；</p>
+                                <p>（3） \(1,2,4,8,16,32,64\)；</p>
+                                <p>（4） \(3,3,3,3,3,3,3,3\)；</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">💡 关键洞察</h4>
+                            <p class="text-blue-700">等差数列的判断标准：相邻两项的差是否为常数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）是，公差为4；（2）不是，相邻项差值不固定；（3）不是，这是等比数列；（4）是，公差为0。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：求首项（搭小桥） - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例2：求首项（搭小桥）】</span>
+                        <i class="fas fa-bridge text-pink-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>一个等差数列共有10项。</p>
+                            <p>（1）每一项都比它的前一项大7，并且末项为125，那么首项是多少？</p>
+                            <p>（2）每一项都比它的前一项小7，并且末项为125，那么首项是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：求首项（搭小桥） - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：求首项（搭小桥）】</span>
+                        <i class="fas fa-bridge text-pink-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>一个等差数列共有10项。</p>
+                            <p>（1）每一项都比它的前一项大7，并且末项为125，那么首项是多少？</p>
+                            <p>（2）每一项都比它的前一项小7，并且末项为125，那么首项是多少？</p>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-pink-800 mb-2">🌉 搭小桥提示</h4>
+                            <p class="text-pink-700">10个桥墩，需要搭9座小桥。每座小桥的长度就是公差！</p>
+                            <div class="bridge-illustration mt-3">
+                                <span class="bridge-pier">首项</span>
+                                <span class="bridge-span">+7</span>
+                                <span class="bridge-pier">□</span>
+                                <span class="bridge-span">+7</span>
+                                <span class="bridge-pier">□</span>
+                                <span class="bridge-span">...</span>
+                                <span class="bridge-pier">125</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 搭小桥解析</h4>
+                            <p>（1）10个桥墩，9座小桥，每座小桥+7。从首项到末项走9座小桥：首项+7×9=125，所以首项=125-63=62</p>
+                            <p>（2）10个桥墩，9座小桥，每座小桥-7。从首项到末项走9座小桥：首项-7×9=125，所以首项=125+63=188</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：求第n项（搭小桥） - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例3：求第n项（搭小桥）】</span>
+                        <i class="fas fa-bridge text-pink-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）在等差数列 \(4、6、8、10\cdots\) 中，首项是多少，公差是多少，第10项是多少？</p>
+                            <p>（2）\(1,5,9,13,17,\cdots\)，这个等差数列的第21个数是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：求第n项（搭小桥） - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：求第n项（搭小桥）】</span>
+                        <i class="fas fa-bridge text-pink-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）在等差数列 \(4、6、8、10\cdots\) 中，首项是多少，公差是多少，第10项是多少？</p>
+                            <p>（2）\(1,5,9,13,17,\cdots\)，这个等差数列的第21个数是多少？</p>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-pink-800 mb-2">🌉 搭小桥提示</h4>
+                            <p class="text-pink-700">从第1项到第n项，需要搭（n-1）座小桥！</p>
+                            <div class="bridge-illustration mt-3">
+                                <span class="bridge-pier">4</span>
+                                <span class="bridge-span">+2</span>
+                                <span class="bridge-pier">6</span>
+                                <span class="bridge-span">+2</span>
+                                <span class="bridge-pier">8</span>
+                                <span class="bridge-span">...</span>
+                                <span class="bridge-pier">第10项</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 搭小桥解析</h4>
+                            <p>（1）首项是4，公差是2。10个桥墩，9座小桥，每座小桥+2。第10项=4+2×9=22</p>
+                            <p>（2）首项是1，公差是4。21个桥墩，20座小桥，每座小桥+4。第21项=1+4×20=81</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：求项数 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例4：求项数】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>下面的等差数列中各有多少个项？</p>
+                            <p>（1） \(3、4、5、6、\ldots 76、77、78\)</p>
+                            <p>（2）\(4、7、10、13、\ldots、40、43、46\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：求项数 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：求项数】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>下面的等差数列中各有多少个项？</p>
+                            <p>（1） \(3、4、5、6、\ldots 76、77、78\)</p>
+                            <p>（2）\(4、7、10、13、\ldots、40、43、46\)</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">💡 提示</h4>
+                            <p class="text-green-700">项数 = （末项-首项）÷ 公差 + 1</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）项数 = (78-3) ÷ 1 + 1 = 76</p>
+                            <p>（2）项数 = (46-4) ÷ 3 + 1 = 15</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：求公差 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例5：求公差】</span>
+                        <i class="fas fa-ruler"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）一个等差数列首项为5，末项为93，公差为8，那么这个等差数列一共有多少项？</p>
+                            <p>（2）一个等差数列首项为7，第10项为61，那么这个等差数列的公差等于多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：求公差 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：求公差】</span>
+                        <i class="fas fa-ruler"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）一个等差数列首项为5，末项为93，公差为8，那么这个等差数列一共有多少项？</p>
+                            <p>（2）一个等差数列首项为7，第10项为61，那么这个等差数列的公差等于多少？</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">💡 提示</h4>
+                            <p class="text-yellow-700">公差 = （某项-首项）÷（项数-1）</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）项数 = (93-5) ÷ 8 + 1 = 12</p>
+                            <p>（2）公差 = (61-7) ÷ (10-1) = 6</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：等差数列求和 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例6：等差数列求和】</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用等差数列的求和公式计算下面各题：</p>
+                            <p>（1） \(3+4+5+6+\ldots+76+77+78\)</p>
+                            <p>（2） \(1+3+5+7+\ldots+87+89\)</p>
+                            <p>（3） \(4+7+10+13+\ldots+40+43+46\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：等差数列求和 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：等差数列求和】</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用等差数列的求和公式计算下面各题：</p>
+                            <p>（1） \(3+4+5+6+\ldots+76+77+78\)</p>
+                            <p>（2） \(1+3+5+7+\ldots+87+89\)</p>
+                            <p>（3） \(4+7+10+13+\ldots+40+43+46\)</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-red-800 mb-2">💡 倒序相加法</h4>
+                            <p class="text-red-700">和 = （首项 + 末项）× 项数 ÷ 2</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）项数=76，和=(3+78)×76÷2=3078</p>
+                            <p>（2）项数=45，和=(1+89)×45÷2=2025</p>
+                            <p>（3）项数=15，和=(4+46)×15÷2=375</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：连续自然数应用 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例7：连续自然数应用】</span>
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>9个连续自然数的和是126，其中最小的数是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：连续自然数应用 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：连续自然数应用】</span>
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>9个连续自然数的和是126，其中最小的数是多少？</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-orange-800 mb-2">🎯 中项定理</h4>
+                            <p class="text-orange-700">奇数个数的等差数列，中间项 = 和 ÷ 项数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>9个连续自然数是公差为1的等差数列，第5项为：126÷9=14，所以最小的数为：14-4×1=10。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：连续偶数应用 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例8：连续偶数应用】</span>
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>把248表示成8个连续偶数的和，其中最大的偶数是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：连续偶数应用 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：连续偶数应用】</span>
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>把248表示成8个连续偶数的和，其中最大的偶数是多少？</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">💡 连续偶数</h4>
+                            <p class="text-purple-700">连续偶数的公差为2</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>8个连续偶数构成公差为2的等差数列，最大数应该比最小数大2×7=14，再算出最小数与最大数的和：248×2÷8=62，所以最大数为：(62+14)÷2=38。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：缺项填空 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例9：缺项填空】</span>
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>在下面12个方框中各填入一个数，使这12个数从左到右构成等差数列，其中10、16已经填好，这12个数的和为多少？</p>
+                            <div class="mt-3 text-center font-mono text-lg">
+                                □ □ □ □ □ 16 □ □ 10 □ □ □
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：缺项填空 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：缺项填空】</span>
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>在下面12个方框中各填入一个数，使这12个数从左到右构成等差数列，其中10、16已经填好，这12个数的和为多少？</p>
+                            <div class="mt-3 text-center font-mono text-lg">
+                                □ □ □ □ □ 16 □ □ 10 □ □ □
+                            </div>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-indigo-800 mb-2">💡 关键思路</h4>
+                            <p class="text-indigo-700">根据已知项确定公差，再推算首末项</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>这个数列是等差数列，公差为(16-10)÷3=2，那么第一个方格填26，最后一个方格是4，由等差数列求和公式知和为：(4+26)×12÷2=180。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：实际应用题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例10：实际应用题】</span>
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小强读一本课外书，第一天读了15页，以后每天都比前一天多读3页，最后一天读了36页，刚好把书读完。请问：小强一共读了多少天？这本课外书共有多少页？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：实际应用题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：实际应用题】</span>
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小强读一本课外书，第一天读了15页，以后每天都比前一天多读3页，最后一天读了36页，刚好把书读完。请问：小强一共读了多少天？这本课外书共有多少页？</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-teal-800 mb-2">📚 实际应用</h4>
+                            <p class="text-teal-700">生活中的等差数列问题</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>小强每天读书的页数构成了一个等差数列，首项是15，末项是36，公差是3，项数是(36-15)÷3+1=8，故课外书共有(15+36)×8÷2=204页。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：图形问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例11：图形问题】</span>
+                        <i class="fas fa-shapes"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用3根等长的火柴棍摆成一个等边三角形，用这样的等边三角形，按下图所示铺满一个大的等边三角形，如果这个大的等边三角形的底边能放10根火柴棒，那么这个大的等边三角形中一共要放多少根火柴棒？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：图形问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：图形问题】</span>
+                        <i class="fas fa-shapes"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用3根等长的火柴棍摆成一个等边三角形，用这样的等边三角形，按下图所示铺满一个大的等边三角形，如果这个大的等边三角形的底边能放10根火柴棒，那么这个大的等边三角形中一共要放多少根火柴棒？</p>
+                        </div>
+                        <div class="bg-cyan-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-cyan-800 mb-2">🔺 图形规律</h4>
+                            <p class="text-cyan-700">每层火柴数构成等差数列：3, 6, 9, ..., 30</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>这个图中一共有10层三角形。每层所需火柴棒根数，自上而下依次为：3,6,9,...,3×10。它们构成首项为3，公差为3，项数为10的等差数列。火柴的总根数为3+6+9+...+30=(3+30)×10÷2=165根。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：已知前n项和 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例12：已知前n项和】</span>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>已知一个等差数列的前15项之和为450，前21项之和为819，请问：这个数列的公差是多少？首项是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：已知前n项和 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：已知前n项和】</span>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>已知一个等差数列的前15项之和为450，前21项之和为819，请问：这个数列的公差是多少？首项是多少？</p>
+                        </div>
+                        <div class="bg-rose-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-rose-800 mb-2">🎯 反推技巧</h4>
+                            <p class="text-rose-700">利用中项定理求出关键项，再推算公差</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>先根据前15项之和，求出第8项为：450÷15=30。再根据21项之和，求出第11项为：819÷21=39。所以公差是：(39-30)÷(11-8)=3，首项为：30-3×(8-1)=9。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：巧算技巧 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例13：巧算技巧】</span>
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>计算：\(2000 \times 1999-1999 \times 1998+1998 \times 1997-1997 \times 1996+\cdots+4 \times 3-3 \times 2+2 \times 1\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：巧算技巧 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：巧算技巧】</span>
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>计算：\(2000 \times 1999-1999 \times 1998+1998 \times 1997-1997 \times 1996+\cdots+4 \times 3-3 \times 2+2 \times 1\)</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-amber-800 mb-2">⚡ 巧算方法</h4>
+                            <p class="text-amber-700">配对重组，化复杂为简单</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <div class="space-y-2 text-sm">
+                                <p>原式 = 1999×(2000-1998)+1997×(1998-1996)+⋯+3×(4-2)+2×1</p>
+                                <p>= 1999×2+1997×2+⋯+3×2+2×1</p>
+                                <p>= 2×(1999+1997+⋯+3+1)</p>
+                                <p>= 2×(1999+1)×1000÷2 = 2000000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：周期性数列 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例14：周期性数列】</span>
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>2025，2024，1，2023，2022，1，2021，⋯ 从第3个数起，每一个数都是它前面2个数中大数减小数的差，那么第2000个数是几？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：周期性数列 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：周期性数列】</span>
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>2025，2024，1，2023，2022，1，2021，⋯ 从第3个数起，每一个数都是它前面2个数中大数减小数的差，那么第2000个数是几？</p>
+                        </div>
+                        <div class="bg-violet-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-violet-800 mb-2">🔄 周期模式</h4>
+                            <p class="text-violet-700">找出数列的规律和周期性</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>观察可发现，第1,4,7,⋯项是等差数列，公差是2；第2,5,8,⋯项数字也是等差数列，公差是2；第3,6,9,⋯数字是常数数列，都是1。因此只需要知道第2000个数是哪一个数列中的数即可。2000÷3=666⋯2。那么第2000个数是2024-(667-1)×2=692。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：马虎计算问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例15：马虎计算问题】</span>
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小马虎计算2到200这100个连续双数的平均数。在求这100个数的和时，他少算了其中的一个数，但他仍按100个数计算平均数，结果求出的数比应求得的数小1。小马虎求和时漏掉的数是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：马虎计算问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：马虎计算问题】</span>
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小马虎计算2到200这100个连续双数的平均数。在求这100个数的和时，他少算了其中的一个数，但他仍按100个数计算平均数，结果求出的数比应求得的数小1。小马虎求和时漏掉的数是多少？</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-red-800 mb-2">🔍 逆向思维</h4>
+                            <p class="text-red-700">从结果推原因，找出遗漏的数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>2到200的和=(2+200)×100÷2=10100，应得的平均数=10100÷100=101，现实算出的平均数=101-1=100，现实的总和=100×100=10000，所以少算的数=10100-10000=100。</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-blue-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- 左侧：题目 -->
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                                1. 什么是等差数列？
+                            </h4>
+                        </div>
+                        <!-- 右侧：答案 -->
+                        <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>相邻两个数的差都相等的数列。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-arrows-alt-h text-green-500 mr-3 text-xl"></i>
+                                2. 什么是公差？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>相邻两个数之间固定的差。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calculator text-purple-500 mr-3 text-xl"></i>
+                                3. 等差数列怎么求第几项？
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>第 n 项 = 首项 + (n-1) × 公差</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-bridge text-orange-500 mr-3 text-xl"></i>
+                                4. 搭小桥方法是干什么用的？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>帮助理解：n 个数之间有(n-1)个间隔</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-list-ol text-indigo-500 mr-3 text-xl"></i>
+                                5. 从 3 到 10 有多少个数？用什么公式？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>有 8 个数，公式是：尾-头+1 = 10-3+1 = 8</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-user-graduate text-red-500 mr-3 text-xl"></i>
+                                6. 知道第5项是6，公差1，怎么求首项？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <div class="text-gray-700 text-lg">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i>递增：首项 = 第 5 项 - 1×4 = 2</p>
+                                <p><i class="fas fa-check text-green-500 mr-2"></i>递减：首项 = 第 5 项 + 1×4 = 10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-plus text-teal-500 mr-3 text-xl"></i>
+                                7. 等差数列怎么求和？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>和 =（首项 + 末项）× 项数 ÷ 2</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-dot-circle text-cyan-500 mr-3 text-xl"></i>
+                                8. 什么时候可以用中项定理？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>当项数是奇数时，和 = 中间项 × 项数</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8" style="background: var(--dark-gradient);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                <!-- 作者信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-chalkboard-teacher text-blue-400 mr-2"></i>
+                        作者团队
+                    </h3>
+                    <p class="text-gray-300 mb-2">魔渊国际数学教研团队</p>
+                    <p class="text-gray-400 text-sm">专注于创新数学教学方法研究</p>
+                </div>
+                
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap text-green-400 mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-300 mb-2">2025年魔渊Class精品课程</p>
+                    <p class="text-gray-400 text-sm">第2讲：等差数列</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope text-pink-400 mr-2"></i>
+                        联系我们
+                    </h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                        <p><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+                        <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 魔渊国际. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+        <!-- 主题切换 -->
+        <button id="themeToggle" 
+            class="w-14 h-14 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+        
+        <!-- 返回顶部 -->
+        <button id="backToTop" 
+            class="w-14 h-14 bg-pink-600 text-white rounded-full shadow-lg hover:bg-pink-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // MathJax配置
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            initScrollEffects();
+            initNavigation();
+            initExampleVersionToggle(); // 初始化范例版本切换
+            
+            // 初始化GSAP动画
+            gsap.registerPlugin(ScrollTrigger);
+            initGSAPAnimations();
+        });
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 更新粒子位置
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // 边界检查
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    // 绘制粒子
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                });
+                
+                // 绘制连线
+                particles.forEach((particle1, i) => {
+                    particles.slice(i + 1).forEach(particle2 => {
+                        const dx = particle1.x - particle2.x;
+                        const dy = particle1.y - particle2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle1.x, particle1.y);
+                            ctx.lineTo(particle2.x, particle2.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // 滚动效果
+        function initScrollEffects() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollTop / documentHeight;
+                
+                progressBar.style.transform = `scaleX(${scrollPercent})`;
+            });
+        }
+
+        // 导航功能
+        function initNavigation() {
+            // 返回顶部按钮
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 主题切换
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+
+
+        // 跳转到指定部分
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 打字机动画已移除
+
+        // GSAP动画
+        function initGSAPAnimations() {
+            // 卡片悬停动画
+            gsap.utils.toArray('.example-card').forEach(card => {
+                gsap.set(card, { transformOrigin: 'center' });
+                
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+            });
+            
+            // 滚动触发动画
+            gsap.utils.toArray('.fade-in').forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%'
+                        }
+                    }
+                );
+            });
+        }
+
+        // 知识自测功能 - 简化版
+        function toggleAnswer(questionNumber) {
+            const answerElement = document.getElementById(`answer-${questionNumber}`);
+            
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 范例版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            
+            studentBtn.addEventListener('click', () => showStudentVersion());
+            teacherBtn.addEventListener('click', () => showTeacherVersion());
+        }
+
+        function showStudentVersion() {
+            // 切换按钮样式
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        function showTeacherVersion() {
+            // 切换按钮样式
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.className = 'fas fa-sun text-xl';
+            } else {
+                themeIcon.className = 'fas fa-moon text-xl';
+            }
+        }
+    </script>
+</body>
+</html> 

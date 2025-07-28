@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3讲：分数的认识及基本计算 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际分数计算精品课程 - 分数可视化方法，轻松掌握分数运算">
+    <meta name="keywords" content="分数,分数运算,数学教学,计算技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 - MathJax配置必须在脚本加载之前 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                processEscapes: true,
+                processEnvironments: true,
+                packages: {'[+]': ['ams', 'base']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            startup: {
+                ready: () => {
+                    console.log('MathJax正在启动...');
+                    MathJax.startup.defaultReady();
+                    MathJax.startup.promise.then(() => {
+                        console.log('MathJax启动完成');
+                    });
+                }
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于分数主题的配色 */
+            --primary-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: white;
+        }
+
+        /* 玻璃态效果 - 改为浅色背景 */
+        .glass-card {
+            background: white;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 247, 237, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 - 改为浅色背景 */
+        .concept-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(249, 115, 22, 0.1);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 247, 237, 0.8);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 分数可视化样式 */
+        .fraction-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            gap: 1rem;
+        }
+
+        .fraction-bar {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            min-width: 3rem;
+            text-align: center;
+        }
+
+        .fraction-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(#f59e0b 0deg 120deg, #e5e7eb 120deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 3rem !important; }
+            .hero-section h2 { font-size: 1.5rem !important; }
+            .fraction-visual { flex-direction: column; gap: 0.5rem; }
+        }
+
+        /* 深色模式 */
+        .dark {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+
+        .dark .example-card {
+            background: #2d2d2d;
+            color: #e5e5e5;
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Hero 区域 -->
+    <section id="hero" class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-yellow-50 to-pink-50"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-gray-800 px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第3讲：分数的认识及基本计算
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                分数可视化方法，轻松掌握分数运算
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-80 rounded-full text-lg font-medium magnetic-hover border border-orange-200">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-80 rounded-full text-lg font-medium magnetic-hover border border-orange-200">
+                    🍰 分数可视化
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-80 rounded-full text-lg font-medium magnetic-hover border border-orange-200">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                class="px-8 py-4 bg-white text-orange-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-600 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-orange-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-compass text-orange-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握分数的核心概念，构建完整知识体系
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 分数定义与分类 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-orange-500 mb-4">🍰</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">分数定义与分类</h3>
+                    <div class="text-gray-600 text-sm space-y-2">
+                        <p><strong>定义：</strong>形如 $\frac{b}{a}$ 的数，表示把单位"1"平均分成a份，取其中b份</p>
+                        <p><strong>分子(b)：</strong>表示所取的份数</p>
+                        <p><strong>分母(a)：</strong>表示总共分成的份数</p>
+                        <p><strong>分数与除法：</strong>$b \div a = \frac{b}{a}$ (其中 $a \neq 0$)</p>
+                        <div class="mt-3 space-y-1">
+                            <p>• <strong>真分数：</strong>$0 <$ 分子 $<$ 分母</p>
+                            <p>• <strong>假分数：</strong>分子 $\geq$ 分母</p>
+                            <p>• <strong>带分数：</strong>整数带一个真分数</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 基本性质与最简分数 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-green-500 mb-4">⚖️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">基本性质与最简分数</h3>
+                    <div class="text-gray-600 text-sm space-y-2">
+                        <p><strong>基本性质：</strong>分数的分子和分母都乘以或都除以同一个不为零的数，所得的分数与原分数的大小相等</p>
+                        <p><strong>最简分数：</strong>分子与分母除了1以外，没有其他共同整数因数的分数</p>
+                        <p><strong>通分：</strong>利用基本性质，把所有异分母的分数变成同分母的分数</p>
+                        <p><strong>约分：</strong>利用基本性质，把分数化为最简分数</p>
+                    </div>
+                </div>
+                
+                <!-- 假带互化 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-purple-500 mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">假带互化</h3>
+                    <div class="text-gray-600 text-sm space-y-2">
+                        <p><strong>带化假：</strong>$a\frac{c}{b} = \frac{a \times b + c}{b}$</p>
+                        <p><strong>假化带：</strong>若 $a \div b = c \ldots d$，则 $\frac{a}{b} = c\frac{d}{b}$</p>
+                        <p><strong>说明：</strong>整数部分乘以分母再加分子，作为新的分子，分母不变</p>
+                    </div>
+                </div>
+                
+                <!-- 分数运算 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-red-500 mb-4">➕</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">分数运算</h3>
+                    <div class="text-gray-600 text-sm space-y-2">
+                        <p><strong>同分母加减：</strong>分母不变，分子相加减</p>
+                        <p><strong>异分母加减：</strong>先通分，再加减</p>
+                        <p><strong>分数乘法：</strong>分子相乘作分子，分母相乘作分母</p>
+                        <p><strong>分数除法：</strong>除以一个分数等于乘以这个分数的倒数</p>
+                        <p><strong>注意：</strong>分数中有带分数时要先将带分数化为假分数</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                四种基本运算，掌握分数计算精髓
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本概念技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        🍰 <span class="ml-3">基本概念技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 分数识别 -->
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎯 分数识别：分子分母看大小
+                            </h4>
+                            <p class="text-gray-600">
+                                真分数<1，假分数≥1，带分数=整数+真分数
+                            </p>
+                        </div>
+                        
+                        <!-- 约分通分 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                🔄 约分通分：找准公因数和公倍数
+                            </h4>
+                            <p class="text-gray-600">
+                                约分除公因数，通分找公倍数
+                            </p>
+                        </div>
+                        
+                        <!-- 假带互化 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                ↔️ 假带互化：乘法加法巧转换
+                            </h4>
+                            <p class="text-gray-600">
+                                带化假：整数×分母+分子
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 运算技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        ✖️ <span class="ml-3">运算技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 加减运算 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                ➕ 加减法：同分母直算，异分母通分
+                            </h4>
+                            <p class="text-gray-600">分母不变分子算，结果记得要化简</p>
+                        </div>
+                        
+                        <!-- 乘法运算 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                ✖️ 乘法：分子分母分别乘
+                            </h4>
+                            <p class="text-gray-600">
+                                能约分的先约分，结果化成最简分数
+                            </p>
+                        </div>
+                        
+                        <!-- 除法运算 -->
+                        <div class="p-4 bg-indigo-50 rounded-lg">
+                            <h4 class="font-semibold text-indigo-700 mb-2">
+                                ➗ 除法：转乘倒数
+                            </h4>
+                            <p class="text-gray-600">
+                                除以分数等于乘以倒数
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础概念到复杂运算，全面掌握分数计算
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-orange-500 hover:bg-orange-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例卡片 -->
+            <div class="space-y-8">
+                <!-- 范例1：分数判断 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例1：分数判断】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>判断下面的数中，哪些属于分数？并写明是什么分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{1}{10000}$　（2）11　（3）$\frac{100}{3}$　（4）$1\frac{2}{3}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：分数判断 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：分数判断】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>判断下面的数中，哪些属于分数？并写明是什么分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{1}{10000}$　（2）11　（3）$\frac{100}{3}$　（4）$1\frac{2}{3}$</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-orange-800 mb-2">🍰 分数识别提示</h4>
+                            <p class="text-orange-700">真分数：分子&lt;分母；假分数：分子≥分母；带分数：整数+真分数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{1}{10000}$是真分数；（3）$\frac{100}{3}$是假分数；（4）$1\frac{2}{3}$是带分数。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：分数与除法互化 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例2：分数与除法互化】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>将下面的分数写成除法的形式，除法写成分数的形式。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$7 \div 4$　　（2）$\frac{11}{8}$</p>
+                            <p>（3）$\frac{3}{5}$　　（4）$10 \div 3 = 3 \ldots 1$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：分数与除法互化 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：分数与除法互化】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>将下面的分数写成除法的形式，除法写成分数的形式。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$7 \div 4$　　（2）$\frac{11}{8}$</p>
+                            <p>（3）$\frac{3}{5}$　　（4）$10 \div 3 = 3 \ldots 1$</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-green-800 mb-2">🔄 互化规律</h4>
+                            <p class="text-green-700">被除数 ÷ 除数 = $\frac{\text{被除数}}{\text{除数}}$</p>
+                            <p class="text-green-700">有余数的除法可写成带分数形式</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{7}{4}$　（2）$11 \div 8$　（3）$3 \div 5$　（4）$3\frac{1}{3}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：分数书写方法判断 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例3：分数书写方法判断】</span>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>下面的数中，哪些分数正确的书写方法？并说明是什么分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{2}{3}$　（2）$\frac{3}{2}$　（3）$3\frac{2}{3}$　（4）$2\frac{3}{2}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：分数书写方法判断 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：分数书写方法判断】</span>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>下面的数中，哪些分数正确的书写方法？并说明是什么分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{2}{3}$　（2）$\frac{3}{2}$　（3）$3\frac{2}{3}$　（4）$2\frac{3}{2}$</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-purple-800 mb-2">✏️ 书写规范</h4>
+                            <p class="text-purple-700">带分数必须是整数带一个真分数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）是真分数，（2）是假分数，（3）是带分数，（4）是错误的书写方法，带分数必须是整数带一个真分数。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：利用分数性质填空 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例4：利用分数性质填空】</span>
+                        <i class="fas fa-fill-drip"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>利用分数的性质填空。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{20}{(\quad)}=5$　（2）$\frac{(\quad)}{6}=1$</p>
+                            <p>（3）$11 \div 22=\frac{(\quad)}{2}$　（4）$15 \div 12=\frac{5}{(\quad)}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：利用分数性质填空 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：利用分数性质填空】</span>
+                        <i class="fas fa-fill-drip"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>利用分数的性质填空。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{20}{(\quad)}=5$　（2）$\frac{(\quad)}{6}=1$</p>
+                            <p>（3）$11 \div 22=\frac{(\quad)}{2}$　（4）$15 \div 12=\frac{5}{(\quad)}$</p>
+                        </div>
+                        <div class="bg-cyan-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-cyan-800 mb-2">⚖️ 基本性质</h4>
+                            <p class="text-cyan-700">分子分母同时乘除以同一个非零数，分数大小不变</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）4　（2）6　（3）1　（4）4</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：等值分数 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例5：等值分数】</span>
+                        <i class="fas fa-equals"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>利用分数的性质填空。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>$\frac{4}{8}=1 \div(\quad)=\frac{2}{(\quad)}=6 \div(\quad)=\frac{8}{(\quad)}=\frac{(\quad)}{6}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：等值分数 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：等值分数】</span>
+                        <i class="fas fa-equals"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>利用分数的性质填空。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>$\frac{4}{8}=1 \div(\quad)=\frac{2}{(\quad)}=6 \div(\quad)=\frac{8}{(\quad)}=\frac{(\quad)}{6}$</p>
+                        </div>
+                        <div class="bg-lime-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-lime-800 mb-2">🔗 等值转换</h4>
+                            <p class="text-lime-700">先化简$\frac{4}{8}=\frac{1}{2}$，再进行等值变换</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>2，4，12，16，3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：化简分数 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例6：化简分数】</span>
+                        <i class="fas fa-compress"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>将下面的分数化成最简分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{2}{8}$　（2）$\frac{3}{12}$　（3）$\frac{5}{15}$　（4）$\frac{15}{9}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：化简分数 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：化简分数】</span>
+                        <i class="fas fa-compress"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>将下面的分数化成最简分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{2}{8}$　（2）$\frac{3}{12}$　（3）$\frac{5}{15}$　（4）$\frac{15}{9}$</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-emerald-800 mb-2">✂️ 化简方法</h4>
+                            <p class="text-emerald-700">找出分子分母的最大公因数，同时除以这个数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{1}{4}$　（2）$\frac{1}{4}$　（3）$\frac{1}{3}$　（4）$\frac{5}{3}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：假带互化 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例7：假带互化】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>把下面的假分数化成带分数，带分数化成假分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{31}{12}$　（2）$\frac{38}{9}$</p>
+                            <p>（3）$2\frac{7}{8}$　（4）$4\frac{11}{12}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：假带互化 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：假带互化】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>把下面的假分数化成带分数，带分数化成假分数。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{31}{12}$　（2）$\frac{38}{9}$</p>
+                            <p>（3）$2\frac{7}{8}$　（4）$4\frac{11}{12}$</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-amber-800 mb-2">🔄 互化公式</h4>
+                            <p class="text-amber-700">带化假：$a\frac{c}{b} = \frac{a \times b + c}{b}$</p>
+                            <p class="text-amber-700">假化带：用除法，商是整数部分，余数做分子</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$2\frac{7}{12}$　（2）$4\frac{2}{9}$　（3）$\frac{23}{8}$　（4）$\frac{59}{12}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：同分母加减 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例8：同分母加减】</span>
+                        <i class="fas fa-plus-minus"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{3}{7}+\frac{5}{7}-\frac{4}{7}$</p>
+                            <p>（2）$\frac{13}{11}-\frac{1}{11}-1$</p>
+                            <p>（3）$\frac{3}{5}+\frac{5}{8}+\frac{3}{8}-\frac{3}{5}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：同分母加减 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：同分母加减】</span>
+                        <i class="fas fa-plus-minus"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{3}{7}+\frac{5}{7}-\frac{4}{7}$</p>
+                            <p>（2）$\frac{13}{11}-\frac{1}{11}-1$</p>
+                            <p>（3）$\frac{3}{5}+\frac{5}{8}+\frac{3}{8}-\frac{3}{5}$</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-red-800 mb-2">➕ 同分母加减</h4>
+                            <p class="text-red-700">分母不变，分子相加减，注意约分化简</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{4}{7}$　（2）$\frac{1}{11}$　（3）1</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：分数通分 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例9：分数通分】</span>
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>将下列几组数通分：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{1}{4}$ 和 $\frac{5}{6}$（2）$\frac{3}{14}$ 和 $\frac{11}{28}$</p>
+                            <p>（3）$\frac{5}{6}$ 和 $\frac{2}{5}$（4）$\frac{4}{9}$ 和 $\frac{7}{12}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：分数通分 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：分数通分】</span>
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>将下列几组数通分：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{1}{4}$ 和 $\frac{5}{6}$（2）$\frac{3}{14}$ 和 $\frac{11}{28}$</p>
+                            <p>（3）$\frac{5}{6}$ 和 $\frac{2}{5}$（4）$\frac{4}{9}$ 和 $\frac{7}{12}$</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-blue-800 mb-2">🔄 通分方法</h4>
+                            <p class="text-blue-700">找最小公倍数作公分母，分子分母同时乘以相应的数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{3}{12}$ 和 $\frac{10}{12}$（2）$\frac{6}{28}$ 和 $\frac{11}{28}$</p>
+                            <p>（3）$\frac{25}{30}$ 和 $\frac{12}{30}$（4）$\frac{16}{36}$ 和 $\frac{21}{36}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：分数大小比较 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例10：分数大小比较】</span>
+                        <i class="fas fa-greater-than"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>比较下列分数的大小。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{17}{29}$ 和 $\frac{18}{29}$　（2）$\frac{6}{13}$ 和 $\frac{21}{52}$</p>
+                            <p>（3）$\frac{31}{71}$ 和 $\frac{31}{81}$　（4）$\frac{2}{35}$ 和 $\frac{4}{69}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：分数大小比较 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：分数大小比较】</span>
+                        <i class="fas fa-greater-than"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>比较下列分数的大小。</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{17}{29}$ 和 $\frac{18}{29}$　（2）$\frac{6}{13}$ 和 $\frac{21}{52}$</p>
+                            <p>（3）$\frac{31}{71}$ 和 $\frac{31}{81}$　（4）$\frac{2}{35}$ 和 $\frac{4}{69}$</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-sky-800 mb-2">🔍 比较方法</h4>
+                            <p class="text-sky-700">同分母看分子，同分子看分母；异分母需通分</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{17}{29} < \frac{18}{29}$　（2）$\frac{6}{13} > \frac{21}{52}$</p>
+                            <p>（3）$\frac{31}{71} > \frac{31}{81}$　（4）$\frac{2}{35} < \frac{4}{69}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：异分母加减 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例11：异分母加减】</span>
+                        <i class="fas fa-not-equal"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数的加减计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{5}{8}-\frac{1}{2}$　（2）$\frac{1}{4}+\frac{3}{7}$</p>
+                            <p>（3）$\frac{6}{7}-\frac{4}{9}$　（4）$\frac{3}{5}+\frac{3}{10}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：异分母加减 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：异分母加减】</span>
+                        <i class="fas fa-not-equal"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数的加减计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{5}{8}-\frac{1}{2}$　（2）$\frac{1}{4}+\frac{3}{7}$</p>
+                            <p>（3）$\frac{6}{7}-\frac{4}{9}$　（4）$\frac{3}{5}+\frac{3}{10}$</p>
+                        </div>
+                        <div class="bg-rose-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-rose-800 mb-2">🔄 异分母加减</h4>
+                            <p class="text-rose-700">先通分（变成同分母），再按同分母加减法计算</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{1}{8}$　（2）$\frac{19}{28}$　（3）$\frac{26}{63}$　（4）$\frac{9}{10}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：分数乘法 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例12：分数乘法】</span>
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数乘法计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{3}{4} \times \frac{4}{7}$（2）$\frac{2}{5} \times \frac{9}{11}$</p>
+                            <p>（3）$\frac{3}{8} \times \frac{13}{6}$（4）$\frac{10}{9} \times \frac{6}{25}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：分数乘法 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：分数乘法】</span>
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数乘法计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{3}{4} \times \frac{4}{7}$（2）$\frac{2}{5} \times \frac{9}{11}$</p>
+                            <p>（3）$\frac{3}{8} \times \frac{13}{6}$（4）$\frac{10}{9} \times \frac{6}{25}$</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">✖️ 乘法法则</h4>
+                            <p class="text-yellow-700">分子相乘做分子，分母相乘做分母，结果化最简</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{3}{7}$（2）$\frac{18}{55}$（3）$\frac{13}{16}$（4）$\frac{4}{15}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：分数除法 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例13：分数除法】</span>
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数除法计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{6}{7} \div \frac{3}{14}$（2）$\frac{8}{5} \div \frac{5}{8}$</p>
+                            <p>（3）$\frac{7}{12} \div \frac{10}{9}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：分数除法 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：分数除法】</span>
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数除法计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{6}{7} \div \frac{3}{14}$（2）$\frac{8}{5} \div \frac{5}{8}$</p>
+                            <p>（3）$\frac{7}{12} \div \frac{10}{9}$</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-indigo-800 mb-2">➗ 除法法则</h4>
+                            <p class="text-indigo-700">除以一个分数等于乘以这个分数的倒数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{6}{7} \times \frac{14}{3} = 4$</p>
+                            <p>（2）$\frac{8}{5} \times \frac{8}{5} = \frac{64}{25}$</p>
+                            <p>（3）$\frac{7}{12} \times \frac{9}{10} = \frac{21}{40}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：混合运算 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例14：混合运算】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数的加减混合计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{41}{42}-\frac{5}{8}+\frac{1}{8}$　（2）$\left(\frac{13}{14}-\frac{3}{5}\right)-\frac{3}{14}$</p>
+                            <p>（3）$\frac{1}{3}+\left(\frac{1}{4}-\frac{1}{5}\right)$　（4）$2-\left(\frac{1}{8}+\frac{2}{5}\right)$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：混合运算 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：混合运算】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数的加减混合计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{41}{42}-\frac{5}{8}+\frac{1}{8}$　（2）$\left(\frac{13}{14}-\frac{3}{5}\right)-\frac{3}{14}$</p>
+                            <p>（3）$\frac{1}{3}+\left(\frac{1}{4}-\frac{1}{5}\right)$　（4）$2-\left(\frac{1}{8}+\frac{2}{5}\right)$</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-teal-800 mb-2">📚 运算顺序</h4>
+                            <p class="text-teal-700">先算括号内，再按从左到右顺序计算，先通分再加减</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{10}{21}$　（2）$\frac{4}{35}$　（3）$\frac{23}{60}$　（4）$\frac{59}{40}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：乘除混合运算 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例15：乘除混合运算】</span>
+                        <i class="fas fa-asterisk"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数的乘除混合计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{39}{22} \times \frac{4}{9} \times \frac{11}{26}$　（2）$\frac{2}{9} \times \frac{9}{8} \div \frac{7}{9}$</p>
+                            <p>（3）$\frac{1}{24} \div \left(\frac{3}{8} \times \frac{1}{4}\right)$　（4）$\frac{19}{26} \div \frac{38}{55} \div \frac{5}{11}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：乘除混合运算 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：乘除混合运算】</span>
+                        <i class="fas fa-asterisk"></i>
+                    </div>
+                    <div class="p-6">
+                        <p>分数的乘除混合计算：</p>
+                        <div class="mt-2 space-y-1">
+                            <p>（1）$\frac{39}{22} \times \frac{4}{9} \times \frac{11}{26}$　（2）$\frac{2}{9} \times \frac{9}{8} \div \frac{7}{9}$</p>
+                            <p>（3）$\frac{1}{24} \div \left(\frac{3}{8} \times \frac{1}{4}\right)$　（4）$\frac{19}{26} \div \frac{38}{55} \div \frac{5}{11}$</p>
+                        </div>
+                        <div class="bg-violet-50 p-4 rounded-lg mb-4 mt-4">
+                            <h4 class="font-bold text-violet-800 mb-2">⚡ 乘除混合</h4>
+                            <p class="text-violet-700">先算括号，除法变乘法，连乘可以先约分再计算</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）$\frac{1}{3}$　（2）$\frac{9}{28}$　（3）$\frac{4}{9}$　（4）$\frac{121}{52}$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-blue-50">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-orange-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-orange-500 mr-3 text-xl"></i>
+                                1. 什么是分数？
+                            </h4>
+                        </div>
+                        <div id="answer-1" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>分数 $\frac{b}{a}$ 表示把1平均分成a份，每份a分之1，取其中b份。a叫分母（分的份数），b叫分子（取的份数）。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-layer-group text-green-500 mr-3 text-xl"></i>
+                                2. 分数有哪几种类型？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>真假带。真分数：分子<分母，值<1；假分数：分子≥分母，值≥1；带分数：整数+真分数</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-balance-scale text-purple-500 mr-3 text-xl"></i>
+                                3. 分数的基本性质是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>同乘同除值不变。分子分母同时乘以或除以同一个非零数，分数大小不变。注意：不能乘除0。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-target text-indigo-500 mr-3 text-xl"></i>
+                                4. 什么是最简分数？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>分子分母只有公因数1的分数。如 $\frac{2}{4}$ 可化简为 $\frac{1}{2}$。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-exchange-alt text-yellow-500 mr-3 text-xl"></i>
+                                5. 带分数怎样变假分数？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-yellow-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>$a \frac{c}{b} = \frac{a \times b + c}{b}$</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-plus text-red-500 mr-3 text-xl"></i>
+                                6. 同分母分数怎样加减？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>分母不变，分子相加减。结果化最简。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-not-equal text-teal-500 mr-3 text-xl"></i>
+                                7. 异分母分数怎样加减？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>先通分（变成同分母），再加减。母积子差，结果化最简。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-times text-blue-500 mr-3 text-xl"></i>
+                                8. 分数乘法怎样算？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>分子相乘做分子，分母相乘做分母，结果化最简。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题9 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-divide text-pink-500 mr-3 text-xl"></i>
+                                9. 分数除法怎样算？
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-pink-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>除以一个分数 = 乘以它的倒数。如 $\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}$</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题10 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calculator text-cyan-500 mr-3 text-xl"></i>
+                                10. 有带分数时怎样计算？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>带化假，再按运算规则计算。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 bg-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-800">
+                <!-- 作者信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-chalkboard-teacher text-orange-500 mr-2"></i>
+                        作者团队
+                    </h3>
+                    <p class="text-gray-600 mb-2">魔渊国际数学教研团队</p>
+                    <p class="text-gray-500 text-sm">专注于创新数学教学方法研究</p>
+                </div>
+                
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-600 mb-2">2025年魔渊Class精品课程</p>
+                    <p class="text-gray-500 text-sm">第3讲：分数的认识及基本计算</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope text-pink-500 mr-2"></i>
+                        联系我们
+                    </h3>
+                    <div class="space-y-2 text-gray-600">
+                        <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                        <p><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+                        <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 魔渊国际. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+        <!-- 主题切换 -->
+        <button id="themeToggle" 
+            class="w-14 h-14 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+        
+        <!-- 返回顶部 -->
+        <button id="backToTop" 
+            class="w-14 h-14 bg-red-600 text-white rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            initScrollEffects();
+            initNavigation();
+            initExampleVersionToggle(); // 初始化范例版本切换
+            
+            // 初始化GSAP动画
+            if (typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                initGSAPAnimations();
+            }
+            
+            // 确保MathJax渲染
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise().then(() => {
+                    console.log('MathJax渲染完成');
+                }).catch((err) => console.log('MathJax渲染错误：', err));
+            }
+        });
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 更新粒子位置
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // 边界检查
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    // 绘制粒子
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(249, 115, 22, 0.4)';
+                    ctx.fill();
+                });
+                
+                // 绘制连线
+                particles.forEach((particle1, i) => {
+                    particles.slice(i + 1).forEach(particle2 => {
+                        const dx = particle1.x - particle2.x;
+                        const dy = particle1.y - particle2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle1.x, particle1.y);
+                            ctx.lineTo(particle2.x, particle2.y);
+                            ctx.strokeStyle = `rgba(249, 115, 22, ${0.3 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // 滚动效果
+        function initScrollEffects() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollTop / documentHeight;
+                
+                progressBar.style.transform = `scaleX(${scrollPercent})`;
+            });
+        }
+
+        // 导航功能
+        function initNavigation() {
+            // 返回顶部按钮
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 主题切换
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+        // 跳转到指定部分
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 打字机动画已移除
+
+        // GSAP动画
+        function initGSAPAnimations() {
+            // 卡片悬停动画
+            gsap.utils.toArray('.example-card').forEach(card => {
+                gsap.set(card, { transformOrigin: 'center' });
+                
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+            });
+            
+            // 滚动触发动画
+            gsap.utils.toArray('.fade-in').forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%'
+                        }
+                    }
+                );
+            });
+        }
+
+        // 知识自测功能
+        function toggleAnswer(questionNumber) {
+            const answerElement = document.getElementById(`answer-${questionNumber}`);
+            
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 范例版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            
+            if (studentBtn && teacherBtn) {
+                studentBtn.addEventListener('click', () => showStudentVersion());
+                teacherBtn.addEventListener('click', () => showTeacherVersion());
+            }
+        }
+
+        function showStudentVersion() {
+            // 切换按钮样式
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-orange-500 hover:bg-orange-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        function showTeacherVersion() {
+            // 切换按钮样式
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.className = 'fas fa-sun text-xl';
+            } else {
+                themeIcon.className = 'fas fa-moon text-xl';
+            }
+        }
+    </script>
+</body>
+</html>

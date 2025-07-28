@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第6讲：一元一次方程 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际一元一次方程精品课程 - 系统方法，轻松掌握一元一次方程求解">
+    <meta name="keywords" content="一元一次方程,等式性质,移项,数学教学,解方程技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 方程步骤演示样式 */
+        .equation-steps {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+        }
+
+        .equation-step {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin: 0.2rem 0;
+            font-weight: bold;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .equation-arrow {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            margin: 0.1rem 0;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 3rem !important; }
+            .hero-section h2 { font-size: 1.5rem !important; }
+            .equation-steps { font-size: 1rem; }
+            .equation-step { padding: 0.3rem 0.8rem; min-width: 150px; }
+        }
+
+        /* 深色模式 */
+        .dark {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+
+        .dark .example-card {
+            background: #2d2d2d;
+            color: #e5e5e5;
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 打字机效果 */
+        .typewriter {
+            /* 静态样式，避免闪动 */
+        }
+
+        /* 简答题卡片样式 */
+        .question-card {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-card {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .answer-card:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Hero 区域 -->
+    <section id="hero" class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                <span id="hero-title" class="typewriter">第6讲：一元一次方程</span>
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                系统方法，轻松掌握一元一次方程求解
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    ⚖️ 等式性质
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                class="px-8 py-4 bg-white text-purple-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-compass text-blue-600 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握一元一次方程的核心概念，构建完整知识体系
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 方程的定义与分类 -->
+                <div class="concept-card bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 p-6 fade-in">
+                    <div class="text-3xl text-blue-600 mb-4">📐</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">方程的定义与分类</h3>
+                    <p class="text-gray-600 text-sm">
+                        <strong>方程</strong>：含有未知数的等式<br>
+                        <strong>一元一次方程</strong>：只含有一个未知数，且未知数的最高次数为1的整式方程
+                    </p>
+                </div>
+                
+                <!-- 书写注意事项 -->
+                <div class="concept-card bg-gradient-to-br from-green-50 to-green-100 border border-green-200 p-6 fade-in">
+                    <div class="text-3xl text-green-600 mb-4">✍️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">书写注意事项</h3>
+                    <p class="text-gray-600 text-sm">
+                        数字写在字母前面，乘号省略；未知数指数为1时省略"1"；系数为1时省略"1"
+                    </p>
+                </div>
+                
+                <!-- 方程的解与解方程 -->
+                <div class="concept-card bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 p-6 fade-in">
+                    <div class="text-3xl text-purple-600 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">方程的解与解方程</h3>
+                    <p class="text-gray-600 text-sm">
+                        <strong>方程的解</strong>：使方程左右两边值相等的未知数的值<br>
+                        <strong>解方程</strong>：求方程的解的过程
+                    </p>
+                </div>
+                
+                <!-- 解方程的基本性质 -->
+                <div class="concept-card bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 p-6 fade-in">
+                    <div class="text-3xl text-orange-600 mb-4">⚖️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">解方程的基本性质</h3>
+                    <p class="text-gray-600 text-sm">
+                        等式两边同时加上或减去同一个数，等式仍然成立；等式两边同时乘以同一个数或除以同一个非零的数，等式仍然成立
+                    </p>
+                </div>
+                
+                <!-- 解一元一次方程的基本步骤 -->
+                <div class="concept-card bg-gradient-to-br from-red-50 to-red-100 border border-red-200 p-6 fade-in">
+                    <div class="text-3xl text-red-600 mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">解方程的基本步骤</h3>
+                    <p class="text-gray-600 text-sm">
+                        <strong>"去去移合系"</strong>：去分母、去括号、移项、合并同类项、系数化为1
+                    </p>
+                </div>
+                
+                <!-- 易错点 -->
+                <div class="concept-card bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 p-6 fade-in">
+                    <div class="text-3xl text-yellow-600 mb-4">⚠️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">易错点</h3>
+                    <p class="text-gray-600 text-sm">
+                        去分母时不要漏乘；去括号时注意符号变化；移项时必须改变符号
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握"去去移合系"五步法，轻松解决一元一次方程
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本解题步骤 -->
+                <div class="bg-white border border-gray-200 rounded-xl shadow-lg p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        📚 <span class="ml-3">解题五步法：去去移合系</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 去分母 -->
+                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                1️⃣ 去分母：两边同乘最小公倍数
+                            </h4>
+                            <p class="text-gray-600">
+                                将方程两边同时乘以所有分母的最小公倍数，以消除分数
+                            </p>
+                        </div>
+                        
+                        <!-- 去括号 -->
+                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                2️⃣ 去括号：利用乘法分配律
+                            </h4>
+                            <p class="text-gray-600">
+                                利用乘法分配律去掉括号，注意符号变化
+                            </p>
+                        </div>
+                        
+                        <!-- 移项 -->
+                        <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                3️⃣ 移项：含未知数项移一边，常数项移另一边
+                            </h4>
+                            <p class="text-gray-600">
+                                移项时要变号：➕ 变➖，➖ 变➕，➗ 变 ✖️
+                            </p>
+                        </div>
+                        
+                        <!-- 合并同类项 -->
+                        <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                4️⃣ 合并同类项：将方程两边同类项分别合并
+                            </h4>
+                            <p class="text-gray-600">
+                                化简为 ax = b 的形式
+                            </p>
+                        </div>
+                        
+                        <!-- 系数化为1 -->
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                5️⃣ 系数化为1：方程两边同时除以未知数的系数
+                            </h4>
+                            <p class="text-gray-600">
+                                得到方程的解
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 易错点提醒 -->
+                <div class="bg-white border border-gray-200 rounded-xl shadow-lg p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        ⚠️ <span class="ml-3">易错点提醒</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 去分母易错点 -->
+                        <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🚨 去分母时：不要漏乘不含分母的项
+                            </h4>
+                            <p class="text-gray-600">
+                                方程两边同乘最小公倍数时，每一项都要乘，包括那些原本没有分母的整数项
+                            </p>
+                        </div>
+                        
+                        <!-- 去括号易错点 -->
+                        <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🚨 去括号时：如果括号前是负号（-），括号内每一项都要改变符号
+                            </h4>
+                            <p class="text-gray-600">
+                                不要只变第一项，括号内的所有项都要变号
+                            </p>
+                        </div>
+                        
+                        <!-- 移项易错点 -->
+                        <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🚨 移项时：移动的项必须改变其符号
+                            </h4>
+                            <p class="text-gray-600">
+                                加变减，减变加。这是最常见的错误！
+                            </p>
+                        </div>
+                        
+                        <!-- 书写规范 -->
+                        <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                📝 书写规范提醒
+                            </h4>
+                            <p class="text-gray-600 text-sm">
+                                • 解方程前先写"解："<br>
+                                • 所有"="号要上下对齐<br>
+                                • 最后答案：未知数在左边，解值在右边
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握一元一次方程
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例卡片 -->
+            <div class="space-y-8">
+                <!-- 范例1：方程识别 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例1：方程识别】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>判断下面的式子是不是方程？如果是方程，请指出是否为一元一次方程。</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(5x - 2 > 8\)；</p>
+                                <p>（2） \(8 + 7 = 15\)；</p>
+                                <p>（3） \(2x + 6 = 13.8\)；</p>
+                                <p>（4） \(x = 0\)；</p>
+                                <p>（5） \(x + y + z = 2025\)；</p>
+                                <p>（6） \(\frac{6}{x} = 1\)；</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：方程识别 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：方程识别】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>判断下面的式子是不是方程？如果是方程，请指出是否为一元一次方程。</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(5x - 2 > 8\)；</p>
+                                <p>（2） \(8 + 7 = 15\)；</p>
+                                <p>（3） \(2x + 6 = 13.8\)；</p>
+                                <p>（4） \(x = 0\)；</p>
+                                <p>（5） \(x + y + z = 2025\)；</p>
+                                <p>（6） \(\frac{6}{x} = 1\)；</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">💡 关键判断</h4>
+                            <p class="text-blue-700">方程的特征：含有未知数的等式；一元一次方程：只含一个未知数且次数为1的整式方程</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）不是方程，是不等式；（2）不是方程，无未知数；（3）是一元一次方程；（4）是一元一次方程；（5）是方程但不是一元一次方程，是三元一次方程；（6）是方程但不是一元一次方程，分母中含有未知数。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：基本求解 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例5：基本求解】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求下列方程的解：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(2x + 1 = 7\)</p>
+                                <p>（2） \(18 - 3x = 6\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：基本求解 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：基本求解】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求下列方程的解：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(2x + 1 = 7\)</p>
+                                <p>（2） \(18 - 3x = 6\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">🎯 解题步骤</h4>
+                            <p class="text-purple-700">移项→合并→系数化1</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <div class="equation-steps">
+                                <div class="equation-step">（1）解：2x = 7 - 1</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">2x = 6</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">x = 3</div>
+                            </div>
+                            <p class="mt-4">（2）解：18 - 6 = 3x，12 = 3x，x = 4</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：移项技巧 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例6：移项技巧】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求下列方程的解：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(4x + 3 = 3x + 8\)</p>
+                                <p>（2） \(12 - 4x = 3x - 2\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：移项技巧 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：移项技巧】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求下列方程的解：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(4x + 3 = 3x + 8\)</p>
+                                <p>（2） \(12 - 4x = 3x - 2\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">↔️ 移项要领</h4>
+                            <p class="text-blue-700">移项时要变号：➕ 变➖，➖ 变➕，➗ 变 ✖️</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）解：4x - 3x = 8 - 3，x = 5</p>
+                            <p>（2）解：-4x - 3x = -2 - 12，-7x = -14，x = 2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：标准表示 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例2：标准表示】</span>
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>省略乘号，写出下面各式：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(8 \times a =\)____</p>
+                                <p>（2） \(25 \times a \times b \times s =\)____</p>
+                                <p>（3） \(m \times 10 =\)____</p>
+                                <p>（4） \(8 \times x \times y =\)____</p>
+                                <p>（5） \(x \times 1 - 4 =\)____</p>
+                                <p>（6） \(c \times 8 + a =\)____</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：标准表示 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：标准表示】</span>
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>省略乘号，写出下面各式：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(8 \times a =\)____</p>
+                                <p>（2） \(25 \times a \times b \times s =\)____</p>
+                                <p>（3） \(m \times 10 =\)____</p>
+                                <p>（4） \(8 \times x \times y =\)____</p>
+                                <p>（5） \(x \times 1 - 4 =\)____</p>
+                                <p>（6） \(c \times 8 + a =\)____</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">📝 书写规则</h4>
+                            <p class="text-green-700">数字在前，字母在后；乘号省略；系数为1时省略1</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）8a（2）25abs（3）10m（4）8xy（5）x-4（6）8c+a</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：化简同类项 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例3：化简同类项】</span>
+                        <i class="fas fa-compress-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>化简下列各式：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(10a - 7a =\)____</p>
+                                <p>（2） \(4a + 5b + b =\)____</p>
+                                <p>（3） \((a + a) - (b + b) =\)____</p>
+                                <p>（4） \(12a - 11a + 4a =\)____</p>
+                                <p>（5） \(4x + 16x - 13x =\)____</p>
+                                <p>（6） \(25a + 3b + 15a =\)____</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：化简同类项 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：化简同类项】</span>
+                        <i class="fas fa-compress-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>化简下列各式：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(10a - 7a =\)____</p>
+                                <p>（2） \(4a + 5b + b =\)____</p>
+                                <p>（3） \((a + a) - (b + b) =\)____</p>
+                                <p>（4） \(12a - 11a + 4a =\)____</p>
+                                <p>（5） \(4x + 16x - 13x =\)____</p>
+                                <p>（6） \(25a + 3b + 15a =\)____</p>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-orange-800 mb-2">🧮 合并要领</h4>
+                            <p class="text-orange-700">同类项系数相加减，字母部分保持不变</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）3a（2）4a+6b（3）2a-2b（4）5a（5）7x（6）40a+3b</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：等式性质 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例4：等式性质】</span>
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）如果 \(a + 3 = 5\)，那么 \(2(a + 3)\) 的结果是（ ）</p>
+                            <div class="ml-4 mt-2">
+                                <p>A. 2　　B. 5　　C. 10</p>
+                            </div>
+                            <p class="mt-4">（2）由 \(x - 5 = 3x + 1\)，得 \(x - 3x = 1 + 5\)，是等式两边同时（ ）</p>
+                            <div class="ml-4 mt-2">
+                                <p>A. \(+3x + 5\)　　B. \(-3x - 5\)</p>
+                                <p>C. \(-3x + 5\)　　D. \(+3x - 5\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：等式性质 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：等式性质】</span>
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）如果 \(a + 3 = 5\)，那么 \(2(a + 3)\) 的结果是（ ）</p>
+                            <div class="ml-4 mt-2">
+                                <p>A. 2　　B. 5　　C. 10</p>
+                            </div>
+                            <p class="mt-4">（2）由 \(x - 5 = 3x + 1\)，得 \(x - 3x = 1 + 5\)，是等式两边同时（ ）</p>
+                            <div class="ml-4 mt-2">
+                                <p>A. \(+3x + 5\)　　B. \(-3x - 5\)</p>
+                                <p>C. \(-3x + 5\)　　D. \(+3x - 5\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">⚖️ 等式性质</h4>
+                            <p class="text-blue-700">等式两边同时进行相同运算，等式仍成立</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）C. 因为 a + 3 = 5，所以 2(a + 3) = 2 × 5 = 10</p>
+                            <p>（2）C. 移项相当于两边同时加 -3x + 5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：去括号 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例7：去括号】</span>
+                        <i class="fas fa-brackets-curly"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求下列带括号方程的解：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(3(x - 4) = 12\)</p>
+                                <p>（2） \(3(2x - 1) = 9 + 2x\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：去括号 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：去括号】</span>
+                        <i class="fas fa-brackets-curly"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求下列带括号方程的解：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(3(x - 4) = 12\)</p>
+                                <p>（2） \(3(2x - 1) = 9 + 2x\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">📖 去括号法则</h4>
+                            <p class="text-green-700">先去括号，再移项合并</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <div class="equation-steps">
+                                <div class="equation-step">（1）解：3x - 12 = 12</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">3x = 24</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">x = 8</div>
+                            </div>
+                            <p class="mt-4">（2）解：6x - 3 = 9 + 2x，4x = 12，x = 3</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 范例8：小数方程 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例8：小数方程】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解小数方程：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(0.273 ÷ x = 0.35\)</p>
+                                <p>（2） \(3x + 3.24 × 5 = 39.6\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：小数方程 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：小数方程】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解小数方程：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(0.273 ÷ x = 0.35\)</p>
+                                <p>（2） \(3x + 3.24 × 5 = 39.6\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">🔢 小数处理</h4>
+                            <p class="text-purple-700">先化简常数项，再按一般方法求解</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）解：x = 0.273 ÷ 0.35 = 0.78</p>
+                            <p>（2）解：3x + 16.2 = 39.6，3x = 23.4，x = 7.8</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：小数复合方程 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例9：小数复合方程】</span>
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解小数方程：</p>
+                            <div class="mt-2">
+                                <p>\((2.5 + 2x) × 2 = 14\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：小数复合方程 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：小数复合方程】</span>
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解小数方程：</p>
+                            <div class="mt-2">
+                                <p>\((2.5 + 2x) × 2 = 14\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-indigo-800 mb-2">🔄 复合运算</h4>
+                            <p class="text-indigo-700">先处理最外层运算，逐步化简</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <div class="equation-steps">
+                                <div class="equation-step">解：(2.5 + 2x) = 14 ÷ 2</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">2.5 + 2x = 7</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">2x = 4.5</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">x = 2.25</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：分数方程 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例10：分数方程】</span>
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解分数方程：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(x - \frac{5}{6}x = \frac{12}{19}\)</p>
+                                <p>（2） \(\frac{2}{3}x ÷ \frac{1}{4} = 12\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：分数方程 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：分数方程】</span>
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解分数方程：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(x - \frac{5}{6}x = \frac{12}{19}\)</p>
+                                <p>（2） \(\frac{2}{3}x ÷ \frac{1}{4} = 12\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-red-800 mb-2">🔢 分数技巧</h4>
+                            <p class="text-red-700">通分后合并同类项，或先化简运算</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）解：\(\frac{1}{6}x = \frac{12}{19}\)，\(x = \frac{72}{19}\)</p>
+                            <p>（2）解：\(\frac{2}{3}x × 4 = 12\)，\(\frac{8}{3}x = 12\)，\(x = \frac{9}{2}\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：复杂方程 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例11：复杂方程】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(3(x - 2) + 1 = x - (2x - 1)\)</p>
+                                <p>（2） \(2(2x + 1) = 1 - 5(x - 2)\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：复杂方程 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：复杂方程】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(3(x - 2) + 1 = x - (2x - 1)\)</p>
+                                <p>（2） \(2(2x + 1) = 1 - 5(x - 2)\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">⚙️ 复杂处理</h4>
+                            <p class="text-yellow-700">先去括号，注意符号，再移项合并</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）解：3x - 6 + 1 = x - 2x + 1，4x = 6，\(x = \frac{3}{2}\)</p>
+                            <p>（2）解：4x + 2 = 1 - 5x + 10，9x = 9，x = 1</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：填空题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例12：填空题】</span>
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>填出"□"里的数：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \((□ + 3 × 0.6) ÷ 2.4 = 7\)</p>
+                                <p>（2） \(9 ÷ [(□ + 1) × 0.6] = 3\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：填空题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：填空题】</span>
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>填出"□"里的数：</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \((□ + 3 × 0.6) ÷ 2.4 = 7\)</p>
+                                <p>（2） \(9 ÷ [(□ + 1) × 0.6] = 3\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-pink-800 mb-2">🎯 逆向思维</h4>
+                            <p class="text-pink-700">从结果出发，逆向推理</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）解：设□ = x，(x + 1.8) ÷ 2.4 = 7，x = 15</p>
+                            <p>（2）解：设□ = x，9 ÷ [(x + 1) × 0.6] = 3，x = 4</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：复杂分数方程 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例13：复杂分数方程】</span>
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程：</p>
+                            <div class="mt-2">
+                                <p>\(\frac{21}{4}(x - 3) + \frac{1}{2}(3 - x) = \frac{3}{4}(x - 3) + 6\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：复杂分数方程 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：复杂分数方程】</span>
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程：</p>
+                            <div class="mt-2">
+                                <p>\(\frac{21}{4}(x - 3) + \frac{1}{2}(3 - x) = \frac{3}{4}(x - 3) + 6\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">🔄 去分母</h4>
+                            <p class="text-blue-700">两边同乘最小公倍数4，化为整数方程</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <div class="equation-steps">
+                                <div class="equation-step">去分母：21(x-3) + 6 - 2x = 3x - 9 + 24</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">去括号：21x - 63 + 6 - 2x = 3x + 15</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">合并：19x - 57 = 3x + 15</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">移项：16x = 72，\(x = \frac{9}{2}\)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：分式方程 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例14：分式方程】</span>
+                        <i class="fas fa-fraction"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程：</p>
+                            <div class="mt-2">
+                                <p>\(\frac{y + 3}{6} - 1 = \frac{2y - 3}{4}\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：分式方程 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：分式方程】</span>
+                        <i class="fas fa-fraction"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程：</p>
+                            <div class="mt-2">
+                                <p>\(\frac{y + 3}{6} - 1 = \frac{2y - 3}{4}\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">📐 通分技巧</h4>
+                            <p class="text-green-700">找最小公倍数12，两边同乘</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>解：两边同乘12：2(y + 3) - 12 = 3(2y - 3)</p>
+                            <p>2y + 6 - 12 = 6y - 9，-4y = -3，\(y = \frac{3}{4}\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：综合分式方程 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例15：综合分式方程】</span>
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解下列一元一次方程：</p>
+                            <div class="mt-2">
+                                <p>\(\frac{x - 1}{3} - \frac{10x + 1}{12} = \frac{2x - 3}{4}\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：综合分式方程 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：综合分式方程】</span>
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解下列一元一次方程：</p>
+                            <div class="mt-2">
+                                <p>\(\frac{x - 1}{3} - \frac{10x + 1}{12} = \frac{2x - 3}{4}\)</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">🎯 综合运用</h4>
+                            <p class="text-purple-700">多项分式，找最小公倍数12</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <div class="equation-steps">
+                                <div class="equation-step">两边同乘12：4(x-1) - (10x+1) = 3(2x-3)</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">4x - 4 - 10x - 1 = 6x - 9</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">-6x - 5 = 6x - 9</div>
+                                <div class="equation-arrow">↓</div>
+                                <div class="equation-step">-12x = -4，\(x = \frac{1}{3}\)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-brain text-purple-500 mr-3"></i>
+                知识自测
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                通过互动测验检验学习成果，巩固核心概念
+            </p>
+            
+            <!-- 十个简答题 -->
+            <div class="space-y-6">
+                <!-- 题目列表 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+                        <i class="fas fa-question-circle text-purple-500 mr-3"></i>
+                        十个简答题
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 题目1-5 -->
+                        <div class="space-y-4">
+                            <div class="question-card p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <p class="font-semibold text-blue-800">1. 什么是方程？</p>
+                            </div>
+                            <div class="question-card p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-semibold text-green-800">2. 一元一次方程有什么特点？</p>
+                            </div>
+                            <div class="question-card p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                                <p class="font-semibold text-purple-800">3. 怎样省略乘号写代数式？</p>
+                            </div>
+                            <div class="question-card p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                                <p class="font-semibold text-orange-800">4. 什么是方程的解？</p>
+                            </div>
+                            <div class="question-card p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-semibold text-red-800">5. 移项时要注意什么？</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 题目6-10 -->
+                        <div class="space-y-4">
+                            <div class="question-card p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">
+                                <p class="font-semibold text-indigo-800">6. 怎样合并同类项？</p>
+                            </div>
+                            <div class="question-card p-4 bg-pink-50 rounded-lg border-l-4 border-pink-500">
+                                <p class="font-semibold text-pink-800">7. 解方程的最后一步要做什么？</p>
+                            </div>
+                            <div class="question-card p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-semibold text-yellow-800">8. 怎样检验答案是否正确？</p>
+                            </div>
+                            <div class="question-card p-4 bg-teal-50 rounded-lg border-l-4 border-teal-500">
+                                <p class="font-semibold text-teal-800">9. 去括号时要注意什么？</p>
+                            </div>
+                            <div class="question-card p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                                <p class="font-semibold text-gray-800">10. 解方程时遇到分数怎么办？</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 查看答案按钮 -->
+                <div class="text-center">
+                    <button id="show-answers-btn" class="px-8 py-3 bg-purple-500 text-white rounded-full font-semibold hover:bg-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                        <i class="fas fa-eye mr-2"></i>
+                        查看答案
+                    </button>
+                </div>
+                
+                <!-- 答案显示 -->
+                <div id="answers-section" class="bg-white rounded-xl shadow-lg p-8 fade-in hidden">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        参考答案
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 答案1-5 -->
+                        <div class="space-y-4">
+                            <div class="answer-card p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <p class="font-semibold text-blue-800 mb-2">1. 什么是方程？</p>
+                                <p class="text-gray-700">方程是含有未知数的等式。</p>
+                            </div>
+                            <div class="answer-card p-4 bg-green-50 rounded-lg border border-green-200">
+                                <p class="font-semibold text-green-800 mb-2">2. 一元一次方程有什么特点？</p>
+                                <p class="text-gray-700">一元一次方程只有1个未知数，且未知数的次数是1</p>
+                            </div>
+                            <div class="answer-card p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                <p class="font-semibold text-purple-800 mb-2">3. 怎样省略乘号写代数式？</p>
+                                <p class="text-gray-700">数字写字母前面，省略中间乘号，如 \(3 \times x\) 写成 \(3x\)</p>
+                            </div>
+                            <div class="answer-card p-4 bg-orange-50 rounded-lg border border-orange-200">
+                                <p class="font-semibold text-orange-800 mb-2">4. 什么是方程的解？</p>
+                                <p class="text-gray-700">方程的解是使等式两边相等的未知数的值。</p>
+                            </div>
+                            <div class="answer-card p-4 bg-red-50 rounded-lg border border-red-200">
+                                <p class="font-semibold text-red-800 mb-2">5. 移项时要注意什么？</p>
+                                <p class="text-gray-700">移项时要变号，➕ 变➖，➖ 变➕，➗ 变 ✖️。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 答案6-10 -->
+                        <div class="space-y-4">
+                            <div class="answer-card p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+                                <p class="font-semibold text-indigo-800 mb-2">6. 怎样合并同类项？</p>
+                                <p class="text-gray-700">合并同类项就是把系数相加，字母部分不变。</p>
+                            </div>
+                            <div class="answer-card p-4 bg-pink-50 rounded-lg border border-pink-200">
+                                <p class="font-semibold text-pink-800 mb-2">7. 解方程的最后一步要做什么？</p>
+                                <p class="text-gray-700">解方程的最后一步是把未知数的系数化为1。</p>
+                            </div>
+                            <div class="answer-card p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <p class="font-semibold text-yellow-800 mb-2">8. 怎样检验答案是否正确？</p>
+                                <p class="text-gray-700">把求出的解代入原方程，看左右两边是否相等。</p>
+                            </div>
+                            <div class="answer-card p-4 bg-teal-50 rounded-lg border border-teal-200">
+                                <p class="font-semibold text-teal-800 mb-2">9. 去括号时要注意什么？</p>
+                                <p class="text-gray-700">注意分配律，括号前的符号要分配给括号内每一项</p>
+                            </div>
+                            <div class="answer-card p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <p class="font-semibold text-gray-800 mb-2">10. 解方程时遇到分数怎么办？</p>
+                                <p class="text-gray-700">遇到分数先去分母，两边同时乘以分母的最小公倍数</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 隐藏答案按钮 -->
+                    <div class="text-center mt-6">
+                        <button id="hide-answers-btn" class="px-6 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors">
+                            <i class="fas fa-eye-slash mr-2"></i>
+                            隐藏答案
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-12 px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-blue-400">
+                        <i class="fas fa-graduation-cap mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-300 mb-2">第6讲：一元一次方程</p>
+                    <p class="text-gray-300 mb-2">适用年级：初一</p>
+                    <p class="text-gray-300 mb-2">课时：2课时</p>
+                    <p class="text-gray-300">难度：★★★☆☆</p>
+                </div>
+                
+                <!-- 学习资源 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-green-400">
+                        <i class="fas fa-book mr-2"></i>
+                        学习资源
+                    </h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#concepts" class="hover:text-blue-400 transition-colors">知识导航</a></li>
+                        <li><a href="#techniques" class="hover:text-blue-400 transition-colors">技巧总结</a></li>
+                        <li><a href="#examples" class="hover:text-blue-400 transition-colors">范例讲解</a></li>
+                        <li><a href="#quiz" class="hover:text-blue-400 transition-colors">知识自测</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 技术支持 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-purple-400">
+                        <i class="fas fa-cog mr-2"></i>
+                        技术支持
+                    </h3>
+                    <p class="text-gray-300 mb-2">
+                        <i class="fas fa-palette mr-2"></i>
+                        杂志级设计
+                    </p>
+                    <p class="text-gray-300 mb-2">
+                        <i class="fas fa-mobile-alt mr-2"></i>
+                        响应式布局
+                    </p>
+                    <p class="text-gray-300 mb-2">
+                        <i class="fas fa-calculator mr-2"></i>
+                        MathJax支持
+                    </p>
+                    <p class="text-gray-300">
+                        <i class="fas fa-magic mr-2"></i>
+                        动画交互
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 版权信息 -->
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    <i class="fas fa-heart text-red-400 mr-1"></i>
+                    精心制作的数学教学网页 | 让学习更美好
+                    <i class="fas fa-heart text-red-400 ml-1"></i>
+                </p>
+                <p class="text-gray-400 text-sm mt-2">
+                    © 2024 数学教学创新实验室 | 基于现代Web技术构建
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // MathJax配置
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化所有功能
+            initParticles();
+            initVersionToggle();
+            initQuiz();
+            initScrollAnimations();
+            initSmoothScroll();
+            
+            // 延迟初始化MathJax以确保内容加载完成
+            setTimeout(() => {
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            }, 500);
+        });
+
+        // 粒子动画系统
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            
+            // 调整canvas大小
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // 粒子类
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.radius = Math.random() * 3 + 1;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+                
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                
+                draw() {
+                    ctx.globalAlpha = this.opacity;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = '#667eea';
+                    ctx.fill();
+                }
+            }
+            
+            // 创建粒子
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+            
+            // 动画循环
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                // 绘制连接线
+                ctx.globalAlpha = 0.1;
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = '#667eea';
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // 版本切换功能
+        function initVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            const studentVersions = document.querySelectorAll('.student-version');
+            const teacherVersions = document.querySelectorAll('.teacher-version');
+            
+            if (!studentBtn || !teacherBtn) return;
+            
+            // 学生版按钮点击
+            studentBtn.addEventListener('click', function() {
+                // 更新按钮状态
+                studentBtn.classList.add('active-version', 'bg-blue-500', 'text-white');
+                studentBtn.classList.remove('bg-gray-200', 'text-gray-600');
+                teacherBtn.classList.remove('active-version', 'bg-blue-500', 'text-white');
+                teacherBtn.classList.add('bg-gray-200', 'text-gray-600');
+                
+                // 显示学生版，隐藏教师版
+                studentVersions.forEach(el => {
+                    el.classList.remove('hidden');
+                    el.style.animation = 'fadeIn 0.5s ease-in-out';
+                });
+                teacherVersions.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // 重新渲染数学公式
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            });
+            
+            // 教师版按钮点击
+            teacherBtn.addEventListener('click', function() {
+                // 更新按钮状态
+                teacherBtn.classList.add('active-version', 'bg-blue-500', 'text-white');
+                teacherBtn.classList.remove('bg-gray-200', 'text-gray-600');
+                studentBtn.classList.remove('active-version', 'bg-blue-500', 'text-white');
+                studentBtn.classList.add('bg-gray-200', 'text-gray-600');
+                
+                // 显示教师版，隐藏学生版
+                teacherVersions.forEach(el => {
+                    el.classList.remove('hidden');
+                    el.style.animation = 'fadeIn 0.5s ease-in-out';
+                });
+                studentVersions.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // 重新渲染数学公式
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            });
+        }
+
+        // 知识自测功能
+        function initQuiz() {
+            const showAnswersBtn = document.getElementById('show-answers-btn');
+            const hideAnswersBtn = document.getElementById('hide-answers-btn');
+            const answersSection = document.getElementById('answers-section');
+            
+            if (!showAnswersBtn) return;
+            
+            // 显示答案
+            showAnswersBtn.addEventListener('click', function() {
+                answersSection.classList.remove('hidden');
+                answersSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // 重新渲染数学公式
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            });
+            
+            // 隐藏答案
+            if (hideAnswersBtn) {
+                hideAnswersBtn.addEventListener('click', function() {
+                    answersSection.classList.add('hidden');
+                    
+                    // 滚动到题目开始
+                    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+        }
+
+        // 滚动动画
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // 观察所有带有fade-in类的元素
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        }
+
+        // 平滑滚动
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // 添加卡片悬停效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 概念卡片悬停效果
+            document.querySelectorAll('.concept-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                    this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)';
+                });
+            });
+
+            // 范例卡片悬停效果
+            document.querySelectorAll('.example-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)';
+                });
+            });
+        });
+
+        // 返回顶部按钮
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // 如果页面底部没有返回顶部按钮，添加一个
+            let backToTop = document.getElementById('back-to-top');
+            if (!backToTop) {
+                backToTop = document.createElement('button');
+                backToTop.id = 'back-to-top';
+                backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                backToTop.className = 'fixed bottom-8 right-8 w-12 h-12 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 z-50';
+                backToTop.style.display = 'none';
+                document.body.appendChild(backToTop);
+                
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // 显示/隐藏返回顶部按钮
+            if (scrollTop > 300) {
+                backToTop.style.display = 'block';
+                backToTop.style.opacity = '1';
+            } else {
+                backToTop.style.opacity = '0';
+                setTimeout(() => {
+                    if (backToTop.style.opacity === '0') {
+                        backToTop.style.display = 'none';
+                    }
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>

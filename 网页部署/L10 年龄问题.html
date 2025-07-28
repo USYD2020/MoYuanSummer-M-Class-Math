@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第10讲：年龄问题 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际年龄问题精品课程 - 年龄差不变，轻松掌握年龄计算">
+    <meta name="keywords" content="年龄问题,年龄差不变,数学教学,计算技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: white;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .example-content {
+            padding: 1.5rem;
+        }
+
+        .problem-statement {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .hint-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #92400e;
+        }
+
+        .solution-steps {
+            background: #f0f9ff;
+            border: 1px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #1e40af;
+        }
+
+        .key-insight {
+            background: #f0fdf4;
+            border: 1px solid #10b981;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #065f46;
+        }
+
+        /* 进度指示器 */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 粒子动画 */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 数学公式样式 */
+        .math {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1em;
+            color: #2563eb;
+        }
+
+        /* 知识自测样式 */
+        .quiz-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .quiz-answer {
+            background: #f3f4f6;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 3rem !important;
+            }
+            
+            .hero-section h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            .concept-card, .example-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* 版本切换按钮 */
+        .version-toggle {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .version-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .version-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .version-btn:not(.active) {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .version-btn:not(.active):hover {
+            background: #e5e7eb;
+        }
+
+        /* 隐藏内容 */
+        .hidden {
+            display: none !important;
+        }
+
+        /* 浅色背景确保 */
+        section {
+            background: white;
+        }
+
+        section:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero 区域 -->
+    <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+        
+        <!-- 粒子动画 -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                <span id="hero-title">第10讲：年龄问题</span>
+            </h1>
+            
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                年龄差不变，轻松掌握年龄计算
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    📏 年龄差不变
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" class="px-8 py-4 bg-white text-purple-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 🧭 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-compass text-blue-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握年龄问题的核心概念，构建完整知识体系
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 年龄问题定义 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-blue-500 mb-4">🔢</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">年龄问题</h3>
+                    <p class="text-gray-600 text-sm">
+                        研究两人或多人之间的年龄关系，本质是和倍、差倍、和差问题的综合应用
+                    </p>
+                </div>
+
+                <!-- 年龄差不变 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-green-500 mb-4">➕</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">年龄差不变</h3>
+                    <p class="text-gray-600 text-sm">
+                        两个人的年龄差永远不变，无论过去、现在还是将来
+                    </p>
+                </div>
+
+                <!-- 年龄和一起长 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-purple-500 mb-4">📈</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">年龄和一起长</h3>
+                    <p class="text-gray-600 text-sm">
+                        每人每年长1岁，N个人的年龄和每年长N岁
+                    </p>
+                </div>
+
+                <!-- 倍数越来越小 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-yellow-500 mb-4">📉</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">倍数越来越小</h3>
+                    <p class="text-gray-600 text-sm">
+                        你长我也长，年龄倍数随时间推移逐渐减小
+                    </p>
+                </div>
+
+                <!-- 线段图法 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-red-500 mb-4">📏</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">线段图法</h3>
+                    <p class="text-gray-600 text-sm">
+                        有倍先画倍，再找与"倍"同一时间状态的"和"或"差"
+                    </p>
+                </div>
+
+                <!-- 份数思想 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-orange-500 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">份数思想</h3>
+                    <p class="text-gray-600 text-sm">
+                        引入"份数"概念，使变倍问题清晰明了
+                    </p>
+                </div>
+
+                <!-- 年龄轴 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-pink-500 mb-4">⏰</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">年龄轴</h3>
+                    <p class="text-gray-600 text-sm">
+                        用于"当当"型问题，帮助理清时间对应关系
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🍓 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                六种核心技巧，掌握年龄问题计算精髓
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本解法技巧 -->
+                <div class="glass-card p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🍓 <span class="ml-3">基本解法技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                ➕ 年龄差不变法
+                            </h4>
+                            <p class="text-gray-600">
+                                年龄差永不变，利用年龄差求解各种年龄问题
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                📈 年龄和一起长法
+                            </h4>
+                            <p class="text-gray-600">
+                                每人每年长1岁，N个人年龄和每年长N岁
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                📉 倍数变化法
+                            </h4>
+                            <p class="text-gray-600">
+                                你长我也长，倍数越来越小，利用倍数变化求解
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 高级应用技巧 -->
+                <div class="glass-card p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🥝 <span class="ml-3">高级应用技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                📏 线段图法
+                            </h4>
+                            <p class="text-gray-600">有倍先画倍，再找与倍同时间状态的和或差</p>
+                        </div>
+
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎯 份数思想
+                            </h4>
+                            <p class="text-gray-600">
+                                引入"份数"概念，使变倍问题清晰明了
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <h4 class="font-semibold text-pink-700 mb-2">
+                                ⏰ 年龄轴
+                            </h4>
+                            <p class="text-gray-600">
+                                "当当"型问题，用年龄轴理清时间对应关系
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📝 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握年龄问题
+            </p>
+
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="version-toggle">
+                    <button id="student-version-btn" class="version-btn active" onclick="showStudentVersion()">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" class="version-btn" onclick="showTeacherVersion()">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+
+            <!-- 范例内容 -->
+            <div class="space-y-8">
+                <!-- 范例1：年龄差不变 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例1：年龄差不变】</span>
+                        <span class="text-sm opacity-75">基础技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小亮4岁时，妈妈的年龄是小亮的8倍。今年小亮12岁，妈妈今年多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：年龄差不变】</span>
+                        <span class="text-sm opacity-75">基础技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小亮4岁时，妈妈的年龄是小亮的8倍。今年小亮12岁，妈妈今年多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：年龄差永不变，先算出当时的年龄差，再利用年龄差求今年的年龄。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：当小亮4岁时，妈妈：<span class="math">4 × 8 = 32</span>（岁），<br>
+                            年龄差：<span class="math">32 - 4 = 28</span>（岁），<br>
+                            妈妈今年：<span class="math">12 + 28 = 40</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：年龄差28岁在任何时候都不变，这是解决年龄问题的核心。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：年龄换算 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例2：年龄换算】</span>
+                        <span class="text-sm opacity-75">基础技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>红红今年18岁，红红的舅妈10年前的年龄正好等于红红10年后的年龄。红红的舅妈今年多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：年龄换算】</span>
+                        <span class="text-sm opacity-75">基础技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>红红今年18岁，红红的舅妈10年前的年龄正好等于红红10年后的年龄。红红的舅妈今年多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：找出两人的年龄差，红红10年后的年龄是已知的。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：年龄差：<span class="math">10 + 10 = 20</span>岁，<br>
+                            舅妈今年：<span class="math">18 + 20 = 38</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：舅妈10年前的年龄 = 红红10年后的年龄，说明舅妈比红红大20岁。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：年龄和增长 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例3：年龄和增长】</span>
+                        <span class="text-sm opacity-75">基础技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>爸爸今年35岁，小亮今年4岁，10年后，小亮和爸爸的年龄和是多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：年龄和增长】</span>
+                        <span class="text-sm opacity-75">基础技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>爸爸今年35岁，小亮今年4岁，10年后，小亮和爸爸的年龄和是多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：两个人的年龄和每年增长2岁（每人增长1岁）。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：今年年龄和：<span class="math">35 + 4 = 39</span>（岁），<br>
+                            10年后年龄和：<span class="math">39 + (10 + 10) = 59</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：两个人10年后年龄和比今年多20岁，这是年龄和增长的规律。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：和差年龄问题 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例4：和差年龄问题】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>莉莉和乐乐两人今年的年龄和是25岁。6年前，莉莉比乐乐小3岁，问：莉莉和乐乐今年各多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：和差年龄问题】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>莉莉和乐乐两人今年的年龄和是25岁。6年前，莉莉比乐乐小3岁，问：莉莉和乐乐今年各多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：年龄差不变，6年前的年龄差就是今年的年龄差。这是和差问题。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：年龄差不变，故今年年龄差还是3岁，<br>
+                            乐乐今年：<span class="math">(25 + 3) ÷ 2 = 14</span>（岁），<br>
+                            莉莉今年：<span class="math">25 - 14 = 11</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：利用和差问题的公式，较大数=(和+差)÷2，较小数=(和-差)÷2。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：年龄差关系 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例5：年龄差关系】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>今年（公元2025年）王叔叔的年龄比小强和小多的年龄和还大10岁，那么到哪一年时王叔叔的年龄比小强和小多的年龄和少10岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：年龄差关系】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>今年（公元2025年）王叔叔的年龄比小强和小多的年龄和还大10岁，那么到哪一年时王叔叔的年龄比小强和小多的年龄和少10岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：小强和小多每年年龄和长2岁，王叔叔每年长1岁，年龄差会发生变化。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：小强和小多每年长2岁，王叔叔每年长1岁，<br>
+                            需要：<span class="math">(10 + 10) ÷ (2 - 1) = 20</span>（年）<br>
+                            即到公元<span class="math">2025 + 20 = 2045</span>年。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：年龄差会变化，从+10岁变为-10岁，总共变化20岁，每年净变化1岁。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：多人年龄和 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例6：多人年龄和】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小胖今年12岁，小明今年13岁，小美今年15岁，10年后，他们三个的年龄和与奶奶的年龄相同，那么奶奶今年多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：多人年龄和】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小胖今年12岁，小明今年13岁，小美今年15岁，10年后，他们三个的年龄和与奶奶的年龄相同，那么奶奶今年多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：三个人每年年龄和增长3岁，先算出10年后三人的年龄和。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：他们三个今年的年龄和：<span class="math">12 + 13 + 15 = 40</span>（岁），<br>
+                            3人一年一共可以长<span class="math">3 × 1 = 3</span>（岁），<br>
+                            10年后三人的年龄和为<span class="math">40 + 3 × 10 = 70</span>（岁），<br>
+                            那么奶奶今年<span class="math">70 - 10 = 60</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：N个人的年龄和每年增长N岁，这是多人年龄问题的关键规律。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：年龄和变化 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例7：年龄和变化】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>有一家三口，他们全家今年的年龄加起来正好是58岁，而5年前他们全家人年龄加起来刚好是45岁。小孩子今年多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：年龄和变化】</span>
+                        <span class="text-sm opacity-75">进阶技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>有一家三口，他们全家今年的年龄加起来正好是58岁，而5年前他们全家人年龄加起来刚好是45岁。小孩子今年多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：三个人5年应该增长15岁，但实际只增长了13岁，说明小孩子当时还未出生。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：5年前年龄和比今年少：<span class="math">58 - 45 = 13</span>（岁），<br>
+                            3个5年应该少<span class="math">3 × 5 = 15</span>（岁），说明那时候小孩子还未出生，<br>
+                            差了<span class="math">15 - 13 = 2</span>（岁），<br>
+                            所以小孩子今年<span class="math">5 - 2 = 3</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：年龄和的变化量与预期不符，说明有人在期间出生，这是特殊情况。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：倍数关系变化 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例8：倍数关系变化】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>红太狼前年38岁，今年恰好是小灰灰年龄的4倍，多少年后红太狼的年龄是小灰灰的2倍？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：倍数关系变化】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>红太狼前年38岁，今年恰好是小灰灰年龄的4倍，多少年后红太狼的年龄是小灰灰的2倍？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：先算出今年两人的年龄和年龄差，再利用差倍问题求解。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：红太狼今年是小灰灰的4倍，那么小灰灰今年<span class="math">(38 + 2) ÷ 4 = 10</span>岁，<br>
+                            年龄差：<span class="math">40 - 10 = 30</span>岁，<br>
+                            小灰灰几年后：<span class="math">30 ÷ (2 - 1) = 30</span>（岁），<br>
+                            故<span class="math">30 - 10 = 20</span>（年）后。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：倍数关系会变化，但年龄差不变，利用差倍问题公式求解。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：和倍年龄问题 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例9：和倍年龄问题】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>父子今年年龄之和是55岁，再过5年，父亲的年龄正好是儿子的4倍，父子今年各多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：和倍年龄问题】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>父子今年年龄之和是55岁，再过5年，父亲的年龄正好是儿子的4倍，父子今年各多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：先算出5年后的年龄和，再利用和倍问题求解。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：5年后的年龄和为：<span class="math">55 + 5 × 2 = 65</span>（岁），倍：4倍；<br>
+                            5年后儿子的年龄：<span class="math">65 ÷ (4 + 1) = 13</span>（岁），<br>
+                            儿子今年的年龄：<span class="math">13 - 5 = 8</span>（岁）；<br>
+                            父亲今年的年龄：<span class="math">55 - 8 = 47</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：时间状态要一致，5年后的倍数关系对应5年后的年龄和。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：年龄误区 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例10：年龄误区】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>熊大、熊二都以为只有自己过一年长一岁而别人不会长大。有一天，熊大对熊二说："再过3年我的年龄就是你的2倍。"熊二说："不对，再过3年我和你一样大。"这时他们俩各多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：年龄误区】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>熊大、熊二都以为只有自己过一年长一岁而别人不会长大。有一天，熊大对熊二说："再过3年我的年龄就是你的2倍。"熊二说："不对，再过3年我和你一样大。"这时他们俩各多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：按照他们的错误想法，熊大认为3年后年龄差会变为6岁，熊二认为年龄差会变为0。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：年龄差：3岁，<br>
+                            如果年龄差变为6岁，熊大的年龄是弟弟的2倍。<br>
+                            熊二：<span class="math">6 ÷ (2 - 1) = 6</span>（岁）；<br>
+                            熊大：<span class="math">6 + 3 = 9</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：虽然他们的想法是错误的，但可以利用错误想法中的数量关系求解。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：倍数年龄问题 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例11：倍数年龄问题】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小丽比甜甜小6岁，再过3年小丽的年龄将是甜甜年龄的一半，她们今年的年龄总和是多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：倍数年龄问题】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小丽比甜甜小6岁，再过3年小丽的年龄将是甜甜年龄的一半，她们今年的年龄总和是多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：3年后甜甜是小丽的2倍，利用差倍问题求解。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：年龄差：6岁，<br>
+                            3年后，倍：2，<br>
+                            小丽3年后年龄：<span class="math">6 ÷ (2 - 1) = 6</span>岁，<br>
+                            甜甜3年后年龄为：<span class="math">6 × 2 = 12</span>（岁），<br>
+                            今年总和：<span class="math">12 + 6 - 2 × 3 = 12</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：先求出3年后的年龄，再推算今年的年龄总和。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：年龄和倍数 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例12：年龄和倍数】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>哥哥明年16岁，弟弟去年7岁，再过多少年，兄弟的年龄和是今年的3倍？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：年龄和倍数】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>哥哥明年16岁，弟弟去年7岁，再过多少年，兄弟的年龄和是今年的3倍？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：先算出今年兄弟的年龄和，再计算3倍后的年龄和，最后求解。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：今年兄弟的年龄和：<span class="math">16 - 1 + 7 + 1 = 23</span>岁，倍：3<br>
+                            新的年龄和：<span class="math">23 × 3 = 69</span>（岁）<br>
+                            和：69岁，差：<span class="math">15 - 8 = 7</span>岁<br>
+                            哥哥：<span class="math">(69 + 7) ÷ 2 = 38</span>（岁）<br>
+                            再过<span class="math">38 - 15 = 23</span>（年）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：年龄和成倍数关系时，利用和差问题求解个体年龄。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：复合年龄问题 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例13：复合年龄问题】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小亮4年前的年龄与小红7年后的年龄之和是39岁，小红比小亮大8岁，那么，多少年前，小红的年龄是小亮年龄的3倍？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：复合年龄问题】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小亮4年前的年龄与小红7年后的年龄之和是39岁，小红比小亮大8岁，那么，多少年前，小红的年龄是小亮年龄的3倍？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：先求出今年两人的年龄，再利用差倍问题求解过去的时间。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：今年小红和小亮的年龄和：36岁，年龄差：8岁。<br>
+                            所以小红今年的年龄是<span class="math">(36 + 8) ÷ 2 = 22</span>岁，<br>
+                            小亮今年的年龄是<span class="math">36 - 22 = 14</span>岁，<br>
+                            小红年龄是小亮年龄3倍时，差：8岁<br>
+                            那么小亮的年龄就是<span class="math">8 ÷ (3 - 1) = 4</span>岁，<br>
+                            应该是在<span class="math">14 - 4 = 10</span>年前。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：复合年龄问题需要分步求解，先确定现在的年龄，再推算过去的时间。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：份数法 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例14：份数法】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>2年前，哥哥的年龄是妹妹的3倍；3年后，哥哥的年龄是妹妹的2倍。妹妹今年多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：份数法】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>2年前，哥哥的年龄是妹妹的3倍；3年后，哥哥的年龄是妹妹的2倍。妹妹今年多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：引入份数，设2年前妹妹年龄为1份，利用年龄差不变列方程。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：假设2年前妹妹年龄为1份，2年前哥哥年龄3份，年龄差：2份；<br>
+                            3年后，妹妹年龄为"1份+5"，<br>
+                            哥哥年龄是"2份+10"，年龄差为"1份+5"。<br>
+                            年龄差永远不变，所以"2份=1份+5岁"，即1份=5岁，所以今年妹妹<span class="math">5 + 2 = 7</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：份数法是处理复杂年龄问题的利器，通过设份数简化计算。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：年龄轴法 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        <span>【范例15：年龄轴法】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小象对大象说："妈妈，我到你现在这么大时，你就31岁了。"大象说："我像你这么大时，你只有1岁。"问：大象、小象现在各多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：年龄轴法】</span>
+                        <span class="text-sm opacity-75">高级技巧</span>
+                    </div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            <p>小象对大象说："妈妈，我到你现在这么大时，你就31岁了。"大象说："我像你这么大时，你只有1岁。"问：大象、小象现在各多少岁？</p>
+                        </div>
+                        <div class="hint-box">
+                            🍓 提示：用年龄轴理清时间关系，三个时间点的年龄差都相等。
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：根据题意，我们可画出年龄轴帮助理解：<br>
+                            大、小象的年龄差：<span class="math">(31 - 1) ÷ 3 = 10</span>（岁）<br>
+                            小象现在的年龄：<span class="math">1 + 10 = 11</span>（岁），<br>
+                            大象现在的年龄：<span class="math">11 + 10 = 21</span>（岁）。
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：年龄轴法是解决"当当"型问题的最佳工具，通过画图理清时间关系。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🧪 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-blue-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- 左侧：题目 -->
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                                1. 为什么两个人的年龄差一直不变？举个例子。
+                            </h4>
+                        </div>
+                        <!-- 右侧：答案 -->
+                        <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>你长我也长，所以年龄差永不变。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-chart-line text-green-500 mr-3 text-xl"></i>
+                                2. 为什么说年龄的"倍数"会越来越小？这说明了什么？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>因为年龄差永不变，小时候倍数大，长大了"倍数"会变小。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-ruler text-purple-500 mr-3 text-xl"></i>
+                                3. 遇到"和、差、倍"关系的年龄题，用什么方法画图最清楚？
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>用线段图画出来最直观，可以清楚看到"和、差、倍"的关系。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-clock text-orange-500 mr-3 text-xl"></i>
+                                4. 什么是"当当"型年龄题？用什么工具能帮我们理清时间？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>"当A几岁时B几岁"的题型，用年龄轴可以理清时间顺序。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-share-alt text-red-500 mr-3 text-xl"></i>
+                                5. 用"份数"来解年龄题有什么好处？适合哪种题目？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>简化复杂的倍数关系，特别适合"几年前/几年后是几倍"这种题</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-users text-teal-500 mr-3 text-xl"></i>
+                                6. 一家三口，5年后他们的年龄和会比现在多几岁？为什么？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>5年后每个人都大5岁，三个人一共多3×5 = 15岁。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calculator text-pink-500 mr-3 text-xl"></i>
+                                7. 小亮4岁时妈妈是他8倍，今年小亮12岁，怎么用年龄差不变的方法算妈妈今年几岁？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-pink-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>先算小亮4岁时妈妈4×8 = 32岁，年龄差32-4=28岁，所以妈妈今年12+28=40岁。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-exchange-alt text-indigo-500 mr-3 text-xl"></i>
+                                8. 红红今年18岁，舅妈10年前的年龄等于红红10年后的年龄，怎么快速算出舅妈今年几岁？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>舅妈比红红大10+10=20岁，所以舅妈今年18+20=38岁。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题9 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-step-forward text-yellow-500 mr-3 text-xl"></i>
+                                9. 父子今年加起来55岁，5年后爸爸是儿子的4倍，想知道儿子今年几岁，第一步要算什么？
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-yellow-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>先算5年后父子年龄和，55+10=65岁。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题10 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-plus text-cyan-500 mr-3 text-xl"></i>
+                                10. 三个人的年龄和，10年后会比现在多多少？为什么？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>三个人每年一共长3岁，10年后多3×10 = 30岁。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📚 进一步阅读 -->
+    <section id="reading" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-book-open text-green-500 mr-3"></i>
+                进一步阅读
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                拓展知识面，深入理解年龄问题的数学原理
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">📖 相关数学概念</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• 一元一次方程的应用</li>
+                        <li>• 二元一次方程组</li>
+                        <li>• 数列的简单应用</li>
+                        <li>• 函数的初步认识</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-purple-600">🎯 解题策略</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• 化繁为简的思维方法</li>
+                        <li>• 数形结合的应用</li>
+                        <li>• 分类讨论的重要性</li>
+                        <li>• 逆向思维的运用</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-green-600">🔗 生活应用</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• 家庭年龄关系分析</li>
+                        <li>• 历史时间计算</li>
+                        <li>• 人口统计学应用</li>
+                        <li>• 成长规律研究</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-orange-600">🚀 进阶学习</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• 复杂年龄问题的解法</li>
+                        <li>• 多人年龄关系分析</li>
+                        <li>• 年龄问题的编程实现</li>
+                        <li>• 数学建模的应用</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8" style="background: var(--dark-gradient);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                <!-- 作者信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-chalkboard-teacher text-blue-400 mr-2"></i>
+                        作者团队
+                    </h3>
+                    <p class="text-gray-300 mb-2">魔渊国际数学教研团队</p>
+                    <p class="text-gray-400 text-sm">专注于创新数学教学方法研究</p>
+                </div>
+                
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap text-green-400 mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-300 mb-2">2025年魔渊Class精品课程</p>
+                    <p class="text-gray-400 text-sm">第10讲：年龄问题</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope text-pink-400 mr-2"></i>
+                        联系我们
+                    </h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                        <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 魔渊国际. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="fixed bottom-8 right-8 space-y-4 z-50">
+        <button onclick="scrollToTop()" class="w-14 h-14 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 magnetic-hover flex items-center justify-center">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 进度指示器
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // 粒子动画
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // 导航功能
+        function goToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 返回顶部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 知识自测功能
+        function toggleAnswer(questionNumber) {
+            const answerElement = document.getElementById(`answer-${questionNumber}`);
+            
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 范例版本切换
+        function showStudentVersion() {
+            document.getElementById('student-version-btn').className = 'version-btn active';
+            document.getElementById('teacher-version-btn').className = 'version-btn';
+            
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        function showTeacherVersion() {
+            document.getElementById('teacher-version-btn').className = 'version-btn active';
+            document.getElementById('student-version-btn').className = 'version-btn';
+            
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+        }
+
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            
+            // MathJax 配置
+            window.MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+                },
+                svg: {
+                    fontCache: 'global'
+                }
+            };
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第15讲：牛吃草问题 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际牛吃草问题精品课程 - 设1法，轻松掌握动态平衡问题">
+    <meta name="keywords" content="牛吃草问题,设1法,数学教学,动态平衡,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .example-content {
+            padding: 1.5rem;
+        }
+
+        .problem-statement {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .hint-box {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+
+        .solution-steps {
+            background: linear-gradient(135deg, #dbeafe, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: #eff6ff;
+            border-radius: 0.5rem;
+            color: #1e40af;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, #ecfdf5, #10b981);
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            color: #065f46;
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* 数学公式样式 */
+        .MathJax {
+            font-size: 1.1em !important;
+        }
+
+        /* 隐藏类 */
+        .hidden {
+            display: none !important;
+        }
+
+        /* 确保学生版默认显示 */
+        .student-version {
+            display: block !important;
+        }
+
+        .student-version.hidden {
+            display: none !important;
+        }
+
+        /* 知识自测样式 */
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .quiz-question {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-answer {
+            color: #059669;
+            font-weight: 500;
+            background: #ecfdf5;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Hero 区域 -->
+    <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景：绿色牧场主题 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-green-600 via-blue-600 to-emerald-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第15讲：牛吃草问题
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                牛吃草，有三宝；新草、老草、牛分好
+            </h2>
+            
+            <!-- 标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🐄 牛吃草问题
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🌱 动态平衡
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                    class="px-8 py-4 bg-white text-green-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-seedling mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-seedling text-green-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握牛吃草问题的核心概念，构建完整解题体系
+            </p>
+
+            <!-- 五列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <!-- 牛吃草概念 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-green-500 mb-4">🐄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">牛吃草概念</h3>
+                    <p class="text-gray-600 text-sm">
+                        又称"消长问题"<br>一边增长（草生长）<br>一边减少（牛吃草）<br>的动态平衡
+                    </p>
+                </div>
+
+                <!-- 三个量 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-blue-500 mb-4">🔢</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">三个关键量</h3>
+                    <p class="text-gray-600 text-sm">
+                        草的数量（难点）、牛的头数、吃草时间
+                    </p>
+                </div>
+
+                <!-- 设1法 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-purple-500 mb-4">1️⃣</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">设1法</h3>
+                    <p class="text-gray-600 text-sm">
+                        设1头牛1天吃草量为"1"份，简化计算
+                    </p>
+                </div>
+
+                <!-- 分牛策略 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-orange-500 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">分牛策略</h3>
+                    <p class="text-gray-600 text-sm">
+                        部分"幸运牛"专吃新长草，剩余牛吃老草
+                    </p>
+                </div>
+
+                <!-- 解题口诀 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-yellow-500 mb-4">💡</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">解题口诀</h3>
+                    <p class="text-gray-600 text-sm">
+                        牛吃草，有三宝；<br>新草、老草、牛分好
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解题技巧 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-orange-500 mr-3"></i>
+                解题技巧
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                三大核心技巧，掌握牛吃草问题解题精髓
+            </p>
+
+            <!-- 三列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- 草长型 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🌱 <span class="ml-3">草长型</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 特点 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                🌿 特点
+                            </h4>
+                            <p class="text-gray-600">
+                                草匀速生长，时间越长，总草量越多
+                            </p>
+                        </div>
+
+                        <!-- 公式 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                📐 公式
+                            </h4>
+                            <p class="text-gray-600">
+                                新草速度 = (两次吃草量差) ÷ 时间差
+                            </p>
+                        </div>
+
+                        <!-- 方法 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                🎯 方法
+                            </h4>
+                            <p class="text-gray-600">
+                                分牛策略：<br>"幸运牛"专吃新长草，剩余牛吃老草
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 草枯型 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🍂 <span class="ml-3">草枯型</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 特点 -->
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🍃 特点
+                            </h4>
+                            <p class="text-gray-600">草匀速枯萎，时间越长，总草量越少</p>
+                        </div>
+
+                        <!-- 公式 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                📉 公式
+                            </h4>
+                            <p class="text-gray-600">
+                                枯萎速度 = (两次吃草量差) ÷ 时间差
+                            </p>
+                        </div>
+
+                        <!-- 方法 -->
+                        <div class="p-4 bg-yellow-50 rounded-lg">
+                            <h4 class="font-semibold text-yellow-700 mb-2">
+                                🔄 方法
+                            </h4>
+                            <p class="text-gray-600">
+                                加上"隐形牛"：<br>总牛数 = 真牛 + 隐形牛
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 永续问题 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        ♾️ <span class="ml-3">永续问题</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 条件 -->
+                        <div class="p-4 bg-cyan-50 rounded-lg">
+                            <h4 class="font-semibold text-cyan-700 mb-2">
+                                🔄 条件
+                            </h4>
+                            <p class="text-gray-600">牛吃草速度 ≤ 草生长速度</p>
+                        </div>
+
+                        <!-- 关键 -->
+                        <div class="p-4 bg-teal-50 rounded-lg">
+                            <h4 class="font-semibold text-teal-700 mb-2">
+                                🔑 关键
+                            </h4>
+                            <p class="text-gray-600">
+                                最多牛数 = 新草生长速度
+                            </p>
+                        </div>
+
+                        <!-- 应用 -->
+                        <div class="p-4 bg-indigo-50 rounded-lg">
+                            <h4 class="font-semibold text-indigo-700 mb-2">
+                                🌍 应用
+                            </h4>
+                            <p class="text-gray-600">
+                                可持续发展：银行存取、人口资源
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握牛吃草问题
+            </p>
+
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+
+            <!-- 范例内容区域 -->
+            <div class="space-y-8" id="examples-container">
+                <!-- 范例1：永续供应 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例1：永续供应】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            牧场上长满牧草，每天牧草都匀速生长，这片牧场可供30头牛吃7周，可供15头牛吃22周。若想牧草永远吃不完，牛最多不能超过几头？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：永续供应 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例1：永续供应】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            牧场上长满牧草，每天牧草都匀速生长，这片牧场可供30头牛吃7周，可供15头牛吃22周。若想牧草永远吃不完，牛最多不能超过几头？
+                        </div>
+                        <div class="hint-box">
+                            🐄 分牛提示：要想草永远吃不完，牛吃草的速度不能超过草生长的速度
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：假设每头牛每周吃1份草<br>
+                            新草：$(15 \times 22 - 30 \times 7) \div (22-7) = 8$份/周<br>
+                            最多牛数：$8 \div 1 = 8$头
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：永续问题的核心是平衡点 - 牛的消耗速度不能超过草的生长速度
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：资源永续 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例2：资源永续】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            假设地球上新生成的资源增长速度是一定的，照此计算，地球上的资源可供110亿人生活90年；或供90亿人生活210年。为了使人类能够不断繁衍，地球上最多能养活多少人？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：资源永续 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例2：资源永续】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            假设地球上新生成的资源增长速度是一定的，照此计算，地球上的资源可供110亿人生活90年；或供90亿人生活210年。为了使人类能够不断繁衍，地球上最多能养活多少人？
+                        </div>
+                        <div class="hint-box">
+                            🌍 生活提示：这是牛吃草问题在环保和可持续发展中的应用
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：假设每1亿人生活1年需要1份资源<br>
+                            新生资源：$(90 \times 210 - 110 \times 90) \div (210-90) = 75$份/年<br>
+                            地球最多能养活：$75 \times 1 = 75$亿人
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：可持续发展的数学模型，体现了资源与人口的动态平衡
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：草场面积 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例3：草场面积】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一块匀速生长的草场，现在可供12头牛吃25天，或可供24头牛吃10天。如果每头牛每天恰好吃完1平方米草地的牧草，那么这片长有牧草的草场现在面积为多少？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：草场面积 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例3：草场面积】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一块匀速生长的草场，现在可供12头牛吃25天，或可供24头牛吃10天。如果每头牛每天恰好吃完1平方米草地的牧草，那么这片长有牧草的草场现在面积为多少？
+                        </div>
+                        <div class="hint-box">
+                            📏 面积提示：这里的"1份草"对应"1平方米"，要求的是老草的面积
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：新草：$(12 \times 25 - 24 \times 10) \div (25-10) = 4$平方米/天<br>
+                            老草：$12 \times 25 - 4 \times 25 = 200$平方米<br>
+                            草场现在面积为200平方米
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：单位换算的重要性，1份草 = 1平方米
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：重量计算 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例4：重量计算】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            一家牧民养了一些羊，每只羊每天需要吃青草3千克。在牧民家的不远处的青青草原有一片茂盛的牧草，牧草每天生长的速度保持不变，牧民发现：这些牧草可以供70只羊吃24天，或者可以供60只羊吃30天。请计算：现在这片草原一共有多少千克的青草？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：重量计算 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例4：重量计算】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            一家牧民养了一些羊，每只羊每天需要吃青草3千克。在牧民家的不远处的青青草原有一片茂盛的牧草，牧草每天生长的速度保持不变，牧民发现：这些牧草可以供70只羊吃24天，或者可以供60只羊吃30天。请计算：现在这片草原一共有多少千克的青草？
+                        </div>
+                        <div class="hint-box">
+                            🐑 重量提示：设每只羊每天吃1份草，最后要乘以3千克
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：假设每只羊每天吃1份草（1份草=3千克）<br>
+                            新草：$(60 \times 30 - 70 \times 24) \div (30-24) = 20$份/天<br>
+                            老草：$60 \times 30 - 20 \times 30 = 1200$份<br>
+                            现在有青草：$1200 \times 3 = 3600$千克
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：注意单位换算，1份草对应3千克
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：扶梯问题 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例5：扶梯问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            自动扶梯以匀速由下往上行驶，两个急性子的孩子嫌扶梯走的太慢，于是在行驶的扶梯上，男孩每秒向上走1梯级，女孩每3秒钟走2梯级。结果男孩用50秒到达楼上，女孩用60秒到达楼上。该楼梯共有多少级？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：扶梯问题 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例5：扶梯问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            自动扶梯以匀速由下往上行驶，两个急性子的孩子嫌扶梯走的太慢，于是在行驶的扶梯上，男孩每秒向上走1梯级，女孩每3秒钟走2梯级。结果男孩用50秒到达楼上，女孩用60秒到达楼上。该楼梯共有多少级？
+                        </div>
+                        <div class="hint-box">
+                            🚶 扶梯提示：扶梯运行相当于"新草生长"，人走路相当于"牛吃草"
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：女孩速度：$60 \div 3 \times 2 = 40$级/分钟<br>
+                            扶梯速度：$(50 \times 1 - 40) \div (60-50) = 1$级/秒<br>
+                            总级数：$50 \times (1+1) = 100$级
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：牛吃草问题的变种，扶梯运行=草生长，人走路=牛吃草
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：基础应用 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例6：基础应用】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            牧场上有一片匀速生长的草地，可供10头牛吃20天，15头牛吃10天，那么供25头牛可吃几天？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：基础应用 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例6：基础应用】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            牧场上有一片匀速生长的草地，可供10头牛吃20天，15头牛吃10天，那么供25头牛可吃几天？
+                        </div>
+                        <div class="hint-box">
+                            🐄 分牛提示：先算出新草速度，再使用分牛策略
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：设每头牛每天吃1份草<br>
+                            新草：$(10 \times 20 - 15 \times 10) \div (20-10) = 5$份/天<br>
+                            老草：$10 \times 20 - 5 \times 20 = 100$份<br>
+                            分牛：5头牛吃新草，20头牛吃老草，可吃：$100 \div 20 = 5$天
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：标准的牛吃草问题求解模式
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：标准计算 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例7：标准计算】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            牧场上有一片匀速生长的草地，可供27头牛吃6周，或供23头牛吃9周，那么它可供多少头牛吃18周？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：标准计算 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例7：标准计算】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            牧场上有一片匀速生长的草地，可供27头牛吃6周，或供23头牛吃9周，那么它可供多少头牛吃18周？
+                        </div>
+                        <div class="hint-box">
+                            🔄 逆向提示：知道时间求牛数，关键是先分出吃新草的牛
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：新草：$(23 \times 9 - 27 \times 6) \div (9-6) = 15$份/周<br>
+                            老草：$27 \times 6 - 15 \times 6 = 72$份<br>
+                            分牛：15头牛吃新草，需要老草牛：$72 \div 18 = 4$头<br>
+                            总共：$15+4 = 19$头牛
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：已知时间求牛数的逆向思维
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：动物题材 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例8：动物题材】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            林子里有猴子喜欢吃的野果，23只猴子可在9周内吃光，21只猴子可在12周内吃光，如果18只猴子一起吃，可以吃多少周？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：动物题材 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例8：动物题材】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            林子里有猴子喜欢吃的野果，23只猴子可在9周内吃光，21只猴子可在12周内吃光，如果18只猴子一起吃，可以吃多少周？
+                        </div>
+                        <div class="hint-box">
+                            🐒 变换提示：猴子吃野果和牛吃草的道理是一样的
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：新野果：$(21 \times 12 - 23 \times 9) \div (12-9) = 15$份/周<br>
+                            老野果：$23 \times 9 - 15 \times 9 = 72$份<br>
+                            分猴：15只猴子吃新野果，3只猴子吃老野果<br>
+                            时间：$72 \div 3 = 24$周
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：动物和食物的替换不影响数学本质
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：抽水问题 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例9：抽水问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            一水库原有存水量一定，河水每天均匀入库。5台抽水机连续20天可抽干；6台同样的抽水机连续15天可抽干。若要求6天抽干，需要多少台同样的抽水机？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：抽水问题 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例9：抽水问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            一水库原有存水量一定，河水每天均匀入库。5台抽水机连续20天可抽干；6台同样的抽水机连续15天可抽干。若要求6天抽干，需要多少台同样的抽水机？
+                        </div>
+                        <div class="hint-box">
+                            💧 转化提示：进水就像草生长，抽水就像牛吃草
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：设每台抽水机每天抽1份水<br>
+                            新水：$(5 \times 20 - 6 \times 15) \div (20-15) = 2$份/天<br>
+                            老水：$5 \times 20 - 2 \times 20 = 60$份<br>
+                            分抽水机：2台抽新水，需要抽老水的：$60 \div 6 = 10$台<br>
+                            总共需要：$2+10 = 12$台抽水机
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：流体问题向牛吃草问题的转化
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：混合单位 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例10：混合单位】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一块匀速生长的草场，可供16头牛吃20天，可供100只羊吃12天。如果一头牛一天吃草量等于5只羊一天的吃草量，那么这块草地可供10头牛和75只羊一起吃多少天？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：混合单位 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例10：混合单位】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一块匀速生长的草场，可供16头牛吃20天，可供100只羊吃12天。如果一头牛一天吃草量等于5只羊一天的吃草量，那么这块草地可供10头牛和75只羊一起吃多少天？
+                        </div>
+                        <div class="hint-box">
+                            🐑 统一提示：先统一单位，100只羊=20头牛，10头牛+75只羊=25头牛
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：统一单位：100只羊=20头牛，10头牛+75只羊=25头牛<br>
+                            新草：$(16 \times 20 - 20 \times 12) \div (20-12) = 10$份/天<br>
+                            老草：$16 \times 20 - 10 \times 20 = 120$份<br>
+                            分牛：10头牛吃新草，15头牛吃老草<br>
+                            时间：$120 \div 15 = 8$天
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：不同单位的统一换算
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：草枯判断 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例11：草枯判断】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一片草地，每天草量会匀速进行一些变化。如果这些草地可供29头牛吃18周，也可以供24头牛吃20周，那么这段时间内，草地上的草是每周匀速增加，还是每周匀速减少？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：草枯判断 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例11：草枯判断】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一片草地，每天草量会匀速进行一些变化。如果这些草地可供29头牛吃18周，也可以供24头牛吃20周，那么这段时间内，草地上的草是每周匀速增加，还是每周匀速减少？
+                        </div>
+                        <div class="hint-box">
+                            📊 判断提示：比较总吃草量，看时间与吃草量的关系
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：总吃草量比较：<br>
+                            $29 \times 18 = 522$份；$24 \times 20 = 480$份<br>
+                            $522 > 480$<br>
+                            时间越长，吃的总草量反而越少→草在匀速减少（枯萎）
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：通过数据变化趋势判断问题类型
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：枯萎速度 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例12：枯萎速度】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            秋天的时候，某大草原上的青草不但不会再生长，还会以均匀的速度枯萎，如果现在牧民去牧羊，这片草原可供70头牛吃20天，可供40头牛吃30天，如果每头牛每天吃3千克的青草，那么这片草原每天青草会枯萎多少千克？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：枯萎速度 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例12：枯萎速度】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            秋天的时候，某大草原上的青草不但不会再生长，还会以均匀的速度枯萎，如果现在牧民去牧羊，这片草原可供70头牛吃20天，可供40头牛吃30天，如果每头牛每天吃3千克的青草，那么这片草原每天青草会枯萎多少千克？
+                        </div>
+                        <div class="hint-box">
+                            🍂 草枯提示：枯萎的草要"加"到总消耗中，相当于有"隐形牛"
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：设每头牛每天吃1份草（1份=3千克）<br>
+                            草枯萎速度：$(70 \times 20 - 40 \times 30) \div (30-20) = 20$份/天<br>
+                            每天枯萎：$20 \times 3 = 60$千克
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：草枯型问题的计算技巧
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：水草问题 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例13：水草问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一条小溪里生长着一些水草，小溪里的鱼儿每天都要吃这些水草。这些水草可以供300条小鱼吃45天，或者供200条小鱼吃2个月，如果一条小鱼一天吃1株水草，那么现在小溪中有多少株水草？（1个月按30天计算）
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：水草问题 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例13：水草问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            有一条小溪里生长着一些水草，小溪里的鱼儿每天都要吃这些水草。这些水草可以供300条小鱼吃45天，或者供200条小鱼吃2个月，如果一条小鱼一天吃1株水草，那么现在小溪中有多少株水草？（1个月按30天计算）
+                        </div>
+                        <div class="hint-box">
+                            🐟 水草提示：水草枯萎问题，要用"隐形牛"理论
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：2个月=60天<br>
+                            水草枯萎速度：$(300 \times 45 - 200 \times 60) \div (60-45) = 100$株/天<br>
+                            现在有水草：$(300+100) \times 45 = 18000$株
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：草枯型问题求原始量
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：草减问题 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例14：草减问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            由于天气逐渐变冷，牧场上的草每天以均匀的速度减少。经计算，牧场上的草可供20头牛吃5天，或可供16头牛吃6天。那么，可供11头牛吃几天？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：草减问题 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例14：草减问题】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            由于天气逐渐变冷，牧场上的草每天以均匀的速度减少。经计算，牧场上的草可供20头牛吃5天，或可供16头牛吃6天。那么，可供11头牛吃几天？
+                        </div>
+                        <div class="hint-box">
+                            ❄️ 减草提示：11头牛要和"隐形牛"一起工作，才能把减少的草算进去
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：草减少速度：$(20 \times 5 - 16 \times 6) \div (6-5) = 4$份/天<br>
+                            老草量：$20 \times 5 + 4 \times 5 = 120$份<br>
+                            总消耗速度：11头牛+4份减草=15份/天<br>
+                            时间：$120 \div 15 = 8$天
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：草枯型求时间的计算方法
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：复合减草 - 学生版 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例15：复合减草】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            由于天气逐渐冷起来，牧场上的草不仅不生长，反而以固定的速度在减少。已知某块草地上的草可供20头牛吃5天，或可供15头牛吃6天。照此计算，可以供多少头牛吃10天？
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：复合减草 - 教师版 -->
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例15：复合减草】</div>
+                    <div class="example-content">
+                        <div class="problem-statement">
+                            由于天气逐渐冷起来，牧场上的草不仅不生长，反而以固定的速度在减少。已知某块草地上的草可供20头牛吃5天，或可供15头牛吃6天。照此计算，可以供多少头牛吃10天？
+                        </div>
+                        <div class="hint-box">
+                            🌨️ 终极提示：最后一题！草枯型的逆向求解综合应用
+                        </div>
+                        <div class="solution-steps">
+                            ✅ 解析：草减少速度：$(20 \times 5 - 15 \times 6) \div (6-5) = 10$份/天<br>
+                            老草量：$20 \times 5 + 10 \times 5 = 150$份<br>
+                            10天草自己减少：$10 \times 10 = 100$份<br>
+                            剩余草量：$150-100 = 50$份<br>
+                            需要牛数：$50 \div 10 = 5$头牛
+                        </div>
+                        <div class="key-insight">
+                            💡 关键洞察：草枯型的逆向求解综合应用
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-green-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- 左侧：题目 -->
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-cow text-green-500 mr-3 text-xl"></i>
+                                1. 什么是牛吃草问题？
+                            </h4>
+                        </div>
+                        <!-- 右侧：答案 -->
+                        <div id="answer-1" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>研究草一边长、牛一边吃，草会不会被吃光，或者能吃多久。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calculator text-blue-500 mr-3 text-xl"></i>
+                                2. 牛吃草问题中，最重要的三个量是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>草的数量（特点&难点）、牛的头数、吃草的时间。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-seedling text-green-500 mr-3 text-xl"></i>
+                                3. 新长出来的草有什么特点？
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>新草的特点是每天长出来的量是一样的（匀速生长）。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-sort-numeric-up text-purple-500 mr-3 text-xl"></i>
+                                4. "设1法"通常把什么量设为1？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>"设1"：把每头牛一天吃的草当作1份，这样计算更简单。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-chart-line text-orange-500 mr-3 text-xl"></i>
+                                5. 怎么算出每天新长的草有多少？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>（两次牛吃草的总量差）÷（时间差）= 新草 / 单位时间。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-users text-indigo-500 mr-3 text-xl"></i>
+                                6. "分牛"方法是怎么分工的？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>"让一部分“幸运牛”专门吃新长的草，剩下牛吃原来的老草。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-leaf text-yellow-500 mr-3 text-xl"></i>
+                                7. "草枯型"与"草长型"，算老草时有什么不同？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-yellow-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>草枯时，老草=吃草量 + 枯掉的草；草长时，要减去新长的草。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-search text-pink-500 mr-3 text-xl"></i>
+                                8. 怎么判断草是在长还是在枯萎？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-pink-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>时间越长，吃的越多，则草在长；时间短吃的多，则草在枯。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题9 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-lightbulb text-red-500 mr-3 text-xl"></i>
+                                9. 举例说明牛吃草问题的变种。
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>银行存钱和取钱；水池进水和放水。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题10 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-brain text-teal-500 mr-3 text-xl"></i>
+                                10. 学习牛吃草问题，对我们的数学思维有什么帮助？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>分析动态变化，解决实际问题。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 作者信息 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap mr-2"></i>作者信息
+                    </h3>
+                    <p class="text-gray-300">魔渊国际数学教研团队</p>
+                    <p class="text-gray-300">2025年魔渊Class精品课程</p>
+                </div>
+
+                <!-- 课程信息 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-book mr-2"></i>课程信息
+                    </h3>
+                    <p class="text-gray-300">第7讲：牛吃草问题</p>
+                    <p class="text-gray-300">动态平衡思维训练</p>
+                </div>
+
+                <!-- 联系方式 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope mr-2"></i>联系我们
+                    </h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-300">
+                            <i class="fab fa-weixin mr-2"></i>微信：MoYuanGuoJi
+                        </p>
+                        <p class="text-gray-300">
+                            <i class="fab fa-github mr-2"></i>GitHub：github.com/usyd2020
+                        </p>
+                        <p class="text-gray-300">
+                            <i class="fas fa-envelope mr-2"></i>邮箱：8ai4kid@gmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2025 魔渊国际. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // MathJax配置
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+
+        // DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 粒子动画
+            initParticles();
+            
+            // 进度条
+            initProgressBar();
+            
+            // 返回顶部
+            initBackToTop();
+            
+            // 平滑滚动
+            initSmoothScroll();
+            
+            // 版本切换
+            initVersionToggle();
+            
+            // 默认显示学生版
+            showStudentVersion();
+            
+            // GSAP动画
+            initGSAPAnimations();
+        });
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: Math.random() * 3 + 1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                });
+                
+                // 连接粒子
+                particles.forEach((p1, i) => {
+                    particles.slice(i + 1).forEach(p2 => {
+                        const distance = Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // 进度条
+        function initProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollTop = window.pageYOffset;
+                const progress = (scrollTop / scrollHeight) * 100;
+                
+                progressBar.style.width = progress + '%';
+            });
+        }
+
+        // 返回顶部
+        function initBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // 平滑滚动
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // 跳转到指定区域
+        function goToSection(sectionId) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // 版本切换
+        function initVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+
+            studentBtn.addEventListener('click', () => showStudentVersion());
+            teacherBtn.addEventListener('click', () => showTeacherVersion());
+        }
+
+        function showStudentVersion() {
+            // 切换按钮样式
+            document.getElementById('student-version-btn').className =
+                'px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className =
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+
+            // 强制显示所有学生版内容
+            document.querySelectorAll('.student-version').forEach(el => {
+                el.classList.remove('hidden');
+                el.style.display = 'block';
+                el.style.opacity = '1'; // 确保透明度正常
+            });
+            
+            // 隐藏所有教师版内容
+            document.querySelectorAll('.teacher-version').forEach(el => {
+                el.classList.add('hidden');
+                el.style.display = 'none';
+            });
+
+            // 刷新GSAP动画
+            setTimeout(() => refreshGSAPAnimations(), 100);
+        }
+
+        function showTeacherVersion() {
+            // 切换按钮样式
+            document.getElementById('teacher-version-btn').className =
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className =
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+
+            // 强制显示所有教师版内容
+            document.querySelectorAll('.teacher-version').forEach(el => {
+                el.classList.remove('hidden');
+                el.style.display = 'block';
+                el.style.opacity = '1'; // 确保透明度正常
+            });
+            
+            // 隐藏所有学生版内容
+            document.querySelectorAll('.student-version').forEach(el => {
+                el.classList.add('hidden');
+                el.style.display = 'none';
+            });
+
+            // 刷新GSAP动画
+            setTimeout(() => refreshGSAPAnimations(), 100);
+        }
+
+        // 知识自测答案切换功能
+        function toggleAnswer(questionId) {
+            const answerId = 'answer-' + questionId;
+            const answerElement = document.getElementById(answerId);
+            
+            if (answerElement) {
+                if (answerElement.classList.contains('hidden')) {
+                    answerElement.classList.remove('hidden');
+                    // 添加显示动画
+                    answerElement.style.opacity = '0';
+                    answerElement.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        answerElement.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        answerElement.style.opacity = '1';
+                        answerElement.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    answerElement.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    answerElement.style.opacity = '0';
+                    answerElement.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        answerElement.classList.add('hidden');
+                    }, 300);
+                }
+            }
+        }
+
+        // GSAP动画
+        function initGSAPAnimations() {
+            // 注册ScrollTrigger插件
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 标题动画
+            gsap.from('h1, h2', {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'power2.out'
+            });
+
+            // 卡片动画 - 只对可见的元素应用动画
+            gsap.from('.concept-card:not(.hidden), .example-card:not(.hidden), .quiz-card:not(.hidden)', {
+                scrollTrigger: {
+                    trigger: '.concept-card, .example-card, .quiz-card',
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse',
+                    refreshPriority: -1 // 确保在DOM变化后刷新
+                },
+                duration: 0.8,
+                y: 30,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'power2.out'
+            });
+        }
+
+        // 刷新GSAP动画（在版本切换后调用）
+        function refreshGSAPAnimations() {
+            if (window.ScrollTrigger) {
+                ScrollTrigger.refresh();
+            }
+        }
+    </script>
+</body>
+</html>
