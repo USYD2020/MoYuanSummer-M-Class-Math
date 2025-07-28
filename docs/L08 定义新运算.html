@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第8讲：定义新运算 - 魔渊国际数学教研团队</title>
+    
+    <!-- CSS 框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            background-color: white;
+        }
+        
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+        
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+        
+        /* 概念卡片样式 */
+        .concept-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+        }
+        
+        .concept-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+        
+        .example-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .example-content {
+            padding: 1.5rem;
+        }
+        
+        /* 动画效果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 粒子动画背景 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* 打字机效果 */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid rgba(255,255,255,.75);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(255,255,255,.75); }
+        }
+        
+        /* 隐藏类 */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* 按钮活跃状态 */
+        .active-version {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progress-bar"></div>
+    
+    <!-- Hero 区域 -->
+    <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                <span id="hero-title" class="typewriter">第8讲：定义新运算</span>
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                理解定义，掌握特殊运算符的计算方法
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🔄 代入计算技巧
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" class="px-8 py-4 bg-white text-purple-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+    
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-compass text-blue-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握定义新运算的核心概念，构建完整知识体系
+            </p>
+            
+            <!-- 三列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 定义新运算概念 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-blue-500 mb-4">🔢</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">定义新运算</h3>
+                    <p class="text-gray-600 text-sm">
+                        用特殊符号和已知运算表达式表示一种新的运算规则
+                    </p>
+                </div>
+                
+                <!-- 特殊运算符 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-green-500 mb-4">🔺</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">特殊运算符</h3>
+                    <p class="text-gray-600 text-sm">
+                        使用△、○、◇、※等特殊符号，不同于+-×÷
+                    </p>
+                </div>
+                
+                <!-- 理解算式含义 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-purple-500 mb-4">💡</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">理解算式含义</h3>
+                    <p class="text-gray-600 text-sm">
+                        正确理解新定义运算的算式含义是解题关键
+                    </p>
+                </div>
+                
+                <!-- 代入转化 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-yellow-500 mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">代入转化</h3>
+                    <p class="text-gray-600 text-sm">
+                        将数值代入新运算，转化为常规四则运算
+                    </p>
+                </div>
+                
+                <!-- 运算法则注意 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-red-500 mb-4">⚠️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">运算法则注意</h3>
+                    <p class="text-gray-600 text-sm">
+                        每题相对独立，不能随意使用交换律或结合律
+                    </p>
+                </div>
+                
+                <!-- 运算顺序 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-orange-500 mb-4">📋</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">运算顺序</h3>
+                    <p class="text-gray-600 text-sm">
+                        新定义算式中有括号的，要先算括号里的
+                    </p>
+                </div>
+                
+                <!-- 复合运算 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-pink-500 mb-4">🌟</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">复合运算</h3>
+                    <p class="text-gray-600 text-sm">
+                        掌握多层嵌套的新运算计算方法
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                四种基本题型，掌握定义新运算计算精髓
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本解法技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🍓 <span class="ml-3">基本解法技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 理解定义 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                🔢 理解定义：明确运算规则和含义
+                            </h4>
+                            <p class="text-gray-600">
+                                仔细阅读题目中的新运算定义，理解其运算规则
+                            </p>
+                        </div>
+                        
+                        <!-- 代入计算 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                🔄 代入计算：将数值代入新运算定义
+                            </h4>
+                            <p class="text-gray-600">
+                                按照定义，将具体数值代入运算式
+                            </p>
+                        </div>
+                        
+                        <!-- 转化简化 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                ➕ 转化简化：转为常规四则运算
+                            </h4>
+                            <p class="text-gray-600">
+                                将新运算转化为加减乘除进行计算
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 高级应用技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🥝 <span class="ml-3">高级应用技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 复合运算 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🌟 复合运算：分层逐步计算
+                            </h4>
+                            <p class="text-gray-600">先算内层括号，再算外层运算</p>
+                        </div>
+                        
+                        <!-- 反向求值 -->
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎯 反向求值：已知结果求参数
+                            </h4>
+                            <p class="text-gray-600">
+                                根据运算结果，反推出未知参数的值
+                            </p>
+                        </div>
+                        
+                        <!-- 特殊运算 -->
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <h4 class="font-semibold text-pink-700 mb-2">
+                                📐 特殊运算：最大值、平均数等
+                            </h4>
+                            <p class="text-gray-600">
+                                掌握各种特殊定义运算的规则
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握定义新运算
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例内容区域 -->
+            <div class="space-y-8" id="examples-container">
+                <!-- 范例1 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例1：基本代入运算】
+                    </div>
+                    <div class="example-content">
+                        如果规定 \(a \text{※} b=13 \times a-b \div 8\) ，那么 \(17 \text{※} 24\) 的最后结果是多少？
+                    </div>
+                </div>
+                
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例1：基本代入运算】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            如果规定 \(a \text{※} b=13 \times a-b \div 8\) ，那么 \(17 \text{※} 24\) 的最后结果是多少？
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 搭小桥提示：</h5>
+                            <p class="text-gray-700">理解新运算定义，将具体数值代入计算。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">\(17 \text{※} 24=13 \times 17-24 \div 8=221-3=218\)</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">先理解新运算符的定义，再按四则运算顺序计算。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 范例2 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例2：交换律验证】
+                    </div>
+                    <div class="example-content">
+                        定义新运算：\(a \triangle b=a \times a-2 \times b\) ，求 \(5 \triangle 6\) 和 \(6 \triangle 5\) 的值分别是多少？
+                    </div>
+                </div>
+                
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例2：交换律验证】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            定义新运算：\(a \triangle b=a \times a-2 \times b\) ，求 \(5 \triangle 6\) 和 \(6 \triangle 5\) 的值分别是多少？
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 搭小桥提示：</h5>
+                            <p class="text-gray-700">分别计算两个表达式，验证新运算是否满足交换律。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">\(5 \triangle 6=5 \times 5-2 \times 6=25-12=13\)</p>
+                            <p class="text-gray-700">\(6 \triangle 5=6 \times 6-2 \times 5=36-10=26\)</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">由于 \(5 \triangle 6 \neq 6 \triangle 5\)，说明该新运算不满足交换律。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 范例3 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例3：复合运算表达式】
+                    </div>
+                    <div class="example-content">
+                        若 \(A^{*} B\) 表示 \((A+3 B) \times(A+B)\) ，求 \(5 * 7\) 的值。
+                    </div>
+                </div>
+                
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例3：复合运算表达式】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            若 \(A^{*} B\) 表示 \((A+3 B) \times(A+B)\) ，求 \(5 * 7\) 的值。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 搭小桥提示：</h5>
+                            <p class="text-gray-700">将A=5, B=7代入复合表达式中计算。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">\(5 * 7=(5+3 \times 7) \times(5+7)=(5+21) \times 12=26 \times 12=312\)</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">复合表达式需要分步骤计算，先算括号内部，再计算整体。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 范例4 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例4：嵌套运算】
+                    </div>
+                    <div class="example-content">
+                        设 \(a \triangle b=a \times a-2 \times b\) ，那么， \(5 \triangle 6=\) _____ ，\((5 \triangle 2) \triangle 3=\) _____ 。
+                    </div>
+                </div>
+                
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例4：嵌套运算】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            设 \(a \triangle b=a \times a-2 \times b\) ，那么， \(5 \triangle 6=\) _____ ，\((5 \triangle 2) \triangle 3=\) _____ 。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 搭小桥提示：</h5>
+                            <p class="text-gray-700">先计算内层的 \(5 \triangle 2\)，再用结果计算外层运算。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">\(5 \triangle 6=5 \times 5-2 \times 6=25-12=13\)</p>
+                            <p class="text-gray-700">\(5 \triangle 2=5 \times 5-2 \times 2=25-4=21\)</p>
+                            <p class="text-gray-700">\((5 \triangle 2) \triangle 3=21 \triangle 3=21 \times 21-2 \times 3=441-6=435\)</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">嵌套运算要从内到外逐层计算，不能跳步。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 范例5 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例5：多种运算符】
+                    </div>
+                    <div class="example-content">
+                        已知 \(a \triangle b=(a+b) \div 2, a \nabla b=a \times 3+b\) 。计算： \(10 \triangle(6 \nabla 4)\) 。
+                    </div>
+                </div>
+                
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例5：多种运算符】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            已知 \(a \triangle b=(a+b) \div 2, a \nabla b=a \times 3+b\) 。计算： \(10 \triangle(6 \nabla 4)\) 。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 搭小桥提示：</h5>
+                            <p class="text-gray-700">有两种不同的运算符，要分别应用对应的定义。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">\(6 \nabla 4=6 \times 3+4=18+4=22\)</p>
+                            <p class="text-gray-700">\(10 \triangle(6 \nabla 4)=10 \triangle 22=(10+22) \div 2=32 \div 2=16\)</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">同一题目中可能定义多种运算符，要准确区分并应用。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 范例6 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例6：选择大小运算】
+                    </div>
+                    <div class="example-content">
+                        规定：符号“&”为选择两数中较大数的运算，“○”为选择两数中较小数的运算。计算下式：\([(7○6) \& 5] \times [5○(3\&9)]\)
+                    </div>
+                </div>
+                
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例6：选择大小运算】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            规定：符号“&”为选择两数中较大数的运算，“○”为选择两数中较小数的运算。计算下式：\([(7○6) \& 5] \times [5○(3\&9)]\)
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">分别判断“&”和“○”代表的运算，然后从内到外计算。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">先算内层括号：\((7○6) = 6\)，\((3\&9) = 9\)。</p>
+                            <p class="text-gray-700">原式变为：\([6 \& 5] \times [5 ○ 9]\)</p>
+                             <p class="text-gray-700">\(= 6 \times 5 = 30\)</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">明确每个符号的含义是第一步。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例7：多层嵌套运算】
+                    </div>
+                    <div class="example-content">
+                        已知 \(a, b\) 是任意自然数，我们规定：\(a \oplus b=a+b-1, a \otimes b=ab-2\) ，那么 \(4 \otimes[(6 \oplus 8) \oplus(3 \otimes 5)]=\) ？
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例7：多层嵌套运算】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            已知 \(a, b\) 是任意自然数，我们规定：\(a \oplus b=a+b-1, a \otimes b=ab-2\) ，那么 \(4 \otimes[(6 \oplus 8) \oplus(3 \otimes 5)]=\) ？
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">这是一个多层嵌套运算，按照括号优先级，从最内层开始计算。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">内层1：\(6 \oplus 8 = 6+8-1 = 13\)</p>
+                            <p class="text-gray-700">内层2：\(3 \otimes 5 = 3 \times 5 - 2 = 13\)</p>
+                            <p class="text-gray-700">中层：\(13 \oplus 13 = 13+13-1 = 25\)</p>
+                            <p class="text-gray-700">外层：\(4 \otimes 25 = 4 \times 25 - 2 = 98\)</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">复杂的嵌套运算只要按部就班，逐层突破，就会变得简单。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例8：规律观察】
+                    </div>
+                    <div class="example-content">
+                        如果 \(1 ※ 2=1+11\), \(2 ※ 3=2+22+222\), \(3 ※ 4=3+33+333+3333\)，计算 \((5 ※ 3) \times 5\)。
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例8：规律观察】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                             如果 \(1 ※ 2=1+11\), \(2 ※ 3=2+22+222\), \(3 ※ 4=3+33+333+3333\)，计算 \((5 ※ 3) \times 5\)。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">先根据规律解读 \(a ※ b\) 的含义，再计算。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">规律是 \(a ※ b\) 表示 a, aa, aaa, ... (共b项) 相加。</p>
+                            <p class="text-gray-700">所以 \(5 ※ 3 = 5 + 55 + 555 = 615\)。</p>
+                            <p class="text-gray-700">最后计算 \((5 ※ 3) \times 5 = 615 \times 5 = 3075\)。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">观察规律，准确“翻译”新运算的定义是关键。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例9：等差数列应用】
+                    </div>
+                    <div class="example-content">
+                        定义： \(F(1)=1, F(2)=1+2+3, F(3)=1+2+3+4+5, \cdots\) ，那么求 \(F(100)\) 的值。
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例9：等差数列应用】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            定义： \(F(1)=1, F(2)=1+2+3, F(3)=1+2+3+4+5, \cdots\) ，那么求 \(F(100)\) 的值。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">观察 \(F(N)\) 的规律。它是一个等差数列求和。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">F(N) 是一个项数为 \(2N-1\)，中间项为 \(N\) 的等差数列。</p>
+                             <p class="text-gray-700">根据中项求和公式：和 = 中间项 × 项数。</p>
+                            <p class="text-gray-700">\(F(100)\) 的项数是 \(2 \times 100 - 1 = 199\)，中间项是 100。</p>
+                            <p class="text-gray-700">所以 \(F(100) = 199 \times 100 = 19900\)。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">找到规律后，利用等差数列的巧算方法（中项定理）可以简化计算。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例10：反向求解】
+                    </div>
+                    <div class="example-content">
+                        \(M, N\) 是两个数，\(M * N = 4M - 3N\)，如果 \(x * 1=17\)，求 \(x\)。
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例10：反向求解】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                             \(M, N\) 是两个数，\(M * N = 4M - 3N\)，如果 \(x * 1=17\)，求 \(x\)。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">这是已知结果求参数的反向求解问题，可以转化为解方程。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">根据定义，\(x * 1 = 4x - 3 \times 1\)。</p>
+                            <p class="text-gray-700">建立方程: \(4x - 3 = 17\)。</p>
+                            <p class="text-gray-700">解方程: \(4x = 20\), 所以 \(x = 5\)。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">反向求解问题通常可以转化为解方程问题。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例11：嵌套与反向求解】
+                    </div>
+                    <div class="example-content">
+                        规定新运算 \(*: a * b=3a - 2b\)。若 \(x * (4 * 1) = 7\)，则 \(x\) 的值是多少？
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例11：嵌套与反向求解】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            规定新运算 \(*: a * b=3a - 2b\)。若 \(x * (4 * 1) = 7\)，则 \(x\) 的值是多少？
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">结合了嵌套运算和反向求解，先算括号内的值。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">先算括号: \(4 * 1 = 3 \times 4 - 2 \times 1 = 12 - 2 = 10\)。</p>
+                            <p class="text-gray-700">方程变为: \(x * 10 = 7\)。</p>
+                            <p class="text-gray-700">根据定义: \(3x - 2 \times 10 = 7\)，即 \(3x - 20 = 7\)。</p>
+                            <p class="text-gray-700">解得 \(3x = 27\), 所以 \(x=9\)。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">即使是求解方程，也要遵循先算括号的运算顺序。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例12：复杂定义与分类讨论】
+                    </div>
+                    <div class="example-content">
+                        定义 \(a * b\) 为 \(a\) 与 \(b\) 之间（包含 \(a、b\)）所有与 \(a\) 奇偶性相同的自然数的平均数。例如： \(7 * 14=(7+9+11+13) \div 4=10\)。在算式 \(\square * (19 * 99)=80\) 的方格中填入恰当的自然数。
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例12：复杂定义与分类讨论】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            定义 \(a * b\) 为 \(a\) 与 \(b\) 之间（包含 \(a、b\)）所有与 \(a\) 奇偶性相同的自然数的平均数。例如： \(7 * 14=(7+9+11+13) \div 4=10\)。在算式 \(\square * (19 * 99)=80\) 的方格中填入恰当的自然数。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">这是一个复杂的定义，需要先仔细理解，再对填入的数进行奇偶性分类讨论。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">先算括号: \(19 * 99\) 是19到99之间所有奇数的平均数，即 \((19 + 99) \div 2 = 59\)。</p>
+                            <p class="text-gray-700">方程变为 \(\square * 59 = 80\)。设方格中为x。</p>
+                            <p class="text-gray-700">情况1 (x是奇数): \((x + 59) \div 2 = 80 \Rightarrow x = 101\)。</p>
+                            <p class="text-gray-700">情况2 (x是偶数): 此时是x到59之间所有偶数的平均数，即 \((x + 60) \div 2 = 80 \Rightarrow x = 100\)。</p>
+                            <p class="text-gray-700">所以，所填的数可能是100或101。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">面对复杂定义时，要耐心拆解，并考虑所有可能的情况（如奇偶性）。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例13：代换与估算】
+                    </div>
+                    <div class="example-content">
+                        规定新运算“#”： \(A \# B = A \times(A-1) \times \ldots \times(A-B+1)\)。如果 \((X \# 4) \# 2=552\)，求 X 的值。
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例13：代换与估算】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            规定新运算“#”： \(A \# B = A \times(A-1) \times \ldots \times(A-B+1)\)。如果 \((X \# 4) \# 2=552\)，求 X 的值。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">这个运算很像排列数。可以设 \(n = (X\#4)\) 来简化问题。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">设 \(n = (X \# 4)\)。方程变为 \(n \# 2 = 552\)。</p>
+                            <p class="text-gray-700">根据定义，\(n \# 2 = n \times (n-1) = 552\)。</p>
+                            <p class="text-gray-700">估算可知 \(24 \times 23 = 552\)，所以 \(n=24\)。</p>
+                            <p class="text-gray-700">现在有 \(X \# 4 = 24\)，即 \(X \times (X-1) \times (X-2) \times (X-3) = 24\)。</p>
+                            <p class="text-gray-700">容易猜到 \(4 \times 3 \times 2 \times 1 = 24\)，所以 \(X=4\)。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">“设而不求”的代换思想可以大大简化复杂方程。估算法是解高次方程的有效技巧。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例14：流程化问题】
+                    </div>
+                    <div class="example-content">
+                        国际统一书号ISBN的核检码计算方法如下：<br>
+                        1. 前9位数字依次乘以10, 9, 8, ..., 2后求和。<br>
+                        2. 将和除以11，求出余数。<br>
+                        3. 用11减去余数，即为核检码。<br>
+                        求书号 ISBN-7-303-07618-\(\square\) 的核检码。
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例14：流程化问题】
+                    </div>
+                    <div class="example-content">
+                        <div class="mb-4">
+                            国际统一书号ISBN的核检码计算方法如下：<br>
+                            1. 前9位数字依次乘以10, 9, 8, ..., 2后求和。<br>
+                            2. 将和除以11，求出余数。<br>
+                            3. 用11减去余数，即为核检码。<br>
+                            求书号 ISBN-7-303-07618-\(\square\) 的核检码。
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">严格按照题目给出的三步计算流程操作。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">1. 加权求和：\(7 \times 10+3 \times 9+0 \times 8+3 \times 7+0 \times 6+7 \times 5+6 \times 4+1 \times 3+8 \times 2 = 196\)。</p>
+                            <p class="text-gray-700">2. 求余数：\(196 \div 11 = 17 \ldots 9\)。</p>
+                            <p class="text-gray-700">3. 11减余数：\(11 - 9 = 2\)。</p>
+                            <p class="text-gray-700">核检码是 2。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">即使规则看起来很长，只要耐心按照步骤执行，问题就能解决。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15 -->
+                <div class="example-card student-version">
+                    <div class="example-header">
+                        【范例15：函数概念】
+                    </div>
+                    <div class="example-content">
+                        定义 \(f(2^n)=n\), \(g(3^m)=m\)。例如 \(f(64)=f(2^6)=6\)。求: <br>
+                        1.  \(f(128)\) <br>
+                        2.  若 \(f(16)=g(x)\), 求x <br>
+                        3.  若 \(f(y)+g(27)=6\), 求y <br>
+                        4.  证明：\(f(a \cdot b)=f(a)+f(b)\)
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">
+                        【范例15：函数概念】
+                    </div>
+                    <div class="example-content">
+                         <div class="mb-4">
+                            定义 \(f(2^n)=n\), \(g(3^m)=m\)。例如 \(f(64)=f(2^6)=6\)。求: <br>
+                            1.  \(f(128)\) <br>
+                            2.  若 \(f(16)=g(x)\), 求x <br>
+                            3.  若 \(f(y)+g(27)=6\), 求y <br>
+                            4.  证明：\(f(a \cdot b)=f(a)+f(b)\)
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-orange-700 mb-2">🍓 解题提示：</h5>
+                            <p class="text-gray-700">f(n) 就是求n是2的几次方，g(n) 就是求n是3的几次方。这其实是对数运算的雏形。</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg mb-4">
+                            <h5 class="font-semibold text-green-700 mb-2">✅ 解析：</h5>
+                            <p class="text-gray-700">(1) \(128 = 2^7\), 所以 \(f(128) = 7\)。</p>
+                            <p class="text-gray-700">(2) \(16=2^4 \Rightarrow f(16)=4\). 要求 \(g(x)=4\), 则 \(x=3^4=81\)。</p>
+                            <p class="text-gray-700">(3) \(27=3^3 \Rightarrow g(27)=3\). 方程变为 \(f(y)+3=6\), 即 \(f(y)=3\). 所以 \(y=2^3=8\)。</p>
+                            <p class="text-gray-700">(4) 证明：设 \(a=2^m, b=2^n\). 则 \(f(a)=m, f(b)=n\).
+                            <br> \(a \cdot b = 2^m \cdot 2^n = 2^{m+n}\).
+                            <br> 所以 \(f(a \cdot b) = f(2^{m+n}) = m+n = f(a)+f(b)\)。</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h5 class="font-semibold text-purple-700 mb-2">💡 关键洞察：</h5>
+                            <p class="text-gray-700">这个新定义揭示了对数的一个重要性质：\(log_c(a \cdot b) = log_c(a) + log_c(b)\)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 继续添加其他范例... -->
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-12 px-6 bg-gray-50">
+        <div class="max-w-5xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-3xl font-bold text-center mb-3 fade-in">
+                <i class="fas fa-brain text-purple-500 mr-2"></i>
+                知识自测
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-base fade-in">
+                通过互动测验检验学习成果，巩固核心概念
+            </p>
+            
+            <!-- 十个简答题 -->
+            <div class="space-y-4">
+                <!-- 题目列表 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 fade-in">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="fas fa-question-circle text-purple-500 mr-2"></i>
+                        十个简答题
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- 题目1-5 -->
+                        <div class="space-y-3">
+                            <div class="question-card p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <p class="font-semibold text-blue-800 text-lg">1. 什么是定义新运算？</p>
+                            </div>
+                            <div class="question-card p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <p class="font-semibold text-green-800 text-lg">2. 新运算符有哪些常见的符号？</p>
+                            </div>
+                            <div class="question-card p-3 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                                <p class="font-semibold text-purple-800 text-lg">3. 进行新运算时最关键的步骤是什么？</p>
+                            </div>
+                            <div class="question-card p-3 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                                <p class="font-semibold text-orange-800 text-lg">4. 新运算能随意使用交换律吗？</p>
+                            </div>
+                            <div class="question-card p-3 bg-red-50 rounded-lg border-l-4 border-red-500">
+                                <p class="font-semibold text-red-800 text-lg">5. 运算顺序要注意什么？</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 题目6-10 -->
+                        <div class="space-y-3">
+                            <div class="question-card p-3 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">
+                                <p class="font-semibold text-indigo-800 text-lg">6. 如何计算复合新运算？</p>
+                            </div>
+                            <div class="question-card p-3 bg-pink-50 rounded-lg border-l-4 border-pink-500">
+                                <p class="font-semibold text-pink-800 text-lg">7. 新运算中分数如何处理？</p>
+                            </div>
+                            <div class="question-card p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                <p class="font-semibold text-yellow-800 text-lg">8. 怎样求解含未知数的新运算？</p>
+                            </div>
+                            <div class="question-card p-3 bg-teal-50 rounded-lg border-l-4 border-teal-500">
+                                <p class="font-semibold text-teal-800 text-lg">9. 新运算的运算顺序与四则运算有何区别？</p>
+                            </div>
+                            <div class="question-card p-3 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                                <p class="font-semibold text-gray-800 text-lg">10. 新运算题目有哪些常见题型？</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 查看答案按钮 -->
+                <div class="text-center">
+                    <button id="show-answers-btn" class="px-6 py-2 bg-purple-500 text-white rounded-full font-semibold hover:bg-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                        <i class="fas fa-eye mr-2"></i>
+                        查看答案
+                    </button>
+                </div>
+                
+                <!-- 答案显示 -->
+                <div id="answers-section" class="bg-white rounded-xl shadow-lg p-6 fade-in hidden">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        参考答案
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- 答案1-5 -->
+                        <div class="space-y-3">
+                            <div class="answer-card p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                <p class="font-semibold text-blue-800 mb-1 text-lg">1. 什么是定义新运算？</p>
+                                <p class="text-gray-700 text-base">用特殊符号和已知运算表达式表示一种新的运算规则。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-green-50 rounded-lg border border-green-200">
+                                <p class="font-semibold text-green-800 mb-1 text-lg">2. 新运算符有哪些常见的符号？</p>
+                                <p class="text-gray-700 text-base">常见符号有△、○、◇、※、★、□等特殊符号。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-purple-50 rounded-lg border border-purple-200">
+                                <p class="font-semibold text-purple-800 mb-1 text-lg">3. 进行新运算时最关键的步骤是什么？</p>
+                                <p class="text-gray-700 text-base">关键是读懂题目定义，像看游戏说明书一样，先理解再代入。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-orange-50 rounded-lg border border-orange-200">
+                                <p class="font-semibold text-orange-800 mb-1 text-lg">4. 新运算能随意使用交换律吗？</p>
+                                <p class="text-gray-700 text-base">不能。每个新运算相对独立，除非题目明确说明，否则不能随意使用交换律。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-red-50 rounded-lg border border-red-200">
+                                <p class="font-semibold text-red-800 mb-1 text-lg">5. 运算顺序要注意什么？</p>
+                                <p class="text-gray-700 text-base">有括号先算括号，按照从内到外的顺序逐步计算。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 答案6-10 -->
+                        <div class="space-y-3">
+                            <div class="answer-card p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+                                <p class="font-semibold text-indigo-800 mb-1 text-lg">6. 如何计算复合新运算？</p>
+                                <p class="text-gray-700 text-base">分层逐步计算，先算内层运算，再用结果计算外层运算。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-pink-50 rounded-lg border border-pink-200">
+                                <p class="font-semibold text-pink-800 mb-1 text-lg">7. 新运算中分数如何处理？</p>
+                                <p class="text-gray-700 text-base">按照新运算定义代入计算，注意运算顺序和分数运算法则。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <p class="font-semibold text-yellow-800 mb-1 text-lg">8. 怎样求解含未知数的新运算？</p>
+                                <p class="text-gray-700 text-base">根据新运算定义列出等式，然后解方程求出未知数的值。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-teal-50 rounded-lg border border-teal-200">
+                                <p class="font-semibold text-teal-800 mb-1 text-lg">9. 新运算的运算顺序与四则运算有何区别？</p>
+                                <p class="text-gray-700 text-base">新运算按照其自身定义的规则计算，不一定遵循四则运算的优先级。</p>
+                            </div>
+                            <div class="answer-card p-3 bg-gray-50 rounded-lg border border-gray-200">
+                                <p class="font-semibold text-gray-800 mb-1 text-lg">10. 新运算题目有哪些常见题型？</p>
+                                <p class="text-gray-700 text-base">直接运算、嵌套运算、反向求解等。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 隐藏答案按钮 -->
+                    <div class="text-center mt-4">
+                        <button id="hide-answers-btn" class="px-4 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors">
+                            <i class="fas fa-eye-slash mr-2"></i>
+                            隐藏答案
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 作者信息 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">作者信息</h3>
+                    <p class="text-gray-300">魔渊国际数学教研团队</p>
+                    <p class="text-gray-300">2025年魔渊 Class 精品课程</p>
+                    <p class="text-gray-300">第8讲：定义新运算</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系我们</h3>
+                    <p class="text-gray-300"><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                    <p class="text-gray-300"><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+                    <p class="text-gray-300"><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                </div>
+                
+                <!-- 版权信息 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">版权信息</h3>
+                    <p class="text-gray-300">© 2025 魔渊国际. 保留所有权利。</p>
+                    <p class="text-gray-300 mt-4">本页面基于杂志级设计标准制作</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        // MathJax 配置
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+        
+        // 粒子动画
+        function createParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 2;
+                    this.vy = (Math.random() - 0.5) * 2;
+                    this.size = Math.random() * 3 + 1;
+                }
+                
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                // 连线效果
+                particles.forEach((particle, i) => {
+                    particles.slice(i + 1).forEach(otherParticle => {
+                        const dx = particle.x - otherParticle.x;
+                        const dy = particle.y - otherParticle.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle.x, particle.y);
+                            ctx.lineTo(otherParticle.x, otherParticle.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 100})`;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+        
+        // 导航到指定区域
+        function goToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // 滚动到顶部
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // 版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            
+            studentBtn.addEventListener('click', () => showStudentVersion());
+            teacherBtn.addEventListener('click', () => showTeacherVersion());
+        }
+        
+        function showStudentVersion() {
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+            
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+        }
+        
+        function showTeacherVersion() {
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+            
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+        }
+        
+        // 进度条更新
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        }
+        
+        // 返回顶部按钮显示/隐藏
+        function toggleBackToTop() {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        }
+        
+        // 知识自测功能
+        function initQuiz() {
+            const showAnswersBtn = document.getElementById('show-answers-btn');
+            const hideAnswersBtn = document.getElementById('hide-answers-btn');
+            const answersSection = document.getElementById('answers-section');
+            
+            if (!showAnswersBtn) return;
+            
+            // 显示答案
+            showAnswersBtn.addEventListener('click', function() {
+                answersSection.classList.remove('hidden');
+                showAnswersBtn.style.display = 'none';
+                
+                // 重新渲染MathJax
+                if (window.MathJax) {
+                    MathJax.typeset();
+                }
+            });
+            
+            // 隐藏答案
+            if (hideAnswersBtn) {
+                hideAnswersBtn.addEventListener('click', function() {
+                    answersSection.classList.add('hidden');
+                    showAnswersBtn.style.display = 'inline-block';
+                });
+            }
+        }
+        
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initExampleVersionToggle();
+            initQuiz();
+            
+            // 滚动事件监听
+            window.addEventListener('scroll', function() {
+                updateProgressBar();
+                toggleBackToTop();
+            });
+            
+            // 窗口大小改变时重新创建粒子
+            window.addEventListener('resize', function() {
+                createParticles();
+            });
+            
+            // GSAP 动画
+            if (typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // 淡入动画
+                gsap.utils.toArray('.fade-in').forEach(element => {
+                    gsap.from(element, {
+                        duration: 1,
+                        y: 50,
+                        opacity: 0,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 85%",
+                            end: "bottom 15%",
+                            toggleActions: "play none none reverse"
+                        }
+                    });
+                });
+                
+                // 磁性悬停效果
+                gsap.utils.toArray('.magnetic-hover').forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        gsap.to(element, {duration: 0.3, scale: 1.05, y: -8, ease: "power2.out"});
+                    });
+                    
+                    element.addEventListener('mouseleave', () => {
+                        gsap.to(element, {duration: 0.3, scale: 1, y: 0, ease: "power2.out"});
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第9讲：和差倍问题 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际和差倍问题精品课程 - 线段图法，轻松掌握和差倍计算">
+    <meta name="keywords" content="和差倍问题,线段图法,数学教学,计算技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: white;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 线段图特殊样式 */
+        .segment-illustration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .segment-unit {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            min-width: 3rem;
+            text-align: center;
+        }
+
+        .segment-label {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* 线段图可视化样式 */
+        .segment-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .segment-line {
+            position: relative;
+            height: 4px;
+            background: #10b981;
+            border-radius: 2px;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .segment-marker {
+            position: absolute;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 12px solid #f59e0b;
+        }
+
+        .segment-text {
+            font-size: 14px;
+            color: #374151;
+            margin: 0.25rem 0;
+            text-align: center;
+        }
+
+        .segment-brace {
+            font-size: 18px;
+            color: #6b7280;
+            margin: 0 0.5rem;
+        }
+
+        /* 份数图解样式 */
+        .portion-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .portion-block {
+            width: 60px;
+            height: 40px;
+            background: #3b82f6;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .portion-block.small {
+            background: #10b981;
+        }
+
+        .portion-block.large {
+            background: #ef4444;
+        }
+
+        .portion-label {
+            position: absolute;
+            top: -25px;
+            font-size: 12px;
+            color: #374151;
+            font-weight: normal;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 3rem !important; }
+            .hero-section h2 { font-size: 1.5rem !important; }
+            .segment-illustration { font-size: 1rem; }
+            .segment-unit { padding: 0.3rem 0.8rem; min-width: 2.5rem; }
+        }
+
+        /* 深色模式 */
+        .dark {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+
+        .dark .example-card {
+            background: #2d2d2d;
+            color: #e5e5e5;
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 打字机效果 */
+        .typewriter {
+            /* 移除闪烁动画，保持静态样式 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Hero 区域 -->
+    <section id="hero" class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第9讲：和差倍问题
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                线段图法，轻松掌握和差倍计算
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    📏 线段图法
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                class="px-8 py-4 bg-white text-purple-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-compass text-blue-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握和差倍问题的核心概念，构建完整知识体系
+            </p>
+            
+            <!-- 三列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 和差倍问题定义 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-blue-500 mb-4">🔢</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">和差倍问题</h3>
+                    <p class="text-gray-600 text-sm">
+                        已知两个数的和、差、倍三个量中的两个，求这两个数的问题
+                    </p>
+                </div>
+                
+                <!-- 和差问题 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-green-500 mb-4">➕</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">和差问题</h3>
+                    <p class="text-gray-600 text-sm">
+                        已知两数的和与差，求这两个数的问题
+                    </p>
+                </div>
+                
+                <!-- 和倍问题 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-purple-500 mb-4">✖️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">和倍问题</h3>
+                    <p class="text-gray-600 text-sm">
+                        已知两个数的和以及它们之间的倍数关系，求这两个数的问题
+                    </p>
+                </div>
+                
+                <!-- 差倍问题 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-yellow-500 mb-4">➖</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">差倍问题</h3>
+                    <p class="text-gray-600 text-sm">
+                        已知两个数的差，它们之间的倍数关系，求这两个数的问题
+                    </p>
+                </div>
+                
+                <!-- 线段图法 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-red-500 mb-4">📏</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">线段图法</h3>
+                    <p class="text-gray-600 text-sm">
+                        找出一倍量，用线段表示，标记"△"，算总份数及对应总和
+                    </p>
+                </div>
+                
+                <!-- 份数思想 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-orange-500 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">份数思想</h3>
+                    <p class="text-gray-600 text-sm">
+                        把较小量看作1份，较大量看作几份，转化为求"总份数"
+                    </p>
+                </div>
+                
+                <!-- 解题口诀 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-pink-500 mb-4">🌟</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">解题口诀</h3>
+                    <p class="text-gray-600 text-sm">
+                        有倍先画倍、再找和与差；和、差的时间状态要与倍保持一致
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                六种核心技巧，掌握和差倍问题计算精髓
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本解法公式 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🍓 <span class="ml-3">基本解法公式</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 和差问题公式 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                ➕ 和差问题公式
+                            </h4>
+                            <p class="text-gray-600">
+                                较小数 = (和-差)÷2<br>
+                                较大数 = (和+差)÷2
+                            </p>
+                        </div>
+                        
+                        <!-- 和倍问题公式 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                ✖️ 和倍问题公式
+                            </h4>
+                            <p class="text-gray-600">
+                                较小数 = 和÷(倍数+1)<br>
+                                较大数 = 较小数×倍数
+                            </p>
+                        </div>
+                        
+                        <!-- 差倍问题公式 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                ➖ 差倍问题公式
+                            </h4>
+                            <p class="text-gray-600">
+                                较小数 = 差÷(倍数-1)<br>
+                                较大数 = 较小数×倍数
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 高级解题技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🥝 <span class="ml-3">高级应用技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 等量代换 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🔄 等量代换法 / 解方程
+                            </h4>
+                            <p class="text-gray-600">用倍数关系表示未知量，构造整倍</p>
+                        </div>
+
+                        <!-- 份数思想 -->
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <p class="text-gray-600">
+                                <strong>份数思想</strong> ：<br>较小量看作1份，较大量看作几份，转化为求"总份数"
+                            </p>
+                        </div>
+
+
+                        
+                        <!-- 转化法 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎯 转化法
+                            </h4>
+                            <p class="text-gray-600">
+                                通过添加、减少、调整"和"或"差"，转化为标准问题
+                            </p>
+                        </div>
+                        
+                        <!-- 暗和暗差 -->
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <p class="text-gray-600">
+                                <strong>暗和：</strong>给来给去和不变<br>
+                                <strong>暗差：</strong>同增同减差不变
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握和差倍问题
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例卡片 -->
+            <div class="space-y-8">
+                <!-- 范例1：和差问题基础 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例1：和差问题基础】</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>三、四年级同学共植树128棵，四年级比三年级多植树20棵，求三、四年级同学各植树多少棵？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：和差问题基础 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：和差问题基础】</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>三、四年级同学共植树128棵，四年级比三年级多植树20棵，求三、四年级同学各植树多少棵？</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">💡 关键洞察</h4>
+                            <p class="text-blue-700">和差问题的标准形式：已知两数之和与差，求这两个数</p>
+                            <div class="segment-diagram mt-3">
+                                <div class="segment-text">三年级植树</div>
+                                <div class="segment-line" style="width: 160px;">
+                                    <div class="segment-marker" style="left: 10px;"></div>
+                                    <div class="segment-marker" style="right: 10px;"></div>
+                                </div>
+                                <div class="segment-text">四年级植树</div>
+                                <div class="segment-line" style="width: 200px;">
+                                    <div class="segment-marker" style="left: 10px;"></div>
+                                    <div class="segment-marker" style="right: 10px;"></div>
+                                </div>
+                                <div class="segment-text">总和：128棵，差：20棵</div>
+                            </div>
+                            <div class="portion-diagram">
+                                <div class="portion-block small">
+                                    <div class="portion-label">三年级</div>
+                                    54棵
+                                </div>
+                                <div class="portion-block large">
+                                    <div class="portion-label">四年级</div>
+                                    74棵
+                                </div>
+                                <div class="segment-brace">}</div>
+                                <div class="segment-text">差20棵</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>和：128，差：20</p>
+                            <p>三年级：(128-20)÷2 = 54棵</p>
+                            <p>四年级：128-54 = 74棵</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：和倍问题基础 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例2：和倍问题基础】</span>
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小丽买童话书和漫画书共16本，其中童话书的本数是漫画书的3倍，童话书和漫画书各多少本？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：和倍问题基础 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：和倍问题基础】</span>
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小丽买童话书和漫画书共16本，其中童话书的本数是漫画书的3倍，童话书和漫画书各多少本？</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">📏 线段图提示</h4>
+                            <p class="text-green-700">把漫画书看作1份，童话书就是3份，总共4份</p>
+                            <div class="segment-diagram mt-3">
+                                <div class="segment-text">漫画书（1份）</div>
+                                <div class="segment-line" style="width: 80px;">
+                                    <div class="segment-marker" style="left: 10px;"></div>
+                                    <div class="segment-marker" style="right: 10px;"></div>
+                                </div>
+                                <div class="segment-text">童话书（3份）</div>
+                                <div class="segment-line" style="width: 240px;">
+                                    <div class="segment-marker" style="left: 20px;"></div>
+                                    <div class="segment-marker" style="left: 100px;"></div>
+                                    <div class="segment-marker" style="left: 180px;"></div>
+                                    <div class="segment-marker" style="right: 20px;"></div>
+                                </div>
+                                <div class="segment-text">总共16本 = 4份</div>
+                            </div>
+                            <div class="portion-diagram">
+                                <div class="portion-block small">
+                                    <div class="portion-label">漫画书</div>
+                                    1份
+                                </div>
+                                <div class="portion-block large">
+                                    <div class="portion-label">童话书</div>
+                                    3份
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>和：16，倍数：3</p>
+                            <p>漫画书：16÷(3+1) = 4本</p>
+                            <p>童话书：3×4 = 12本</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：差倍问题基础 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例3：差倍问题基础】</span>
+                        <i class="fas fa-minus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>超市里有黑巧克力和白巧克力两种，黑巧克力的数量是白巧克力的4倍，黑巧克力比白巧克力多15块，那么两种巧克力各多少块？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：差倍问题基础 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：差倍问题基础】</span>
+                        <i class="fas fa-minus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>超市里有黑巧克力和白巧克力两种，黑巧克力的数量是白巧克力的4倍，黑巧克力比白巧克力多15块，那么两种巧克力各多少块？</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">📏 线段图提示</h4>
+                            <p class="text-purple-700">黑巧克力4份，白巧克力1份，多出的3份就是15块</p>
+                            <div class="segment-diagram mt-3">
+                                <div class="segment-text">白巧克力（1份）</div>
+                                <div class="segment-line" style="width: 80px;">
+                                    <div class="segment-marker" style="left: 10px;"></div>
+                                    <div class="segment-marker" style="right: 10px;"></div>
+                                </div>
+                                <div class="segment-text">黑巧克力（4份）</div>
+                                <div class="segment-line" style="width: 320px;">
+                                    <div class="segment-marker" style="left: 20px;"></div>
+                                    <div class="segment-marker" style="left: 100px;"></div>
+                                    <div class="segment-marker" style="left: 180px;"></div>
+                                    <div class="segment-marker" style="left: 260px;"></div>
+                                    <div class="segment-marker" style="right: 20px;"></div>
+                                </div>
+                                <div class="segment-text">差值：15块 = 3份</div>
+                            </div>
+                            <div class="portion-diagram">
+                                <div class="portion-block small">
+                                    <div class="portion-label">白巧克力</div>
+                                    1份
+                                </div>
+                                <div class="portion-block large">
+                                    <div class="portion-label">黑巧克力</div>
+                                    4份
+                                </div>
+                                <div class="segment-brace">}</div>
+                                <div class="segment-text">差3份=15块</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>差：15，倍数：4</p>
+                            <p>白巧克力：15÷(4-1) = 5块</p>
+                            <p>黑巧克力：4×5 = 20块</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：周长问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例4：周长问题】</span>
+                        <i class="fas fa-square"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>一个蚂蚁沿着一个长方形的花盆爬圈，爬了1圈，一共爬了240厘米，已知花盆长和宽相差10厘米，请问这个花盆的长和宽各是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：周长问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：周长问题】</span>
+                        <i class="fas fa-square"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>一个蚂蚁沿着一个长方形的花盆爬圈，爬了1圈，一共爬了240厘米，已知花盆长和宽相差10厘米，请问这个花盆的长和宽各是多少？</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-orange-800 mb-2">🎯 转化思路</h4>
+                            <p class="text-orange-700">周长240厘米，长+宽=240÷2=120厘米，转化为和差问题</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>和：240÷2 = 120，差：10</p>
+                            <p>宽：(120-10)÷2 = 55厘米</p>
+                            <p>长：55+10 = 65厘米</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：变化后的和倍 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例5：变化后的和倍】</span>
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>公园里有牡丹花和月季花共22朵，又种3朵牡丹花以后，牡丹花是月季花的4倍，那么原来两种花各有多少朵？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：变化后的和倍 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：变化后的和倍】</span>
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>公园里有牡丹花和月季花共22朵，又种3朵牡丹花以后，牡丹花是月季花的4倍，那么原来两种花各有多少朵？</p>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-pink-800 mb-2">🔄 转化提示</h4>
+                            <p class="text-pink-700">变化后总数：22+3=25朵，然后用和倍问题解决</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>和：22+3 = 25，倍数：4</p>
+                            <p>月季花：25÷(4+1) = 5朵</p>
+                            <p>牡丹花：4×5-3 = 17朵</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：变化后的差倍 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例6：变化后的差倍】</span>
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小洪和小陈在下围棋，棋盘上小洪的棋子数量是小陈的4倍。如果拿掉小洪24颗棋子，两人的棋子一样多。小洪和小陈原来各下了多少颗棋子？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：变化后的差倍 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：变化后的差倍】</span>
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小洪和小陈在下围棋，棋盘上小洪的棋子数量是小陈的4倍。如果拿掉小洪24颗棋子，两人的棋子一样多。小洪和小陈原来各下了多少颗棋子？</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-indigo-800 mb-2">🎯 逆向思维</h4>
+                            <p class="text-indigo-700">拿掉24颗后相等，说明原来小洪比小陈多24颗</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>差：24，倍数：4</p>
+                            <p>小陈：24÷(4-1) = 8颗</p>
+                            <p>小洪：24+8 = 32颗</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：倍数关系问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例7：倍数关系问题】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>水果店运进苹果和香蕉共48千克。其中香蕉比苹果多了4倍，问：运进来苹果和香蕉各多少千克？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：倍数关系问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：倍数关系问题】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>水果店运进苹果和香蕉共48千克。其中香蕉比苹果多了4倍，问：运进来苹果和香蕉各多少千克？</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">⚠️ 注意理解</h4>
+                            <p class="text-yellow-700">"多了4倍"意味着香蕉是苹果的4+1=5倍</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>和：48，倍数：4+1 = 5</p>
+                            <p>苹果：48÷(5+1) = 8千克</p>
+                            <p>香蕉：8×5 = 40千克</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：转移数量问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例8：转移数量问题】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>两筐梨子共有120个，如果从第一筐中拿10个放到第二筐中，那么两筐的梨子个数相等。两筐原来各有多少个梨？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：转移数量问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：转移数量问题】</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>两筐梨子共有120个，如果从第一筐中拿10个放到第二筐中，那么两筐的梨子个数相等。两筐原来各有多少个梨？</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-teal-800 mb-2">🔄 暗差原理</h4>
+                            <p class="text-teal-700">拿10个后相等，说明原来第一筐比第二筐多10×2=20个</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>和：120，差：10×2 = 20</p>
+                            <p>第一筐：(120+20)÷2 = 70个</p>
+                            <p>第二筐：70-20 = 50个</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：日常消耗问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例9：日常消耗问题】</span>
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>食堂里有94千克面粉，138千克大米，每天用掉面粉和大米各9千克，几天后剩下的大米是面粉的3倍？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：日常消耗问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：日常消耗问题】</span>
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>食堂里有94千克面粉，138千克大米，每天用掉面粉和大米各9千克，几天后剩下的大米是面粉的3倍？</p>
+                        </div>
+                        <div class="bg-cyan-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-cyan-800 mb-2">🎯 关键思路</h4>
+                            <p class="text-cyan-700">同时消耗相同数量，差值保持不变：138-94=44</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>差：138-94 = 44，倍数：3</p>
+                            <p>面粉：44÷(3-1) = 22千克</p>
+                            <p>需要：(94-22)÷9 = 8天</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：调配问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例10：调配问题】</span>
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲、乙两个仓库共有大米800袋，如果从甲仓库中取出25袋放到乙仓库中，则甲仓库比乙仓库还多8袋。两个仓库原来各有多少袋大米？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：调配问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：调配问题】</span>
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲、乙两个仓库共有大米800袋，如果从甲仓库中取出25袋放到乙仓库中，则甲仓库比乙仓库还多8袋。两个仓库原来各有多少袋大米？</p>
+                        </div>
+                        <div class="bg-rose-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-rose-800 mb-2">🔄 复杂转化</h4>
+                            <p class="text-rose-700">调配后甲比乙多8袋，原来甲比乙多25×2+8=58袋</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>和：800，差：25×2+8 = 58</p>
+                            <p>甲：(800+58)÷2 = 429袋</p>
+                            <p>乙：800-429 = 371袋</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：多倍关系问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例11：多倍关系问题】</span>
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>王老师去慢跑，两天共跑了1000米，已知第二天跑的路程是第一天的2倍多100米，请问第二天比第一天多跑了多少米？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：多倍关系问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：多倍关系问题】</span>
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>王老师去慢跑，两天共跑了1000米，已知第二天跑的路程是第一天的2倍多100米，请问第二天比第一天多跑了多少米？</p>
+                        </div>
+                        <div class="bg-violet-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-violet-800 mb-2">🎯 化简策略</h4>
+                            <p class="text-violet-700">假设第二天少跑100米，就变成标准和倍问题</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>化简后和：1000-100 = 900，倍数：2</p>
+                            <p>第一天：900÷(2+1) = 300米</p>
+                            <p>第二天：300×2+100 = 700米</p>
+                            <p>多跑：700-300 = 400米</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：复合倍数问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例12：复合倍数问题】</span>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>两组学生参加义务劳动，甲组的人数是乙组的3倍，而乙组的人数是甲组的3倍少40人，问两组学生共多少人？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：复合倍数问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：复合倍数问题】</span>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>两组学生参加义务劳动，甲组的人数是乙组的3倍，而乙组的人数是甲组的3倍少40人，问两组学生共多少人？</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-amber-800 mb-2">🔄 等量代换</h4>
+                            <p class="text-amber-700">甲=3乙，乙=3甲-40，所以甲=3(3甲-40)=9甲-120</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>化简得：甲=9甲-120，所以8甲=120</p>
+                            <p>甲组：120÷8 = 15人</p>
+                            <p>乙组：15÷3 = 5人</p>
+                            <p>共：15+5 = 20人</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：三数和差问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例13：三数和差问题】</span>
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>大象、老虎、猴子三只动物的年龄中，大象和老虎共90岁，大象和猴子共70岁，老虎和猴子共40岁，请你算一算，三只动物各多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：三数和差问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：三数和差问题】</span>
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>大象、老虎、猴子三只动物的年龄中，大象和老虎共90岁，大象和猴子共70岁，老虎和猴子共40岁，请你算一算，三只动物各多少岁？</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-emerald-800 mb-2">🎯 巧妙方法</h4>
+                            <p class="text-emerald-700">三个和式相加得到2倍的总和，再分别减去各个和式</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>总和：(90+70+40)÷2 = 100岁</p>
+                            <p>大象：100-40 = 60岁</p>
+                            <p>老虎：100-70 = 30岁</p>
+                            <p>猴子：100-90 = 10岁</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：多级倍数问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例14：多级倍数问题】</span>
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>三个班去种树，一共种了293棵。已知二班种的数量是一班的2倍多1棵，三班种的数量又是二班的2倍多3棵，问三个班各种了多少棵？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：多级倍数问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：多级倍数问题】</span>
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>三个班去种树，一共种了293棵。已知二班种的数量是一班的2倍多1棵，三班种的数量又是二班的2倍多3棵，问三个班各种了多少棵？</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-sky-800 mb-2">📏 份数分析</h4>
+                            <p class="text-sky-700">一班1份，二班2份+1，三班4份+5，总共7份+6</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>纯份数和：293-1-5 = 287棵</p>
+                            <p>一班：287÷7 = 41棵</p>
+                            <p>二班：41×2+1 = 83棵</p>
+                            <p>三班：83×2+3 = 169棵</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：多人份数问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例15：多人份数问题】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲、乙、丙三个人合做一批零件，甲比乙多做12个，丙做的比甲的2倍少20个，比乙做的多38个。这批零件共有多少个？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：多人份数问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：多人份数问题】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲、乙、丙三个人合做一批零件，甲比乙多做12个，丙做的比甲的2倍少20个，比乙做的多38个。这批零件共有多少个？</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-red-800 mb-2">🔄 复杂关系</h4>
+                            <p class="text-red-700">用乙为基准：甲=乙+12，丙=2甲-20=2乙+4</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>乙、丙差：38，份数差：1+4=5，所以乙=(38-4)÷1=34</p>
+                            <p>乙：34个</p>
+                            <p>甲：34+12 = 46个</p>
+                            <p>丙：2×34+4 = 72个</p>
+                            <p>共：34+46+72 = 152个</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-blue-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                                1. 什么是"和差倍问题"？
+                            </h4>
+                        </div>
+                        <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>已知两个数的和、差、倍三个量中的两个，求这两个数分别是多少的问题。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-plus text-green-500 mr-3 text-xl"></i>
+                                2. 解决和差问题时，求较大数和较小数的公式分别是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>较大数=(和+差)÷2，较小数=(和-差)÷2</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-times text-purple-500 mr-3 text-xl"></i>
+                                3. 在和倍问题中，"和÷(倍数+1)"计算出的是哪个数？为什么
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>计算出的是较小数。因为较小数是1份，较大数是倍数份，总共是"倍数+1"份。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-minus text-orange-500 mr-3 text-xl"></i>
+                                4. 在差倍问题中，"差÷(倍数-1)"计算出的是哪个数？为什么
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>计算出的是较小数。因为较大数比较小数多"倍数-1"份。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-ruler text-indigo-500 mr-3 text-xl"></i>
+                                5. 解决和差倍问题，除了公式，还有哪些数学思想或方法？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>线段图、等量代换、份数思想、转化法。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-exchange-alt text-red-500 mr-3 text-xl"></i>
+                                6. 【范例8】中，"如果从第一筐中拿10个放到第二筐中，那么两筐的梨子个数相等"这一条件是如何转化的？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>转化为"差：10×2=20"，因为第一筐给第二筐10个后相等，说明原来第一筐比第二筐多20个。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-apple-alt text-teal-500 mr-3 text-xl"></i>
+                                7. 【范例7】中，"香蕉比苹果多了4倍"中的"4倍"在计算时为何变成了"5"？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>"多了4倍"意味着香蕉是苹果的4+1=5倍。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-tree text-cyan-500 mr-3 text-xl"></i>
+                                8. 【范例14】是一个多量（三班）和倍问题，解题时如何设定"份数"来简化计算？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>将一班设为"1份"，二班是"2份+1"，三班是"4份+5"，总共"7份+6"。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题9 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-3 text-xl"></i>
+                                9. 什么是"暗和"和"暗差"口诀？
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-yellow-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>暗和：给来给去和不变；暗差：同增同减差不变。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题10 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-lightbulb text-pink-500 mr-3 text-xl"></i>
+                                10. 和差倍问题的解题口诀是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-pink-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>有倍先画倍、再找和与差；和、差的时间状态要与倍保持一致。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8" style="background: var(--dark-gradient);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                <!-- 作者信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-chalkboard-teacher text-blue-400 mr-2"></i>
+                        作者团队
+                    </h3>
+                    <p class="text-gray-300 mb-2">魔渊国际数学教研团队</p>
+                    <p class="text-gray-400 text-sm">专注于创新数学教学方法研究</p>
+                </div>
+                
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap text-green-400 mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-300 mb-2">2025年魔渊Class精品课程</p>
+                    <p class="text-gray-400 text-sm">第9讲：和差倍问题</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope text-pink-400 mr-2"></i>
+                        联系我们
+                    </h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                        <p><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+                        <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 魔渊国际. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+        <!-- 主题切换 -->
+        <button id="themeToggle" 
+            class="w-14 h-14 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+        
+        <!-- 返回顶部 -->
+        <button id="backToTop" 
+            class="w-14 h-14 bg-pink-600 text-white rounded-full shadow-lg hover:bg-pink-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // MathJax配置
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            initScrollEffects();
+            initNavigation();
+            initExampleVersionToggle();
+            
+            // 初始化GSAP动画
+            gsap.registerPlugin(ScrollTrigger);
+            initGSAPAnimations();
+        });
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 更新粒子位置
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // 边界检查
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    // 绘制粒子
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                });
+                
+                // 绘制连线
+                particles.forEach((particle1, i) => {
+                    particles.slice(i + 1).forEach(particle2 => {
+                        const dx = particle1.x - particle2.x;
+                        const dy = particle1.y - particle2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle1.x, particle1.y);
+                            ctx.lineTo(particle2.x, particle2.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // 滚动效果
+        function initScrollEffects() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollTop / documentHeight;
+                
+                progressBar.style.transform = `scaleX(${scrollPercent})`;
+            });
+        }
+
+        // 导航功能
+        function initNavigation() {
+            // 返回顶部按钮
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 主题切换
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+        // 跳转到指定部分
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 打字机动画已移除
+
+        // GSAP动画
+        function initGSAPAnimations() {
+            // 卡片悬停动画
+            gsap.utils.toArray('.example-card').forEach(card => {
+                gsap.set(card, { transformOrigin: 'center' });
+                
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+            });
+            
+            // 滚动触发动画
+            gsap.utils.toArray('.fade-in').forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%'
+                        }
+                    }
+                );
+            });
+        }
+
+        // 知识自测功能
+        function toggleAnswer(questionNumber) {
+            const answerElement = document.getElementById(`answer-${questionNumber}`);
+            
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 范例版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            
+            studentBtn.addEventListener('click', () => showStudentVersion());
+            teacherBtn.addEventListener('click', () => showTeacherVersion());
+        }
+
+        function showStudentVersion() {
+            // 切换按钮样式
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        function showTeacherVersion() {
+            // 切换按钮样式
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.className = 'fas fa-sun text-xl';
+            } else {
+                themeIcon.className = 'fas fa-moon text-xl';
+            }
+        }
+    </script>
+</body>
+</html>

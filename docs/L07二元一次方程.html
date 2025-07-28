@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第7讲：二元一次方程 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际二元一次方程精品课程 - 消元法，轻松求解二元一次方程组">
+    <meta name="keywords" content="二元一次方程,消元法,数学教学,计算技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: white;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 3rem !important; }
+            .hero-section h2 { font-size: 1.5rem !important; }
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 打字机效果 - 修复闪动 */
+        .typewriter {
+            /* 移除闪烁动画，保持静态样式 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Hero 区域 -->
+    <section id="hero" class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第7讲：二元一次方程
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                消元法，轻松求解二元一次方程组
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🔄 消元法技巧
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                class="px-8 py-4 bg-white text-purple-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-compass text-blue-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握二元一次方程的核心概念，构建完整知识体系
+            </p>
+            
+            <!-- 三列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 二元一次方程定义 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-blue-500 mb-4">🔢</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">二元一次方程</h3>
+                    <p class="text-gray-600 text-sm">
+                        含有两个未知数的一次方程，每个未知数的次数都是1
+                    </p>
+                </div>
+                
+                <!-- 方程组定义 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-green-500 mb-4">📝</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">二元一次方程组</h3>
+                    <p class="text-gray-600 text-sm">
+                        含有两个未知数的一次方程组成的方程组
+                    </p>
+                </div>
+                
+                <!-- 解的概念 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-purple-500 mb-4">✅</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">方程的解</h3>
+                    <p class="text-gray-600 text-sm">
+                        使方程两边相等的两个未知数的值
+                    </p>
+                </div>
+                
+                <!-- 代入消元法 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-yellow-500 mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">代入消元法</h3>
+                    <p class="text-gray-600 text-sm">
+                        通过代入消去一个未知数，转化为一元一次方程
+                    </p>
+                </div>
+                
+                <!-- 加减消元法 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-red-500 mb-4">➕</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">加减消元法</h3>
+                    <p class="text-gray-600 text-sm">
+                        通过两个方程相加或相减消去一个未知数
+                    </p>
+                </div>
+                
+                <!-- 解题口诀 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-orange-500 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">解题口诀</h3>
+                    <p class="text-gray-600 text-sm">
+                        二元方程找等量；没有等量凑等量；找到等量消等量
+                    </p>
+                </div>
+                
+                <!-- 不定方程 -->
+                <div class="concept-card glass-card p-6 fade-in">
+                    <div class="text-3xl text-pink-500 mb-4">🌟</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">不定方程</h3>
+                    <p class="text-gray-600 text-sm">
+                        方程个数小于未知数个数，有无数个解
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                四种基本题型，掌握二元一次方程计算精髓
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本解法技巧 -->
+                <div class="glass-card p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🍓 <span class="ml-3">基本解法技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 方程组判断 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                🔢 方程组判断：看未知数个数和次数
+                            </h4>
+                            <p class="text-gray-600">
+                                两个未知数，每个方程都是一次的
+                            </p>
+                        </div>
+                        
+                        <!-- 代入消元法 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                🔄 代入消元法：解出一个，代入另一个
+                            </h4>
+                            <p class="text-gray-600">
+                                从简单方程入手，用一个未知数表示另一个
+                            </p>
+                        </div>
+                        
+                        <!-- 加减消元法 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                ➕ 加减消元法：配齐系数，加减相消
+                            </h4>
+                            <p class="text-gray-600">
+                                同减异加，让一个未知数消失
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 高级应用技巧 -->
+                <div class="glass-card p-8 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🥝 <span class="ml-3">高级应用技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 不定方程 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🌟 不定方程：枚举法求正整数解
+                            </h4>
+                            <p class="text-gray-600">确定取值范围，逐一验证</p>
+                        </div>
+                        
+                        <!-- 多元方程 -->
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎯 多元方程：逐级消元法
+                            </h4>
+                            <p class="text-gray-600">
+                                依次消除未知数，转化为简单方程
+                            </p>
+                        </div>
+                        
+                        <!-- 分数方程 -->
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <h4 class="font-semibold text-pink-700 mb-2">
+                                📐 分数方程：先去分母，再消元
+                            </h4>
+                            <p class="text-gray-600">
+                                通分化简，转化为标准形式
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握二元一次方程
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例卡片 -->
+            <div class="space-y-8">
+                <!-- 范例1：方程组识别 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例1：方程组识别】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>下面各式中，属于二元一次方程组的是______。</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(\left\{\begin{array}{l}x=1 \\ y=2\end{array}\right.\)；</p>
+                                <p>（2） \(\left\{\begin{array}{l}xy+1=17 \\ x+6=8\end{array}\right.\)；</p>
+                                <p>（3） \(\left\{\begin{array}{l}3x+2y=91 \\ \frac{1}{3}x-z=5\end{array}\right.\)；</p>
+                                <p>（4） \(\left\{\begin{array}{l}\frac{3}{y}+1=x \\ \frac{2}{x}=4-y\end{array}\right.\)；</p>
+                                <p>（5） \(7x+9y=66\)．</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：方程组识别 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：方程组识别】</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>下面各式中，属于二元一次方程组的是______。</p>
+                            <div class="mt-2 space-y-1">
+                                <p>（1） \(\left\{\begin{array}{l}x=1 \\ y=2\end{array}\right.\)；</p>
+                                <p>（2） \(\left\{\begin{array}{l}xy+1=17 \\ x+6=8\end{array}\right.\)；</p>
+                                <p>（3） \(\left\{\begin{array}{l}3x+2y=91 \\ \frac{1}{3}x-z=5\end{array}\right.\)；</p>
+                                <p>（4） \(\left\{\begin{array}{l}\frac{3}{y}+1=x \\ \frac{2}{x}=4-y\end{array}\right.\)；</p>
+                                <p>（5） \(7x+9y=66\)．</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">💡 关键洞察</h4>
+                            <p class="text-blue-700">二元一次方程组的判断标准：含有两个未知数，每个方程都是一次的</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）是二元一次方程组；（2）第一个方程含有xy项，不是一次方程；（3）含有三个未知数；（4）分母含未知数，不是一次方程；（5）只有一个方程，不是方程组。答案：（1）</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：不定方程求解 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例2：不定方程求解】</span>
+                        <i class="fas fa-infinity text-pink-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>判断下面的不定方程有几组正整数解。</p>
+                            <p>（1） \(3x+5y=31\)</p>
+                            <p>（2） \(7x+4y=89\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：不定方程求解 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：不定方程求解】</span>
+                        <i class="fas fa-infinity text-pink-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>判断下面的不定方程有几组正整数解。</p>
+                            <p>（1） \(3x+5y=31\)</p>
+                            <p>（2） \(7x+4y=89\)</p>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-pink-800 mb-2">🌟 不定方程提示</h4>
+                            <p class="text-pink-700">确定一个未知数的取值范围，然后枚举验证哪些值能使另一个未知数也为正整数！</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）\(y\)的取值范围为1～6，枚举验证得\(y=2\)或5，有两组解。</p>
+                            <p>（2）\(x\)的取值范围为1～12，枚举验证得\(x=3\)或7或11，有三组解。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：方程变形 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例3：方程变形】</span>
+                        <i class="fas fa-exchange-alt text-green-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）把二元一次方程 \(\frac{1}{2}x-\frac{1}{3}y=9\) 先用含\(y\)的式子表示\(x\)，再用含有\(x\)的式子表示\(y\)。</p>
+                            <p>（2）将方程 \(5x+\frac{1}{3}y=60\) 变形为用含\(x\)的式子表示\(y\)，并计算当\(x=3\)时对应的\(y\)值。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：方程变形 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：方程变形】</span>
+                        <i class="fas fa-exchange-alt text-green-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>（1）把二元一次方程 \(\frac{1}{2}x-\frac{1}{3}y=9\) 先用含\(y\)的式子表示\(x\)，再用含有\(x\)的式子表示\(y\)。</p>
+                            <p>（2）将方程 \(5x+\frac{1}{3}y=60\) 变形为用含\(x\)的式子表示\(y\)，并计算当\(x=3\)时对应的\(y\)值。</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">💡 提示</h4>
+                            <p class="text-green-700">用一个未知数表示另一个未知数，为代入消元法做准备</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）化简原式得：\(3x-2y=54\)，故 \(x=\frac{54+2y}{3}; y=\frac{3x-54}{2}\)。</p>
+                            <p>（2）\(y=(60-5x) \times 3; y_{x=3}=135\)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：正整数解求解 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例4：正整数解求解】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求出下列二元一次方程的正整数解。</p>
+                            <p>（1） \(2x+6y=14\)</p>
+                            <p>（2） \(3x+7y=60\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：正整数解求解 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：正整数解求解】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>求出下列二元一次方程的正整数解。</p>
+                            <p>（1） \(2x+6y=14\)</p>
+                            <p>（2） \(3x+7y=60\)</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">💡 提示</h4>
+                            <p class="text-yellow-700">先确定一个未知数的取值范围，再逐一验证</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）\(y\)的取值范围为1～2，故\(y=1\)或2，经验算解得：\(\left\{\begin{array}{l}x=4 \\ y=1\end{array}\right.\) 或 \(\left\{\begin{array}{l}x=1 \\ y=2\end{array}\right.\)</p>
+                            <p>（2）\(x=\frac{60-7y}{3}, y\)的取值范围在1～8之间。经验算解得：\(\left\{\begin{array}{l}x=13 \\ y=3\end{array}\right.\) 或 \(\left\{\begin{array}{l}x=6 \\ y=6\end{array}\right.\)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：唯一解判断 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例5：唯一解判断】</span>
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>方程组 \(\left\{\begin{array}{l}3x+3y=15 \\ 2x+2y=10\end{array}\right.\) 是否有唯一解？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：唯一解判断 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：唯一解判断】</span>
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>方程组 \(\left\{\begin{array}{l}3x+3y=15 \\ 2x+2y=10\end{array}\right.\) 是否有唯一解？</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-red-800 mb-2">💡 提示</h4>
+                            <p class="text-red-700">先化简两个方程，看看是否相同</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>化简后两个方程相同（都是\(x+y=5\)），无唯一解。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：基本方程组 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例6：基本方程组】</span>
+                        <i class="fas fa-equals"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>已知 \(x+y=10, x-y=2\)，将其写成一个二元一次方程组的形式，并求出方程的解。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：基本方程组 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：基本方程组】</span>
+                        <i class="fas fa-equals"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>已知 \(x+y=10, x-y=2\)，将其写成一个二元一次方程组的形式，并求出方程的解。</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-indigo-800 mb-2">💡 提示</h4>
+                            <p class="text-indigo-700">这是一个标准的加减消元法例题</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>\(\left\{\begin{array}{l}x+y=10 \\ x-y=2\end{array}\right. \Rightarrow\left\{\begin{array}{l}x=6 \\ y=4\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：代入消元法 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例7：代入消元法】</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用代入消元法求二元一次方程组 \(\left\{\begin{array}{l}5x-2y=18 \\ 2x-y=7\end{array}\right.\) 的解。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：代入消元法 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：代入消元法】</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用代入消元法求二元一次方程组 \(\left\{\begin{array}{l}5x-2y=18 \\ 2x-y=7\end{array}\right.\) 的解。</p>
+                        </div>
+                        <div class="bg-cyan-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-cyan-800 mb-2">🔄 代入消元步骤</h4>
+                            <p class="text-cyan-700">从简单方程入手，解出一个未知数，代入另一个方程</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>解：由下式得：\(y=2x-7\)</p>
+                            <p>代入上式得：\(5x-2(2x-7)=18\) 解得：\(x=4\)</p>
+                            <p>再将\(x=4\)代入原方程，解得：\(y=1\)。故解得：\(\left\{\begin{array}{l}x=4 \\ y=1\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：加减消元法 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例8：加减消元法】</span>
+                        <i class="fas fa-plus-minus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用加减消元法求二元一次方程组 \(\left\{\begin{array}{l}3x+2y=12 \\ 2x+3y=13\end{array}\right.\) 的解。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：加减消元法 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：加减消元法】</span>
+                        <i class="fas fa-plus-minus"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>用加减消元法求二元一次方程组 \(\left\{\begin{array}{l}3x+2y=12 \\ 2x+3y=13\end{array}\right.\) 的解。</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-teal-800 mb-2">➕ 加减消元步骤</h4>
+                            <p class="text-teal-700">配齐系数，加减相消。同减异加！</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>解：将上式×3，下式×2得：\(\left\{\begin{array}{l}9x+6y=36 \\ 4x+6y=26\end{array}\right.\)</p>
+                            <p>再将上式减下式得：\(5x=10\)，解得：\(x=2\)；</p>
+                            <p>将\(x=2\)代入原方程中，解得：\(y=3\)。解得：\(\left\{\begin{array}{l}x=2 \\ y=3\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：标准方程组 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例9：标准方程组】</span>
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：</p>
+                            <p>（1）\(\left\{\begin{array}{l}x+y=5 \\ 2x+y=6\end{array}\right.\)</p>
+                            <p>（2）\(\left\{\begin{array}{l}2x-9y=2 \\ 3x-5y=20\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：标准方程组 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：标准方程组】</span>
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：</p>
+                            <p>（1）\(\left\{\begin{array}{l}x+y=5 \\ 2x+y=6\end{array}\right.\)</p>
+                            <p>（2）\(\left\{\begin{array}{l}2x-9y=2 \\ 3x-5y=20\end{array}\right.\)</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-emerald-800 mb-2">📊 标准方程组提示</h4>
+                            <p class="text-emerald-700">观察系数特点，选择合适的消元方法</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）用加减消元法，下式减上式得：\(x=1\)，代入得\(y=4\)。解：\(\left\{\begin{array}{l}x=1 \\ y=4\end{array}\right.\)</p>
+                            <p>（2）用加减消元法，第一个方程×3，第二个方程×2，然后相减消元。解：\(\left\{\begin{array}{l}x=10 \\ y=2\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：整理化简 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例10：整理化简】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}9x+9y=315 \\ 6x+24y=300\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：整理化简 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：整理化简】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}9x+9y=315 \\ 6x+24y=300\end{array}\right.\)</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-sky-800 mb-2">⚙️ 整理化简提示</h4>
+                            <p class="text-sky-700">先化简系数，再选择消元方法</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>化简：第一个方程除以9得：\(x+y=35\)；第二个方程除以6得：\(x+4y=50\)</p>
+                            <p>下式减上式得：\(3y=15\)，所以\(y=5\)，代入得\(x=30\)</p>
+                            <p>解得：\(\left\{\begin{array}{l}x=30 \\ y=5\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：变形方程组 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例11：变形方程组】</span>
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：</p>
+                            <p>（1）\(\left\{\begin{array}{l}3y=19-x \\ 10x-7y=5\end{array}\right.\)</p>
+                            <p>（2）\(\left\{\begin{array}{l}3x+6=5y-15 \\ 33=3y+5x\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：变形方程组 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：变形方程组】</span>
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：</p>
+                            <p>（1）\(\left\{\begin{array}{l}3y=19-x \\ 10x-7y=5\end{array}\right.\)</p>
+                            <p>（2）\(\left\{\begin{array}{l}3x+6=5y-15 \\ 33=3y+5x\end{array}\right.\)</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">🔄 变形方程组提示</h4>
+                            <p class="text-purple-700">先整理成标准形式，再选择消元方法</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>（1）第一个方程整理为：\(x+3y=19\)，然后用代入消元法。解：\(\left\{\begin{array}{l}x=4 \\ y=5\end{array}\right.\)</p>
+                            <p>（2）整理为：\(\left\{\begin{array}{l}3x-5y=-21 \\ 5x+3y=33\end{array}\right.\)，用加减消元法。解：\(\left\{\begin{array}{l}x=3 \\ y=6\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：含括号方程组 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例12：含括号方程组】</span>
+                        <i class="fas fa-brackets-curly"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}3y-2(x-1)=19 \\ 5x-2(y-3)=24\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：含括号方程组 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：含括号方程组】</span>
+                        <i class="fas fa-brackets-curly"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}3y-2(x-1)=19 \\ 5x-2(y-3)=24\end{array}\right.\)</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-amber-800 mb-2">📐 含括号提示</h4>
+                            <p class="text-amber-700">先去括号，整理成标准形式</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>去括号：</p>
+                            <p>第一个方程：\(3y-2x+2=19\) → \(-2x+3y=17\)</p>
+                            <p>第二个方程：\(5x-2y+6=24\) → \(5x-2y=18\)</p>
+                            <p>用加减消元法求解。解得：\(\left\{\begin{array}{l}x=8 \\ y=11\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：分式方程组 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例13：分式方程组】</span>
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\frac{x}{3}+\frac{y}{4}=5=\frac{5x}{3}-\frac{5y}{4}\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：分式方程组 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：分式方程组】</span>
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\frac{x}{3}+\frac{y}{4}=5=\frac{5x}{3}-\frac{5y}{4}\)</p>
+                        </div>
+                        <div class="bg-rose-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-rose-800 mb-2">➗ 分式方程组提示</h4>
+                            <p class="text-rose-700">理解题意，写出两个方程，再去分母</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>题意理解：\(\frac{x}{3}+\frac{y}{4}=5\) 且 \(\frac{5x}{3}-\frac{5y}{4}=5\)</p>
+                            <p>去分母：</p>
+                            <p>方程1：\(4x+3y=60\)</p>
+                            <p>方程2：\(20x-15y=60\)</p>
+                            <p>用消元法求解。解得：\(\left\{\begin{array}{l}x=9 \\ y=8\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：分数系数方程组 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例14：分数系数方程组】</span>
+                        <i class="fas fa-fraction"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}\frac{x}{4}+\frac{y}{3}=7 \\ \frac{2}{3}x+\frac{y}{2}=14\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：分数系数方程组 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：分数系数方程组】</span>
+                        <i class="fas fa-fraction"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}\frac{x}{4}+\frac{y}{3}=7 \\ \frac{2}{3}x+\frac{y}{2}=14\end{array}\right.\)</p>
+                        </div>
+                        <div class="bg-lime-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-lime-800 mb-2">🔢 分数系数提示</h4>
+                            <p class="text-lime-700">去分母，化为整数系数方程组</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>去分母：</p>
+                            <p>第一个方程×12：\(3x+4y=84\)</p>
+                            <p>第二个方程×6：\(4x+3y=84\)</p>
+                            <p>两式相减得：\(-x+y=0\)，即\(y=x\)</p>
+                            <p>代入得：\(3x+4x=84\)，所以\(x=12\)，\(y=12\)</p>
+                            <p>解得：\(\left\{\begin{array}{l}x=12 \\ y=12\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：三元方程组 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例15：三元方程组】</span>
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}3x+y+z=8 \\ x+3y+z=10 \\ x+y+3z=12\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：三元方程组 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：三元方程组】</span>
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>解方程组：\(\left\{\begin{array}{l}3x+y+z=8 \\ x+3y+z=10 \\ x+y+3z=12\end{array}\right.\)</p>
+                        </div>
+                        <div class="bg-violet-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-violet-800 mb-2">🧊 三元方程组提示</h4>
+                            <p class="text-violet-700">三个方程相加，得到关键的辅助方程</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>巧妙方法：</p>
+                            <p>（1）+（2）+（3）得：\(5x+5y+5z=30\)，即\(x+y+z=6\)（4）</p>
+                            <p>由（1）-（4）得：\(2x=2\)，所以\(x=1\)</p>
+                            <p>由（2）-（4）得：\(2y=4\)，所以\(y=2\)</p>
+                            <p>由（3）-（4）得：\(2z=6\)，所以\(z=3\)</p>
+                            <p>解得：\(\left\{\begin{array}{l}x=1 \\ y=2 \\ z=3\end{array}\right.\)</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-blue-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- 左侧：题目 -->
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                                1. 什么是二元一次方程？
+                            </h4>
+                        </div>
+                        <!-- 右侧：答案 -->
+                        <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>含有两个未知数，并且每个未知数的次数都是1的方程。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-arrows-alt-h text-green-500 mr-3 text-xl"></i>
+                                2. 二元一次方程的解有什么特点？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>二元一次方程的解有无数个，形成一个解集。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calculator text-purple-500 mr-3 text-xl"></i>
+                                3. 什么是二元一次方程组的解？
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>一组未知数的值，它们能够同时使方程组中的每一个方程都成立。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-bridge text-orange-500 mr-3 text-xl"></i>
+                                4. 二元一次方程组有唯一解的前提是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>至少由两个不同的二元一次方程组成。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-list-ol text-indigo-500 mr-3 text-xl"></i>
+                                5. 简述代入消元法的基本思想。
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>从一个方程中解出一个未知数，然后代入另一个方程，将二元方程组转化为一元方程。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-user-graduate text-red-500 mr-3 text-xl"></i>
+                                6. 简述加减消元法的基本思想。
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <div class="text-gray-700 text-lg">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i>通过将两个方程相加或相减，消除一个未知数，转化为一元方程。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题7 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-plus text-teal-500 mr-3 text-xl"></i>
+                                7. 什么时候可以直接用加减消元法？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>当某个未知数的系数相同或互为相反数时。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题8 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-dot-circle text-cyan-500 mr-3 text-xl"></i>
+                                8. 什么是不定方程？它们的解有什么特点？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>方程个数少于未知数个数时的方程。通常有无数个解，但限定条件下可能有有限个解。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题9 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-exclamation-triangle text-yellow-500 mr-3 text-xl"></i>
+                                9. 在解含有分数或括号的二元一次方程组时，通常第一步需要做什么？
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-yellow-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>先整理和简化：去分母、去括号，将方程转化为标准形式。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题10 -->
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-layer-group text-purple-500 mr-3 text-xl"></i>
+                                10. 对于多元一次方程，如何利用消元思想进行求解？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>逐级消元，依次消除未知数，最终转化为一元一次方程。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8" style="background: var(--dark-gradient);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                <!-- 作者信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-chalkboard-teacher text-blue-400 mr-2"></i>
+                        作者团队
+                    </h3>
+                    <p class="text-gray-300 mb-2">魔渊国际数学教研团队</p>
+                    <p class="text-gray-400 text-sm">专注于创新数学教学方法研究</p>
+                </div>
+                
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap text-green-400 mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-300 mb-2">2025年魔渊Class精品课程</p>
+                    <p class="text-gray-400 text-sm">第7讲：二元一次方程</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope text-pink-400 mr-2"></i>
+                        联系我们
+                    </h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                        <p><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+                        <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 魔渊国际. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+        <!-- 主题切换 -->
+        <button id="themeToggle" 
+            class="w-14 h-14 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+        
+        <!-- 返回顶部 -->
+        <button id="backToTop" 
+            class="w-14 h-14 bg-pink-600 text-white rounded-full shadow-lg hover:bg-pink-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // MathJax配置
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            initScrollEffects();
+            initNavigation();
+            initExampleVersionToggle(); // 初始化范例版本切换
+            
+            // 初始化GSAP动画
+            gsap.registerPlugin(ScrollTrigger);
+            initGSAPAnimations();
+        });
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 更新粒子位置
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // 边界检查
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    // 绘制粒子
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                });
+                
+                // 绘制连线
+                particles.forEach((particle1, i) => {
+                    particles.slice(i + 1).forEach(particle2 => {
+                        const dx = particle1.x - particle2.x;
+                        const dy = particle1.y - particle2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle1.x, particle1.y);
+                            ctx.lineTo(particle2.x, particle2.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // 滚动效果
+        function initScrollEffects() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollTop / documentHeight;
+                
+                progressBar.style.transform = `scaleX(${scrollPercent})`;
+            });
+        }
+
+        // 导航功能
+        function initNavigation() {
+            // 返回顶部按钮
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 主题切换
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+        // 跳转到指定部分
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 打字机动画已移除
+
+        // GSAP动画
+        function initGSAPAnimations() {
+            // 卡片悬停动画
+            gsap.utils.toArray('.example-card').forEach(card => {
+                gsap.set(card, { transformOrigin: 'center' });
+                
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+            });
+            
+            // 滚动触发动画
+            gsap.utils.toArray('.fade-in').forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%'
+                        }
+                    }
+                );
+            });
+        }
+
+        // 知识自测功能 - 简化版
+        function toggleAnswer(questionNumber) {
+            const answerElement = document.getElementById(`answer-${questionNumber}`);
+            
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 范例版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            
+            studentBtn.addEventListener('click', () => showStudentVersion());
+            teacherBtn.addEventListener('click', () => showTeacherVersion());
+        }
+
+        function showStudentVersion() {
+            // 切换按钮样式
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        function showTeacherVersion() {
+            // 切换按钮样式
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.className = 'fas fa-sun text-xl';
+            } else {
+                themeIcon.className = 'fas fa-moon text-xl';
+            }
+        }
+    </script>
+</body>
+</html>

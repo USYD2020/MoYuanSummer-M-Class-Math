@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第11讲：周期问题 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际周期问题精品课程 - 带余除法，轻松掌握周期计算">
+    <meta name="keywords" content="周期问题,带余除法,数学教学,计算技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 3rem !important; }
+            .hero-section h2 { font-size: 1.5rem !important; }
+        }
+
+        /* 深色模式 */
+        .dark {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+
+        .dark .example-card {
+            background: #2d2d2d;
+            color: #e5e5e5;
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Hero 区域 -->
+    <section id="hero" class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第11讲：周期问题
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                带余除法，轻松掌握周期计算
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🔄 周期规律
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                class="px-8 py-4 bg-white text-purple-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-rocket mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-compass text-blue-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握周期问题的核心概念，构建完整知识体系
+            </p>
+            
+            <!-- 三列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 周期现象 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-blue-500 mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">周期现象</h3>
+                    <p class="text-gray-600 text-sm">
+                        周而复始，不断重复的现象，如日出日落、一周七天、四季更替
+                    </p>
+                </div>
+                
+                <!-- 周期定义 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-green-500 mb-4">📏</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">周期定义</h3>
+                    <p class="text-gray-600 text-sm">
+                        连续两次规律出现所经过的时间或空间的间隔
+                    </p>
+                </div>
+                
+                <!-- 带余除法 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-purple-500 mb-4">➗</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">带余除法</h3>
+                    <p class="text-gray-600 text-sm">
+                        总数÷周期长度=组数…余数，是解决周期问题的核心方法
+                    </p>
+                </div>
+                
+                <!-- 余数判断 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-yellow-500 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">余数判断</h3>
+                    <p class="text-gray-600 text-sm">
+                        余几周期第几个，无余周期最后一个
+                    </p>
+                </div>
+                
+                <!-- 日期周期 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-red-500 mb-4">📅</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">日期周期</h3>
+                    <p class="text-gray-600 text-sm">
+                        平年365天，闰年366天，年份跨越的星期计算
+                    </p>
+                </div>
+                
+                <!-- 数列周期 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-orange-500 mb-4">🔢</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">数列周期</h3>
+                    <p class="text-gray-600 text-sm">
+                        数字按规律重复排列，找到周期长度是解题关键
+                    </p>
+                </div>
+                
+                <!-- 幂指数周期 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-pink-500 mb-4">⚡</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">幂指数周期</h3>
+                    <p class="text-gray-600 text-sm">
+                        任何数的n次幂的末位数都呈现周期性变化，通常以4为周期
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-magic text-orange-500 mr-3"></i>
+                技巧总结
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                六种核心技巧，掌握周期问题计算精髓
+            </p>
+            
+            <!-- 两列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本解法技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🍓 <span class="ml-3">基本解法技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 找周期 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                🔄 找周期法
+                            </h4>
+                            <p class="text-gray-600">
+                                观察数列规律，找到重复的最小单位
+                            </p>
+                        </div>
+                        
+                        <!-- 带余除法 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                ➗ 带余除法
+                            </h4>
+                            <p class="text-gray-600">
+                                总数÷周期长度=组数…余数，余数决定位置
+                            </p>
+                        </div>
+                        
+                        <!-- 第几天vs过几天 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                📅 第几天vs过几天
+                            </h4>
+                            <p class="text-gray-600">
+                                第几天要算第1天，过几天不算第1天
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 高级应用技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🥝 <span class="ml-3">高级应用技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 日期星期 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                📅 日期星期计算
+                            </h4>
+                            <p class="text-gray-600">平年+1天，闰年+2天的星期推算</p>
+                        </div>
+                        
+                        <!-- 图形规律 -->
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎨 图形规律
+                            </h4>
+                            <p class="text-gray-600">
+                                图形按规律循环，找到周期长度是关键
+                            </p>
+                        </div>
+                        
+                        <!-- 幂指数末位 -->
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <h4 class="font-semibold text-pink-700 mb-2">
+                                ⚡ 幂指数末位
+                            </h4>
+                            <p class="text-gray-600">
+                                任何数的幂次末位都以4为周期循环
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握周期问题
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例卡片 -->
+            <div class="space-y-8">
+                <!-- 范例1：数列周期基础 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例1：数列周期基础】</span>
+                        <i class="fas fa-list-ol"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小明在地上写了一列数：\(7,0,2,5,3,7,0,2,5,3 \ldots\)，你知道他写的第81个数是多少吗？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：数列周期基础 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：数列周期基础】</span>
+                        <i class="fas fa-list-ol"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>小明在地上写了一列数：\(7,0,2,5,3,7,0,2,5,3 \ldots\)，你知道他写的第81个数是多少吗？</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">💡 关键洞察</h4>
+                            <p class="text-blue-700">找出数列的重复规律，确定周期长度</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>从排列上可以看出这组数按 \(7,0,2,5,3\) 依次重复排列，那么周期为5。\(81 \div 5=16 \ldots 1\)，是周期中的第一个数，即7。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：花朵排列周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例2：花朵排列周期】</span>
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>有279朵花，按5朵红花，9朵黄花，13朵绿花的顺序轮流排列，最后一朵是什么颜色的花？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：花朵排列周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：花朵排列周期】</span>
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>有279朵花，按5朵红花，9朵黄花，13朵绿花的顺序轮流排列，最后一朵是什么颜色的花？</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">🌸 花朵排列规律</h4>
+                            <p class="text-green-700">一个周期内的花朵总数是关键</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>周期为 \(5+9+13=27\)。\(279 \div 27=10 \ldots 9\)，按花的排列规律，应是黄花。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：钟表周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例3：钟表周期】</span>
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如图是一个钟表表盘。某时，时针正好指向7，150个小时后，时针指向几？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：钟表周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：钟表周期】</span>
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如图是一个钟表表盘。某时，时针正好指向7，150个小时后，时针指向几？</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">🕐 时针规律</h4>
+                            <p class="text-purple-700">时针12小时转一圈，以12为周期</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>周期为12，\(150 \div 12=12 \ldots 6\)，从7开始，往后再走6格，即到达"1"的位置。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：黑白球周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例4：黑白球周期】</span>
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>黑球、白球共101颗，穿成一串，排列如下图。这串球子中，最后一颗球子应该是什么颜色的？这种颜色的球一共有多少颗？</p>
+                            <div class="mt-3 text-center font-mono text-lg">
+                                ⚪⚫⚪⚪⚫⚪⚪⚫⚪⚪
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：黑白球周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：黑白球周期】</span>
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>黑球、白球共101颗，穿成一串，排列如下图。这串球子中，最后一颗球子应该是什么颜色的？这种颜色的球一共有多少颗？</p>
+                            <div class="mt-3 text-center font-mono text-lg">
+                                ⚪⚫⚪⚪⚫⚪⚪⚫⚪⚪
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">⚫ 球子排列规律</h4>
+                            <p class="text-yellow-700">观察：白黑白白，周期为4</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>球子的排列规律为：白黑白白，周期为4，\(101 \div 4=25 \ldots 1\)，最后一个为白色，共有 \(25 \times 3+1=76\) 颗。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：日期星期周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例5：日期星期周期】</span>
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>乐乐的生日是6月27日，某年的6月1日是星期六，该年乐乐的生日是星期几呢？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：日期星期周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：日期星期周期】</span>
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>乐乐的生日是6月27日，某年的6月1日是星期六，该年乐乐的生日是星期几呢？</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-red-800 mb-2">📅 日期计算</h4>
+                            <p class="text-red-700">星期以7天为周期循环</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>从1号到27号，一共是27天，\(27 \div 7=3 \ldots 6\)，因为周期是从周六开始的，那么周期第六个是周四，所以乐乐的生日是周四。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：图形旋转周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例6：图形旋转周期】</span>
+                        <i class="fas fa-shapes"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如图所示：10幅图按规律排成一排，其中前三幅图已经画出，请按照规律先画出第4幅图，再画出第10幅图。</p>
+                            <p class="text-sm text-gray-600 mt-2">（图形按顺时针方向旋转90度）</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：图形旋转周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：图形旋转周期】</span>
+                        <i class="fas fa-shapes"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如图所示：10幅图按规律排成一排，其中前三幅图已经画出，请按照规律先画出第4幅图，再画出第10幅图。</p>
+                            <p class="text-sm text-gray-600 mt-2">（图形按顺时针方向旋转90度）</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-orange-800 mb-2">🎨 图形规律</h4>
+                            <p class="text-orange-700">每幅图都是按照顺时针旋转90度，4幅图为一个周期</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>通过前三幅图的规律，可知每幅图都是按照顺时针的旋转。第5幅图和第1幅图是一样的，那么就是4幅图为一个周期。\(10 \div 4=2 \ldots 2\)，所以第10幅图就是第3个周期的第2个，也就是第2幅图。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：珠子颜色周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例7：珠子颜色周期】</span>
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>在一根绳子上依次穿2个红珠、2个白珠、5个黑珠，并按此方式反复，如果从头开始数，直到第50颗，那么其中白珠有多少颗？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：珠子颜色周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：珠子颜色周期】</span>
+                        <i class="fas fa-circle"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>在一根绳子上依次穿2个红珠、2个白珠、5个黑珠，并按此方式反复，如果从头开始数，直到第50颗，那么其中白珠有多少颗？</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-teal-800 mb-2">🔮 珠子排列规律</h4>
+                            <p class="text-teal-700">计算周期中特定颜色珠子的数量</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>周期为\(2+2+5=9\)，\(50 \div 9=5 \ldots 5\)。每个周期中有2个白珠，剩下的5个珠子中有2个白珠，故共有\(5 \times 2+2=12\)（个）。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：跳蚤圆圈周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例8：跳蚤圆圈周期】</span>
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>电子跳蚤每跳一步，可从一个圆圈跳到相邻的圆圈。现在，一只红跳蚤从标有数"1"的圆圈按顺时针方向跳了101步，落在一个圆圈里。一只黑跳蚤也从标有数"1"的圆圈起跳，但它沿着逆时针方向跳了101步，落在另一个圆圈里，那么这两个圆圈里的数的乘积是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：跳蚤圆圈周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：跳蚤圆圈周期】</span>
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>电子跳蚤每跳一步，可从一个圆圈跳到相邻的圆圈。现在，一只红跳蚤从标有数"1"的圆圈按顺时针方向跳了101步，落在一个圆圈里。一只黑跳蚤也从标有数"1"的圆圈起跳，但它沿着逆时针方向跳了101步，落在另一个圆圈里，那么这两个圆圈里的数的乘积是多少？</p>
+                        </div>
+                        <div class="bg-cyan-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-cyan-800 mb-2">🔄 圆圈跳跃规律</h4>
+                            <p class="text-cyan-700">圆圈排列的周期问题，需要考虑顺时针和逆时针方向</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>顺时针周期为8：23456781。\(101 \div 8=12 \ldots 5\)，是周期第五个，即6；逆时针周期为8：87654321。\(101 \div 8=12 \ldots 5\)，是周期第五个，即4；故乘积为\(6 \times 4=24\)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：过天数星期周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例9：过天数星期周期】</span>
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如果某年6月9日是星期五，那么再过2024天是星期几？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：过天数星期周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：过天数星期周期】</span>
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如果某年6月9日是星期五，那么再过2024天是星期几？</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-indigo-800 mb-2">📅 过天数计算</h4>
+                            <p class="text-indigo-700">注意"过几天"需要算上起始日期</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>算上6月9日，一共有2025天，\(2025 \div 7=289 \ldots 2\)，因为周期是从星期五开始的，那么周期第二个是星期六，所以这一天是星期六。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：幂次末位周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例10：幂次末位周期】</span>
+                        <i class="fas fa-superscript"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>100个13相乘，积的个位数字是几？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：幂次末位周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：幂次末位周期】</span>
+                        <i class="fas fa-superscript"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>100个13相乘，积的个位数字是几？</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">⚡ 幂次末位规律</h4>
+                            <p class="text-purple-700">任何数的幂次末位都有4周期规律</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>积的个位的规律：3、9、7、1……，周期是4，\(100 \div 4=25 \ldots 0\)，最后积的个位是周期的最后一个，即1。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：汉字表格周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例11：汉字表格周期】</span>
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如下表所示：第一列是"天革"，第二列是"道命"。那么第30列对应的汉字组是什么？</p>
+                            <div class="mt-3 text-center">
+                                <table class="mx-auto border-collapse border border-gray-300 text-sm">
+                                    <tr>
+                                        <td class="border border-gray-300 px-2 py-1">天</td>
+                                        <td class="border border-gray-300 px-2 py-1">道</td>
+                                        <td class="border border-gray-300 px-2 py-1">酬</td>
+                                        <td class="border border-gray-300 px-2 py-1">勤</td>
+                                        <td class="border border-gray-300 px-2 py-1">…</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-2 py-1">革</td>
+                                        <td class="border border-gray-300 px-2 py-1">命</td>
+                                        <td class="border border-gray-300 px-2 py-1">尚</td>
+                                        <td class="border border-gray-300 px-2 py-1">未</td>
+                                        <td class="border border-gray-300 px-2 py-1">…</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：汉字表格周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：汉字表格周期】</span>
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>如下表所示：第一列是"天革"，第二列是"道命"。那么第30列对应的汉字组是什么？</p>
+                            <div class="mt-3 text-center">
+                                <table class="mx-auto border-collapse border border-gray-300 text-sm">
+                                    <tr>
+                                        <td class="border border-gray-300 px-2 py-1">天</td>
+                                        <td class="border border-gray-300 px-2 py-1">道</td>
+                                        <td class="border border-gray-300 px-2 py-1">酬</td>
+                                        <td class="border border-gray-300 px-2 py-1">勤</td>
+                                        <td class="border border-gray-300 px-2 py-1">…</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-2 py-1">革</td>
+                                        <td class="border border-gray-300 px-2 py-1">命</td>
+                                        <td class="border border-gray-300 px-2 py-1">尚</td>
+                                        <td class="border border-gray-300 px-2 py-1">未</td>
+                                        <td class="border border-gray-300 px-2 py-1">…</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="bg-rose-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-rose-800 mb-2">📝 多周期问题</h4>
+                            <p class="text-rose-700">不同行有不同的周期长度，需要分别计算</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>第一行是4个汉字不断重复，\(30 \div 4=7 \ldots 2\)，所以第30个汉字是"道"；第二行是6个汉字不断重复，\(30 \div 6=5\)（周），所以第30个汉字是"功"。即"道功"。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：跨年星期周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例12：跨年星期周期】</span>
+                        <i class="fas fa-calendar-year"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>算一算2008年8月8号奥运会开幕式是星期五举行的，那么这一年的2月8号是星期几？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：跨年星期周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：跨年星期周期】</span>
+                        <i class="fas fa-calendar-year"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>算一算2008年8月8号奥运会开幕式是星期五举行的，那么这一年的2月8号是星期几？</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-emerald-800 mb-2">🗓️ 跨年日期计算</h4>
+                            <p class="text-emerald-700">需要考虑闰年的2月有29天</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>2008年是闰年，故2月有29天，从8号开始算有22天，故总共有\(22+31+30+31+30+31+8=183\)天，\(183 \div 7=26 \ldots 1\)，因为周期是从星期五开始倒推的，那么周期第1个就是星期五。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：工作日周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例13：工作日周期】</span>
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>某人上班24天，赚得1900元（日工资100元，星期六做半天工，发半工资，星期日休息，无工资）。已知他打工是从1月下旬（指20号以后）的某一天开始的，这个月的1号恰好是星期日。问：这人是几号开始上班的？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：工作日周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：工作日周期】</span>
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>某人上班24天，赚得1900元（日工资100元，星期六做半天工，发半工资，星期日休息，无工资）。已知他打工是从1月下旬（指20号以后）的某一天开始的，这个月的1号恰好是星期日。问：这人是几号开始上班的？</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-amber-800 mb-2">💼 工作日计算</h4>
+                            <p class="text-amber-700">需要综合考虑工作日程和工资情况</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>24天是三周多，故这24天中必定恰有4个星期六。完整三周21天获得1650元，那么剩下三天获得了250元，只能包含了周四，周五，周六。因此，这人上班结束的那一天必定是星期六。由此逆推回去，便可知道开始的那一天是星期四。因为，1月1日是星期日，所以1月22日也是星期日，从而1月下旬唯一的一个星期四是1月26日。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：月份星期周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例14：月份星期周期】</span>
+                        <i class="fas fa-calendar-month"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>在某个月中刚好有3个星期天的日期是偶数（双数），则这个月的3号是星期几？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：月份星期周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：月份星期周期】</span>
+                        <i class="fas fa-calendar-month"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>在某个月中刚好有3个星期天的日期是偶数（双数），则这个月的3号是星期几？</p>
+                        </div>
+                        <div class="bg-violet-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-violet-800 mb-2">🔍 逆向推理</h4>
+                            <p class="text-violet-700">从结果倒推原因，利用星期天日期的奇偶性规律</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>一个星期有7天，注意7是奇数（单数），所以任意两个相继星期天的日数奇偶性不同。于是在每个月从1日到28日这28天中，有\(28 \div 7=4\)个星期天，且其中有两个星期天的日期是偶数，从而题中第3个日期为偶数的星期天必为30日。由此可以推知，这个月的第1个星期天是\(30-4 \times 7=2\)日，那么，3日为星期一。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：幂指数和末位周期 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例15：幂指数和末位周期】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>\(2023^{2024}\) 与 \(2024^{2023}\) 和的个位数字是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：幂指数和末位周期 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：幂指数和末位周期】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>\(2023^{2024}\) 与 \(2024^{2023}\) 和的个位数字是多少？</p>
+                        </div>
+                        <div class="bg-pink-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-pink-800 mb-2">⚡ 幂指数规律</h4>
+                            <p class="text-pink-700">任何数的幂指数末位数都以4为周期</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p>3的次方数周期为\(3,9,7,1\ldots\)；\(2024 \div 4=506\ldots 0\)，末尾数是1。4的次方数周期为\(4,6,4,6\ldots\)；\(2023 \div 4=505\ldots 3\)，末尾数是4，故末尾数是\(1+4=5\)。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-blue-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- 左侧：题目 -->
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                                1. 什么是周期问题？
+                            </h4>
+                        </div>
+                        <!-- 右侧：答案 -->
+                        <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>某些特征周而复始，规律性重复出现的问题。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-arrows-alt-h text-green-500 mr-3 text-xl"></i>
+                                2. 什么是周期？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>连续两次规律出现所经过的时间或空间的间隔。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calculator text-purple-500 mr-3 text-xl"></i>
+                                3. 解决周期问题的基本方法是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>带余除法：总数÷周期长度=组数…余数</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-target text-orange-500 mr-3 text-xl"></i>
+                                4. 余数的作用是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>余几周期第几个，无余周期最后一个</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calendar text-indigo-500 mr-3 text-xl"></i>
+                                5. "第几天"和"过几天"有什么区别？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>第几天要算第1天，过几天不算第1天</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calendar-check text-red-500 mr-3 text-xl"></i>
+                                6. 平年和闰年对星期计算有什么影响？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <div class="text-gray-700 text-lg">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i>平年365天，星期往后推1天; 闰年366天，星期往后推2天</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-bolt text-teal-500 mr-3 text-xl"></i>
+                                7. 幂指数的末位数周期是多少？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>任何数的幂指数末位数都以4为周期</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-search text-cyan-500 mr-3 text-xl"></i>
+                                8. 如何判断闰年？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>普通年份能被4整除，整百年能被400整除</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题9 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-clock text-amber-500 mr-3 text-xl"></i>
+                                9. 钟表的时针转一圈是多少小时？
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-amber-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>12小时</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题10 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calendar-week text-emerald-500 mr-3 text-xl"></i>
+                                10. 今天星期一，过7天是星期几？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-emerald-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>星期一</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8" style="background: var(--dark-gradient);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                <!-- 作者信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-chalkboard-teacher text-blue-400 mr-2"></i>
+                        作者团队
+                    </h3>
+                    <p class="text-gray-300 mb-2">魔渊国际数学教研团队</p>
+                    <p class="text-gray-400 text-sm">专注于创新数学教学方法研究</p>
+                </div>
+                
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap text-green-400 mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-300 mb-2">2025年魔渊Class精品课程</p>
+                    <p class="text-gray-400 text-sm">第11讲：周期问题</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope text-pink-400 mr-2"></i>
+                        联系我们
+                    </h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                        <p><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+                        <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 魔渊国际. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+        <!-- 主题切换 -->
+        <button id="themeToggle" 
+            class="w-14 h-14 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+        
+        <!-- 返回顶部 -->
+        <button id="backToTop" 
+            class="w-14 h-14 bg-pink-600 text-white rounded-full shadow-lg hover:bg-pink-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // MathJax配置
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\(', '\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            initScrollEffects();
+            initNavigation();
+            initExampleVersionToggle();
+            
+            // 初始化GSAP动画
+            gsap.registerPlugin(ScrollTrigger);
+            initGSAPAnimations();
+        });
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                });
+                
+                particles.forEach((particle1, i) => {
+                    particles.slice(i + 1).forEach(particle2 => {
+                        const dx = particle1.x - particle2.x;
+                        const dy = particle1.y - particle2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle1.x, particle1.y);
+                            ctx.lineTo(particle2.x, particle2.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // 滚动效果
+        function initScrollEffects() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollTop / documentHeight;
+                
+                progressBar.style.transform = `scaleX(${scrollPercent})`;
+            });
+        }
+
+        // 导航功能
+        function initNavigation() {
+            // 返回顶部按钮
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 主题切换
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+        // 跳转到指定部分
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+
+        // GSAP动画
+        function initGSAPAnimations() {
+            gsap.utils.toArray('.example-card').forEach(card => {
+                gsap.set(card, { transformOrigin: 'center' });
+                
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+            });
+            
+            gsap.utils.toArray('.fade-in').forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%'
+                        }
+                    }
+                );
+            });
+        }
+
+        // 知识自测功能
+        function toggleAnswer(questionNumber) {
+            const answerElement = document.getElementById(`answer-${questionNumber}`);
+            
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 范例版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            
+            studentBtn.addEventListener('click', () => showStudentVersion());
+            teacherBtn.addEventListener('click', () => showTeacherVersion());
+        }
+
+        function showStudentVersion() {
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+            
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        function showTeacherVersion() {
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+            
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.className = 'fas fa-sun text-xl';
+            } else {
+                themeIcon.className = 'fas fa-moon text-xl';
+            }
+        }
+    </script>
+</body>
+</html>

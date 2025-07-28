@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第16讲：列方程解应用题 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际列方程解应用题精品课程 - 六步解题法，轻松掌握应用题求解">
+    <meta name="keywords" content="列方程解应用题,六步解题法,等量关系,数学教学,应用题技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                processHtmlClass: 'tex2jax_process',
+                processClass: 'tex2jax_process'
+            },
+            startup: {
+                ready: () => {
+                    console.log('MathJax 初始化完成');
+                    MathJax.startup.defaultReady();
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 六步解题法特殊样式 */
+        .steps-illustration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .step-item {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            font-weight: bold;
+            min-width: 3rem;
+            text-align: center;
+        }
+
+        .step-arrow {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1000;
+        }
+
+        /* 粒子动画 */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 3rem !important; }
+            .hero-section h2 { font-size: 1.5rem !important; }
+            .steps-illustration { font-size: 1rem; }
+            .step-item { padding: 0.3rem 0.8rem; min-width: 2.5rem; }
+        }
+
+        /* 深色模式 */
+        .dark {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+
+        .dark .example-card {
+            background: #2d2d2d;
+            color: #e5e5e5;
+        }
+
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+        .fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Hero 区域 -->
+    <section id="hero" class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-orange-600"></div>
+        
+        <!-- 粒子动画 -->
+        <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <!-- 主标题 -->
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第16讲：列方程解应用题
+            </h1>
+            
+            <!-- 副标题 -->
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                审设列解验答，六步法轻松搞定应用题
+            </h2>
+            
+            <!-- 磁性标签云 -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    ⚖️ 列方程解题
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🔄 六步解题法
+                </span>
+            </div>
+            
+            <!-- CTA按钮 -->
+            <button onclick="goToSection('concepts')" 
+                class="px-8 py-4 bg-white text-blue-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-balance-scale mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-balance-scale text-blue-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握列方程解应用题的核心概念，构建完整解题体系
+            </p>
+            
+            <!-- 三列网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 设未知数技巧 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-blue-500 mb-4">❌</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">设未知数技巧</h3>
+                    <p class="text-gray-600 text-sm">
+                        求什么设什么为x；有倍先设倍；联系最多的量优先设为x
+                    </p>
+                </div>
+
+                <!-- 六步解题法 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-green-500 mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">六步解题法</h3>
+                    <p class="text-gray-600 text-sm">
+                        审、设、列、解、验、答 - 系统化解题流程
+                    </p>
+                </div>
+
+                <!-- 等量关系 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-purple-500 mb-4">⚖️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">等量关系</h3>
+                    <p class="text-gray-600 text-sm">
+                        和、差、不变量 - 寻找题目中隐藏的等量关系
+                    </p>
+                </div>
+
+                <!-- 和差倍问题 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-orange-500 mb-4">📊</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">和差倍问题</h3>
+                    <p class="text-gray-600 text-sm">
+                        有倍先设倍，通常设一倍量为x，简化表达关系
+                    </p>
+                </div>
+
+                <!-- 盈亏问题 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-yellow-500 mb-4">🎁</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">盈亏问题</h3>
+                    <p class="text-gray-600 text-sm">
+                        分配物总量不变，分配对象不变 - 抓住不变量列方程
+                    </p>
+                </div>
+
+                <!-- 综合应用 -->
+                <div class="concept-card glass-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <div class="text-3xl text-red-500 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">综合应用</h3>
+                    <p class="text-gray-600 text-sm">
+                        行程、工程、年龄、混合问题 - 灵活运用方程思想
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技巧总结 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-calculator text-blue-500 mr-3"></i>
+                解题技巧
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                四大核心技巧，掌握列方程解应用题精髓
+            </p>
+            
+            <!-- 四列网格布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 和差倍问题：玻璃态卡片 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        📊 <span class="ml-3">和差倍问题</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 特点：蓝色背景 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                🎯 特点
+                            </h4>
+                            <p class="text-gray-600">
+                                涉及和、差、倍数关系的问题
+                            </p>
+                        </div>
+
+                        <!-- 技巧：绿色背景 -->
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                💡 技巧
+                            </h4>
+                            <p class="text-gray-600">
+                                有倍先设倍，通常设一倍量为x
+                            </p>
+                        </div>
+
+                        <!-- 口诀：紫色背景 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                🔥 口诀
+                            </h4>
+                            <p class="text-gray-600">
+                                和差倍问题，一倍量是关键
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 盈亏问题 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🎁 <span class="ml-3">盈亏问题</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 特点：橙色背景 -->
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                🎪 特点
+                            </h4>
+                            <p class="text-gray-600">分配物品时出现多余或不足</p>
+                        </div>
+
+                        <!-- 关键：红色背景 -->
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🔑 关键
+                            </h4>
+                            <p class="text-gray-600">
+                                分配的总量不变，分配的对象不变
+                            </p>
+                        </div>
+
+                        <!-- 方法：黄色背景 -->
+                        <div class="p-4 bg-yellow-50 rounded-lg">
+                            <h4 class="font-semibold text-yellow-700 mb-2">
+                                📐 方法
+                            </h4>
+                            <p class="text-gray-600">
+                                抓住不变量，列等量关系
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 鸡兔同笼问题 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🐔 <span class="ml-3">鸡兔同笼</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 条件：青色背景 -->
+                        <div class="p-4 bg-cyan-50 rounded-lg">
+                            <h4 class="font-semibold text-cyan-700 mb-2">
+                                📝 条件
+                            </h4>
+                            <p class="text-gray-600">知道总数和总的某个特征</p>
+                        </div>
+
+                        <!-- 设法：绿色背景 -->
+                        <div class="p-4 bg-teal-50 rounded-lg">
+                            <h4 class="font-semibold text-teal-700 mb-2">
+                                ❌ 设法
+                            </h4>
+                            <p class="text-gray-600">
+                                设其中一种为x，另一种用总数减x表示
+                            </p>
+                        </div>
+
+                        <!-- 应用：紫色背景 -->
+                        <div class="p-4 bg-indigo-50 rounded-lg">
+                            <h4 class="font-semibold text-indigo-700 mb-2">
+                                🌍 应用
+                            </h4>
+                            <p class="text-gray-600">
+                                票价问题、停车问题等
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 综合应用 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🎯 <span class="ml-3">综合应用</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- 类型：粉色背景 -->
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <h4 class="font-semibold text-pink-700 mb-2">
+                                📚 类型
+                            </h4>
+                            <p class="text-gray-600">行程、工程、年龄、混合问题</p>
+                        </div>
+
+                        <!-- 思路：紫色背景 -->
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                💭 思路
+                            </h4>
+                            <p class="text-gray-600">
+                                灵活运用方程思想，综合分析
+                            </p>
+                        </div>
+
+                        <!-- 关键：蓝色背景 -->
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                🔥 关键
+                            </h4>
+                            <p class="text-gray-600">
+                                找准等量关系，合理设未知数
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题 -->
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握列方程解应用题
+            </p>
+            
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" 
+                            class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" 
+                            class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 范例卡片 -->
+            <div class="space-y-8">
+                <!-- 范例1：书架书本问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例1：书架书本问题】</span>
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>有上下两层书架，共放书1001本，现将上层的书拿出20本给下层，这样上层的书比下层还多15本，求原来上、下层各有书多少本？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例1：书架书本问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例1：书架书本问题】</span>
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>有上下两层书架，共放书1001本，现将上层的书拿出20本给下层，这样上层的书比下层还多15本，求原来上、下层各有书多少本？</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-2">🔄 六步解题法</h4>
+                            <div class="steps-illustration">
+                                <span class="step-item">审</span>
+                                <span class="step-arrow">→</span>
+                                <span class="step-item">设</span>
+                                <span class="step-arrow">→</span>
+                                <span class="step-item">列</span>
+                                <span class="step-arrow">→</span>
+                                <span class="step-item">解</span>
+                                <span class="step-arrow">→</span>
+                                <span class="step-item">验</span>
+                                <span class="step-arrow">→</span>
+                                <span class="step-item">答</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设上层有 $x$ 本书，则下层有 $(1001-x)$ 本书。</p>
+                            <p class="mt-2">$$x-20=(1001-x)+20+15$$</p>
+                            <p class="mt-2">解得：$x=528$</p>
+                            <p class="mt-2">故：上层有528本；下层有 $1001-528=473$ 本。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：甲乙桶油问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例2：甲乙桶油问题】</span>
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲桶里有油480千克，乙桶里有油190千克，将甲桶的油倒入乙桶多少千克，才能使甲桶油是乙桶油的2倍多10千克？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2：甲乙桶油问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例2：甲乙桶油问题】</span>
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲桶里有油480千克，乙桶里有油190千克，将甲桶的油倒入乙桶多少千克，才能使甲桶油是乙桶油的2倍多10千克？</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-green-800 mb-2">💡 关键洞察</h4>
+                            <p class="text-green-700">倍数关系问题，抓住"2倍多10千克"这个等量关系</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设甲桶的油倒入乙桶 $x$ 千克。</p>
+                            <p class="mt-2">$480-x=2(190+x)+10$</p>
+                            <p class="mt-2">解得：$x=30$</p>
+                            <p class="mt-2">故：甲桶的油倒入乙桶30千克才能使甲桶油是乙桶油的2倍多10千克。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：羊群数量问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例3：羊群数量问题】</span>
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>一人看见山上有一群羊，他自言自语道："我如果有这些羊，再加上这些羊，然后加上这些羊的一半，又加上这些羊一半的一半，最后再加上我家里的那只，一共有100只羊"，山上的羊群共有多少只？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3：羊群数量问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例3：羊群数量问题】</span>
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>一人看见山上有一群羊，他自言自语道："我如果有这些羊，再加上这些羊，然后加上这些羊的一半，又加上这些羊一半的一半，最后再加上我家里的那只，一共有100只羊"，山上的羊群共有多少只？</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-2">💡 提示</h4>
+                            <p class="text-purple-700">分数问题，将所有羊数用x表示，建立等式</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设山上的羊有 $x$ 只。</p>
+                            <p class="mt-2">$$x+x+0.5x+0.25x=100-1$$</p>
+                            <p class="mt-2">解得：$x=36$</p>
+                            <p class="mt-2">故：山上的羊群共有36只。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：西瓜白兰瓜问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例4：西瓜白兰瓜问题】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>水果店运来的西瓜的个数是白兰瓜的个数的2倍。如果每天卖白兰瓜40个，西瓜50个，若干天后卖完白兰瓜时，西瓜还剩360个。水果店运来的西瓜和白兰瓜共多少个？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4：西瓜白兰瓜问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例4：西瓜白兰瓜问题】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>水果店运来的西瓜的个数是白兰瓜的个数的2倍。如果每天卖白兰瓜40个，西瓜50个，若干天后卖完白兰瓜时，西瓜还剩360个。水果店运来的西瓜和白兰瓜共多少个？</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-orange-800 mb-2">💡 关键洞察</h4>
+                            <p class="text-orange-700">设时间为未知数，利用白兰瓜卖完这个条件</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设卖了 $x$ 天。</p>
+                            <p class="mt-2">$$40x \times 2=50x+360$$</p>
+                            <p class="mt-2">解得：$x=12$</p>
+                            <p class="mt-2">故：西瓜和白兰瓜共有 $40x+50x+360=90 \times 12+360=1440$ 个</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：四个自然数问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例5：四个自然数问题】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>四个自然数，每次取其中的三个相加，得到四个和，分别为22，24，27和20，求这四个数各是多少？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5：四个自然数问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例5：四个自然数问题】</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>四个自然数，每次取其中的三个相加，得到四个和，分别为22，24，27和20，求这四个数各是多少？</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-red-800 mb-2">💡 巧思</h4>
+                            <p class="text-red-700">设四个数的总和为x，巧妙利用总和关系</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设这四个数的总和为 $x$。</p>
+                            <p class="mt-2">$$(x-22)+(x-24)+(x-27)+(x-20)=x$$</p>
+                            <p class="mt-2">解得：$x=31$</p>
+                            <p class="mt-2">所以这四个数分别为 $31-22=9$、$31-24=7$、$31-27=4$、$31-20=11$。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：年龄问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例6：年龄问题】</span>
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>今年小刚年龄的4倍与小芳年龄的6倍相等，9年后小刚年龄的5倍和小芳年龄的6倍相等。小刚今年多少岁？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6：年龄问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例6：年龄问题】</span>
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>今年小刚年龄的4倍与小芳年龄的6倍相等，9年后小刚年龄的5倍和小芳年龄的6倍相等。小刚今年多少岁？</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">💡 年龄问题特点</h4>
+                            <p class="text-yellow-700">利用年龄差不变和倍数关系变化的特点</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设小刚今年 $x$ 岁，小芳今年 $(4x \div 6)$ 岁。</p>
+                            <p class="mt-2">$$5(x+9)=6(4x \div 6+9)$$</p>
+                            <p class="mt-2">解得：$x=9$</p>
+                            <p class="mt-2">故：小刚今年9岁。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：师徒做零件问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例7：师徒做零件问题】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>师傅和徒弟共100人做零件，师傅每人做3个，徒弟每3人做1个，一共做了100个零件，问徒弟有多少人？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7：师徒做零件问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例7：师徒做零件问题】</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>师傅和徒弟共100人做零件，师傅每人做3个，徒弟每3人做1个，一共做了100个零件，问徒弟有多少人？</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-teal-800 mb-2">💡 关键</h4>
+                            <p class="text-teal-700">注意徒弟的工作效率：每3人做1个</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设徒弟有 $x$ 人。则师傅有 $(100-x)$ 人</p>
+                            <p class="mt-2">$$x \div 3+3(100-x)=100$$</p>
+                            <p class="mt-2">解得：$x=75$</p>
+                            <p class="mt-2">故：徒弟有75人。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：苹果梨价格问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例8：苹果梨价格问题】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>苹果和梨共80斤，价值200元，已知苹果2元一斤，梨2.8元一斤，那么苹果和梨各多少斤？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8：苹果梨价格问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例8：苹果梨价格问题】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>苹果和梨共80斤，价值200元，已知苹果2元一斤，梨2.8元一斤，那么苹果和梨各多少斤？</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-indigo-800 mb-2">💡 混合问题</h4>
+                            <p class="text-indigo-700">重量关系+价值关系，双重约束条件</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设苹果 $x$ 斤，梨 $(80-x)$ 斤。</p>
+                            <p class="mt-2">$$2x+2.8(80-x)=200$$</p>
+                            <p class="mt-2">解得 $x=30$</p>
+                            <p class="mt-2">故：苹果有30斤，梨有50斤。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：玻璃厂托运问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例9：玻璃厂托运问题】</span>
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>某玻璃厂托运玻璃250箱，合同规定每箱运费20元，如果损坏一箱，不但不付运费还要赔偿100元。运后结算时，共付运费4400元。托运中损坏了多少箱玻璃？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9：玻璃厂托运问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例9：玻璃厂托运问题】</span>
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>某玻璃厂托运玻璃250箱，合同规定每箱运费20元，如果损坏一箱，不但不付运费还要赔偿100元。运后结算时，共付运费4400元。托运中损坏了多少箱玻璃？</p>
+                        </div>
+                        <div class="bg-rose-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-rose-800 mb-2">💡 盈亏变形</h4>
+                            <p class="text-rose-700">损坏箱数影响总收入，建立收入关系</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设托运中损坏了 $x$ 箱玻璃，则没有损坏的是 $(250-x)$ 箱。</p>
+                            <p class="mt-2">$20(250-x)-100x=4400$</p>
+                            <p class="mt-2">解得：$x=5$</p>
+                            <p class="mt-2">故：托运中损坏了5箱玻璃。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：甲乙仓库粮食问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例10：甲乙仓库粮食问题】</span>
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>有甲、乙两个仓库，两个仓库平均储存粮食32.5吨。甲仓的存粮吨数比乙仓的4倍少5吨，甲、乙两仓各储存粮食多少吨？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10：甲乙仓库粮食问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例10：甲乙仓库粮食问题】</span>
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>有甲、乙两个仓库，两个仓库平均储存粮食32.5吨。甲仓的存粮吨数比乙仓的4倍少5吨，甲、乙两仓各储存粮食多少吨？</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-amber-800 mb-2">💡 倍数关系</h4>
+                            <p class="text-amber-700">甲比乙的4倍少5吨，建立等量关系</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设乙仓储存粮食 $x$ 吨，甲仓储存粮食 $(4x-5)$ 吨。</p>
+                            <p class="mt-2">$$x+(4x-5)=32.5 \times 2$$</p>
+                            <p class="mt-2">解得：$x=14$</p>
+                            <p class="mt-2">故：乙仓储存粮食14吨；甲仓储存粮食：$4 \times 14-5=51$ 吨。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：苹果梨装袋问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例11：苹果梨装袋问题】</span>
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>苹果和梨各有若干个，如果5个苹果和3个梨装一袋，那么还多4个苹果，梨恰好装完；如果7个苹果和3个梨装一袋，那么苹果恰好装完，还多12个梨，那么苹果和梨各有多少个？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11：苹果梨装袋问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例11：苹果梨装袋问题】</span>
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>苹果和梨各有若干个，如果5个苹果和3个梨装一袋，那么还多4个苹果，梨恰好装完；如果7个苹果和3个梨装一袋，那么苹果恰好装完，还多12个梨，那么苹果和梨各有多少个？</p>
+                        </div>
+                        <div class="bg-violet-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-violet-800 mb-2">💡 复杂盈亏</h4>
+                            <p class="text-violet-700">两种装袋方式，设袋数为未知数</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设第一次装了 $x$ 袋，则第二次装了 $x-12 \div 3=x-4$（袋）。</p>
+                            <p class="mt-2">$$5x+4=7(x-4)$$</p>
+                            <p class="mt-2">解得 $x=16$</p>
+                            <p class="mt-2">故：原有苹果 $5 \times 16+4=84$（个），原有梨 $3 \times 16=48$（个）</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：四人做零件问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例12：四人做零件问题】</span>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲、乙、丙、丁四人共做了270个零件，如果甲多做10个，乙少做10个，丙做的个数乘以2，丁做的个数除以2，那么四人做的零件数恰好相等。问：丙实际做了多少个？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12：四人做零件问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例12：四人做零件问题】</span>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>甲、乙、丙、丁四人共做了270个零件，如果甲多做10个，乙少做10个，丙做的个数乘以2，丁做的个数除以2，那么四人做的零件数恰好相等。问：丙实际做了多少个？</p>
+                        </div>
+                        <div class="bg-cyan-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-cyan-800 mb-2">💡 逆向思维</h4>
+                            <p class="text-cyan-700">设变化后相等的数为x，逆推原来各人的数量</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设当四人做的零件数恰好相等时为 $x$ 个。</p>
+                            <p class="mt-2">$$(x-10)+(x+10)+x \div 2+2x=270$$</p>
+                            <p class="mt-2">解得：$x=60$</p>
+                            <p class="mt-2">故：丙实际做了 $60 \div 2=30$ 个。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：丁丁玲玲摘苹果 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例13：丁丁玲玲摘苹果】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>丁丁和玲玲两人摘苹果，丁丁说："把我摘的苹果给玲玲7个，玲玲摘的苹果的个数就是我的2倍。"玲玲说："把我摘的苹果给丁丁7个，他的苹果个数就和我的一样多了。"问丁丁和玲玲各摘了多少个苹果？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13：丁丁玲玲摘苹果 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例13：丁丁玲玲摘苹果】</span>
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>丁丁和玲玲两人摘苹果，丁丁说："把我摘的苹果给玲玲7个，玲玲摘的苹果的个数就是我的2倍。"玲玲说："把我摘的苹果给丁丁7个，他的苹果个数就和我的一样多了。"问丁丁和玲玲各摘了多少个苹果？</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-emerald-800 mb-2">💡 二元一次方程组</h4>
+                            <p class="text-emerald-700">两个等量关系，建立方程组求解</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设丁丁摘了 $x$ 个苹果，玲玲摘了 $y$ 个苹果</p>
+                            <p class="mt-2">$$\left\{\begin{array}{l}
+                            2(x-7)=y+7 \\
+                            x+7=y-7
+                            \end{array}\right.$$</p>
+                            <p class="mt-2">解得：$$\left\{\begin{array}{l}
+                            x=35 \\
+                            y=49
+                            \end{array}\right.$$</p>
+                            <p class="mt-2">故：丁丁摘了35个，玲玲摘了49个。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：小车卡车运货问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例14：小车卡车运货问题】</span>
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>30辆小车和3辆卡车一次运货75吨，45辆小车和6辆卡车一次运货120吨。每辆卡车和每辆小车每次各运货多少吨？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14：小车卡车运货问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例14：小车卡车运货问题】</span>
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>30辆小车和3辆卡车一次运货75吨，45辆小车和6辆卡车一次运货120吨。每辆卡车和每辆小车每次各运货多少吨？</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-sky-800 mb-2">💡 二元一次方程组</h4>
+                            <p class="text-sky-700">两种运输组合，两个等量关系</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设每辆小车每次运货 $x$ 吨，每辆卡车每次运货 $y$ 吨。</p>
+                            <p class="mt-2">$$\left\{\begin{array}{l}
+                            30x+3y=75 \\
+                            45x+6y=120
+                            \end{array}\right.$$</p>
+                            <p class="mt-2">解得：$$\left\{\begin{array}{l}
+                            x=2 \\
+                            y=5
+                            \end{array}\right.$$</p>
+                            <p class="mt-2">故：每辆小车每次运货2吨，每辆卡车每次运货5吨。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：数学竞赛给分问题 - 学生版 -->
+                <div class="example-card fade-in student-version">
+                    <div class="example-header">
+                        <span>【范例15：数学竞赛给分问题】</span>
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>某次数学竞赛，分两种方法给分。一种是先给40分，每答对一题给4分，不答题不给分，答错扣1分；另一种是先给60分，每答对一题给3分，不答题不给分，答错扣3分。小明在考试中只有2道题没有答，以两种方式计分他都得102分，求考试一共有多少道题？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15：数学竞赛给分问题 - 教师版 -->
+                <div class="example-card fade-in teacher-version hidden">
+                    <div class="example-header">
+                        <span>【范例15：数学竞赛给分问题】</span>
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <p>某次数学竞赛，分两种方法给分。一种是先给40分，每答对一题给4分，不答题不给分，答错扣1分；另一种是先给60分，每答对一题给3分，不答题不给分，答错扣3分。小明在考试中只有2道题没有答，以两种方式计分他都得102分，求考试一共有多少道题？</p>
+                        </div>
+                        <div class="bg-lime-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-lime-800 mb-2">💡 复杂计分</h4>
+                            <p class="text-lime-700">两种计分方式相等，建立方程组</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">✅ 解析</h4>
+                            <p><strong>解：</strong>设小明答对了 $x$ 道，答错了 $y$ 道。</p>
+                            <p class="mt-2">$$\left\{\begin{array}{l}
+                            40+4x-y=102 \\
+                            60+3x-3y=102
+                            \end{array}\right.$$</p>
+                            <p class="mt-2">解得：$$\left\{\begin{array}{l}
+                            x=16 \\
+                            y=2
+                            \end{array}\right.$$</p>
+                            <p class="mt-2">故：考试一共有 $16+2+2=20$ 道题。</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-blue-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- 左侧：题目 -->
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                                1. 列方程解应用题有什么好处？
+                            </h4>
+                        </div>
+                        <!-- 右侧：答案 -->
+                        <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>用未知数直接参加运算，简化推导和分析过程，高效、精确。</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 自测题10 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-search text-pink-500 mr-3 text-xl"></i>
+                                2. 解应用题时，第一步应该做什么？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-pink-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>第一步要认真读题，找出已知和未知的数量关系。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-clipboard-list text-green-500 mr-3 text-xl"></i>
+                                3. 列方程解应用题的六个基本步骤是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>审（题）、设（$x$）、列（方程）、解（方程）、验、答。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-check-double text-teal-500 mr-3 text-xl"></i>
+                                4. 解方程后为什么要验算？
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>验算是为了检查答案对不对，防止出错。</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-plus text-cyan-500 mr-3 text-xl"></i>
+                                5. 如果一个未知数不够用，应该怎么办？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>再设一个未知数，比如 $y$，用二元一次方程组来解题。</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 自测题9 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-users text-indigo-500 mr-3 text-xl"></i>
+                                6. 小学生常用哪两种方程来解应用题？
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>一元一次方程, “难列易解”;二元一次方程组,“易列难解”</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-check-double text-teal-500 mr-3 text-xl"></i>
+                                7. 题目问“有几本书”，我们通常怎么设未知数？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>“求什么就设什么为 $x$”,这通常是最直观的方法。</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-chart-bar text-orange-500 mr-3 text-xl"></i>
+                                4. 什么是"和差倍"问题，通常怎么设未知数？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>有倍先设倍，通常设一倍量为 $x$，简化表达。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-gift text-yellow-500 mr-3 text-xl"></i>
+                                5. "盈亏"问题的特点是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-yellow-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>一般来说，分配的总数不变，分配的对象不变。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-chicken text-red-500 mr-3 text-xl"></i>
+                                6. "鸡兔同笼"问题，知道总数，可以怎么设未知数？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>可以把鸡的只数设为 $x$，兔的只数就是总数减去 $x$。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+
+
+                
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8" style="background: var(--dark-gradient);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                <!-- 作者信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-chalkboard-teacher text-blue-400 mr-2"></i>
+                        作者团队
+                    </h3>
+                    <p class="text-gray-300 mb-2">魔渊国际数学教研团队</p>
+                    <p class="text-gray-400 text-sm">专注于创新数学教学方法研究</p>
+                </div>
+                
+                <!-- 课程信息 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-graduation-cap text-green-400 mr-2"></i>
+                        课程信息
+                    </h3>
+                    <p class="text-gray-300 mb-2">2025年魔渊Class精品课程</p>
+                    <p class="text-gray-400 text-sm">第8讲：列方程解应用题</p>
+                </div>
+                
+                <!-- 联系方式 -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-envelope text-pink-400 mr-2"></i>
+                        联系我们
+                    </h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+                        <p><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+                        <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 魔渊国际. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+        <!-- 主题切换 -->
+        <button id="themeToggle" 
+            class="w-14 h-14 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+        
+        <!-- 返回顶部 -->
+        <button id="backToTop" 
+            class="w-14 h-14 bg-pink-600 text-white rounded-full shadow-lg hover:bg-pink-700 transition-all duration-300 flex items-center justify-center magnetic-hover">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // MathJax配置
+        // MathJax 已在 <head> 中配置，这里不需要重复配置
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            initScrollEffects();
+            initNavigation();
+            initExampleVersionToggle(); // 初始化范例版本切换
+            
+            // 初始化GSAP动画
+            gsap.registerPlugin(ScrollTrigger);
+            initGSAPAnimations();
+            
+            // 延迟渲染数学公式，确保所有元素都加载完毕
+            setTimeout(() => {
+                if (window.MathJax) {
+                    MathJax.typesetPromise().then(() => {
+                        console.log('数学公式渲染完成');
+                    }).catch((err) => {
+                        console.error('MathJax 渲染错误:', err);
+                    });
+                }
+            }, 1000);
+        });
+        
+        // MathJax 加载完成后的回调
+        window.addEventListener('load', function() {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 更新粒子位置
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // 边界检查
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    // 绘制粒子
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                });
+                
+                // 绘制连线
+                particles.forEach((particle1, i) => {
+                    particles.slice(i + 1).forEach(particle2 => {
+                        const dx = particle1.x - particle2.x;
+                        const dy = particle1.y - particle2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle1.x, particle1.y);
+                            ctx.lineTo(particle2.x, particle2.y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // 滚动效果
+        function initScrollEffects() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = scrollTop / documentHeight;
+                
+                progressBar.style.transform = `scaleX(${scrollPercent})`;
+            });
+        }
+
+        // 导航功能
+        function initNavigation() {
+            // 返回顶部按钮
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 主题切换
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+        // 跳转到指定部分
+        function goToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // GSAP动画
+        function initGSAPAnimations() {
+            // 卡片悬停动画
+            gsap.utils.toArray('.example-card').forEach(card => {
+                gsap.set(card, { transformOrigin: 'center' });
+                
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+            });
+            
+            // 滚动触发动画
+            gsap.utils.toArray('.fade-in').forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%'
+                        }
+                    }
+                );
+            });
+        }
+
+        // 知识自测功能 - 简化版
+        function toggleAnswer(questionNumber) {
+            const answerElement = document.getElementById(`answer-${questionNumber}`);
+            
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 范例版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById('student-version-btn');
+            const teacherBtn = document.getElementById('teacher-version-btn');
+            
+            studentBtn.addEventListener('click', () => showStudentVersion());
+            teacherBtn.addEventListener('click', () => showTeacherVersion());
+        }
+
+        function showStudentVersion() {
+            // 切换按钮样式
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version';
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.student-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.add('hidden'));
+            
+            // 重新渲染数学公式
+            setTimeout(() => {
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            }, 100);
+        }
+
+        function showTeacherVersion() {
+            // 切换按钮样式
+            document.getElementById('teacher-version-btn').className = 
+                'px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version';
+            document.getElementById('student-version-btn').className = 
+                'px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2';
+            
+            // 显示/隐藏内容
+            document.querySelectorAll('.teacher-version').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.student-version').forEach(el => el.classList.add('hidden'));
+            
+            // 重新渲染数学公式
+            setTimeout(() => {
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            }, 100);
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.querySelector('#themeToggle i');
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.className = 'fas fa-sun text-xl';
+            } else {
+                themeIcon.className = 'fas fa-moon text-xl';
+            }
+        }
+    </script>
+</body>
+</html>

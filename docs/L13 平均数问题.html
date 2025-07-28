@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第13讲：平均数问题 - 杂志级教学体验</title>
+    <meta name="description" content="魔渊国际平均数问题精品课程 - 基本公式，轻松掌握平均数计算">
+    <meta name="keywords" content="平均数问题,基本公式,数学教学,计算技巧,教育课程">
+    <meta name="author" content="魔渊国际数学教研团队">
+    
+    <!-- 样式框架 -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- 字体系统 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 数学公式渲染 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                    MathJax.startup.promise.then(() => {
+                        console.log('MathJax ready');
+                    });
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- 交互增强 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            /* 色彩系统 - 基于心理学的配色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+            
+            /* 间距系统 - 黄金比例 */
+            --space-unit: 1.618rem;
+            --space-xs: calc(var(--space-unit) * 0.382);
+            --space-sm: calc(var(--space-unit) * 0.618);
+            --space-md: var(--space-unit);
+            --space-lg: calc(var(--space-unit) * 1.618);
+            --space-xl: calc(var(--space-unit) * 2.618);
+            
+            /* 动画系统 */
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: white;
+        }
+
+        /* 玻璃态效果 */
+        .glass-card {
+            background: var(--glass-effect);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 磁性悬停效果 */
+        .magnetic-hover {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .magnetic-hover:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        /* 概念卡片样式 */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .concept-card:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 范例卡片样式 */
+        .example-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .example-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .example-content {
+            padding: 1.5rem;
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 浅色背景section */
+        .section-light {
+            background-color: #f8f9fa;
+        }
+
+        .section-white {
+            background-color: white;
+        }
+
+        /* 进度指示器 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            z-index: 9999;
+            transition: width 0.3s ease;
+        }
+
+        /* 悬浮按钮 */
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* 知识自测样式 */
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+        }
+
+        /* MathJax样式优化 */
+        .MathJax {
+            font-size: 1.1em !important;
+        }
+        
+        .MathJax_Display {
+            text-align: left !important;
+            margin: 0.5em 0 !important;
+        }
+        
+        /* 确保数学公式正确显示 */
+        .tex2jax_process {
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Hero 区域 -->
+    <section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 渐变背景 -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-orange-600"></div>
+        
+        <!-- 粒子动画背景 -->
+        <div id="particles-canvas" class="absolute inset-0"></div>
+        
+        <!-- Hero内容 -->
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+                第13讲：平均数问题
+            </h1>
+            <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+                基本公式，轻松掌握平均数计算
+            </h2>
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎯 15个精选范例
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🍓 平均数问题
+                </span>
+                <span class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover">
+                    🎭 互动式学习
+                </span>
+            </div>
+            <button onclick="goToSection('concepts')" class="px-8 py-4 bg-white text-blue-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover">
+                <i class="fas fa-calculator mr-2"></i>开始学习
+            </button>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+        </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 section-light">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-calculator text-blue-500 mr-3"></i>
+                知识导航
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                掌握平均数问题的核心概念，构建完整解题体系
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 平均数概念 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-blue-500 mb-4">🍓</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">平均数</h3>
+                    <p class="text-gray-600 text-sm">
+                        反映整体数据一般水平的数值，平均数 = 总数 ÷ 份数
+                    </p>
+                </div>
+
+                <!-- 加权平均数 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-green-500 mb-4">⚖️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">加权平均数</h3>
+                    <p class="text-gray-600 text-sm">
+                        不同数据点有不同权重时使用，整体的平均数 = 整体总数 ÷ 整体总份数
+                    </p>
+                </div>
+
+                <!-- 中位数 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-purple-500 mb-4">📊</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">中位数</h3>
+                    <p class="text-gray-600 text-sm">
+                        从小到大排列后处于最中间位置的数。如有两个中间数则取平均值
+                    </p>
+                </div>
+
+                <!-- 巧算方法 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-yellow-500 mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">中位数</h3>
+                    <p class="text-gray-600 text-sm">
+                        基准数法、数位分离法、移多补少凑整法等巧妙计算技巧
+                    </p>
+                </div>
+
+                <!-- 容斥平均数 -->
+                <div class="concept-card p-6 fade-in">
+                    <div class="text-3xl text-red-500 mb-4">🔄</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">容斥平均数</h3>
+                    <p class="text-gray-600 text-sm">
+                        求某一数时构造差，求总平均数时构造和，灵活运用解题技巧
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解题技巧 -->
+    <section id="techniques" class="py-16 px-8 section-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+                <i class="fas fa-lightbulb text-orange-500 mr-3"></i>
+                解题技巧
+            </h2>
+            <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+                六种核心技巧，掌握平均数问题解题精髓
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 基本解法技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🍓 <span class="ml-3">基本解法技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-2">
+                                🍓 平均数
+                            </h4>
+                            <p class="text-gray-600">
+                                平均数 = 总数 ÷ 份数。已知两个量，可以求第三个量。
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-2">
+                                🎯 中位数
+                            </h4>
+                            <p class="text-gray-600">
+                                从小到大排列后，最中间位置的数。<br>如果中间有两个数（总数为偶数时），则取平均数。
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-2">
+                                ⚖️ 加权平均数
+                            </h4>
+                            <p class="text-gray-600">
+                                整体的平均数 = 整体的总数 ÷ 整体的总份数
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 高级应用技巧 -->
+                <div class="glass-card p-8 fade-in" style="background: rgba(255, 255, 255, 0.9);">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+                        🥝 <span class="ml-3">高级应用技巧</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-red-50 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">
+                                🔄 容斥平均数
+                            </h4>
+                            <p class="text-gray-600">求某一数时构造差，求总平均数时构造和</p>
+                        </div>
+
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">
+                                📊 变化平均数
+                            </h4>
+                            <p class="text-gray-600">
+                                数据变化后的平均数计算，通过总量变化分析
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-pink-50 rounded-lg">
+                            <h4 class="font-semibold text-pink-700 mb-2">
+                                📈 中位数应用
+                            </h4>
+                            <p class="text-gray-600">
+                                数据排序后的中位数计算和实际应用
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 section-light">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                范例讲解
+            </h2>
+            <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+                15个精选范例，从基础到进阶，全面掌握平均数问题
+            </p>
+
+            <!-- 版本切换按钮 -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button id="student-version-btn" class="px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version">
+                        <i class="fas fa-user-graduate mr-2"></i>学生版
+                    </button>
+                    <button id="teacher-version-btn" class="px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+                    </button>
+                </div>
+            </div>
+
+            <!-- 范例内容 -->
+            <div class="space-y-8" id="examples-container">
+                <!-- 范例1 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例1：基础平均数】</div>
+                    <div class="example-content">
+                        <p>幼儿园小朋友做红花，小明做了 7 朵，小红做了 9 朵，小花和小张共做了 12 朵。平均每人做了多少朵？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例1：基础平均数】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>幼儿园小朋友做红花，小明做了 7 朵，小红做了 9 朵，小花和小张共做了 12 朵。平均每人做了多少朵？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>先算总数，再除以份数</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>四个人一共做了 $7+9+12=28$（朵），平均每人做了 $28 \div 4=7$（朵）。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>平均数 = 总数 ÷ 份数的基本应用</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例2 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例2：中位数计算】</div>
+                    <div class="example-content">
+                        <p>某射手在一次训练中共射出了 10 发子弹，射击成绩如图所示，则射击成绩的中位数是多少环？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例2：中位数计算】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>某射手在一次训练中共射出了 10 发子弹，射击成绩如图所示，则射击成绩的中位数是多少环？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>找到中间位置的两个数据</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>由统计图可得，中间的两个数据是 9,9 ，故射击成绩的中位数是 $(9+9) \div 2=9$（环）。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>中位数是排序后中间位置的数值</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例3 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例3：巧算方法】</div>
+                    <div class="example-content">
+                        <p>小叶子这学期前 5 次作业的得分分别是 $95,87,92,100,96$ ．求小叶子这 5 次作业的平均成绩？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例3：巧算方法】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>小叶子这学期前 5 次作业的得分分别是 $95,87,92,100,96$ ．求小叶子这 5 次作业的平均成绩？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>可以用基准数法巧算</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong><br>
+                            解法一：$(95+87+92+100+96) \div 5=470 \div 5=94$（分）．<br>
+                            解法二： $90+(5-3+2+10+6) \div 5=94$（分）。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>基准数法能简化计算过程</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例4 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例4：平均数求未知】</div>
+                    <div class="example-content">
+                        <p>一个粮仓，第一天运进大米 83 吨，第二天运进大米 74 吨，第三天运进大米71吨，第四天运进大米64吨，第五天运进的大米比四天中平均每天运的还多 32 吨，第五天运进大米多少吨？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例4：平均数求未知】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>一个粮仓，第一天运进大米 83 吨，第二天运进大米 74 吨，第三天运进大米71吨，第四天运进大米64吨，第五天运进的大米比四天中平均每天运的还多 32 吨，第五天运进大米多少吨？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>先求前四天的平均数</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>前四天运的大米的平均数是：$(83+74+71+64) \div 4=73$（吨），第五天运进的大米是： $73+32=105$（吨）．</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>已知平均数求未知数的典型应用</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例5 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例5：加权平均数】</div>
+                    <div class="example-content">
+                        <p>三年级举办跳绳比赛，其中第二小组同学跳的情况为：跳 90 下的有 2人，跳 80 下的有 4 人，跳 70 下的有 4 人，跳 60 下的有 2 人。这个小组平均每人跳了多少下？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例5：加权平均数】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>三年级举办跳绳比赛，其中第二小组同学跳的情况为：跳 90 下的有 2人，跳 80 下的有 4 人，跳 70 下的有 4 人，跳 60 下的有 2 人。这个小组平均每人跳了多少下？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>这是加权平均数问题</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>总数量： $90 \times 2+80 \times 4+70 \times 4+60 \times 2=900$（下），<br>
+                            总人数： $2+4+4+2=12$（人），那么平均每人跳了 $900 \div 12=75$（下）。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>加权平均数 = 总数 ÷ 总份数</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例6 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例6：加权平均考试】</div>
+                    <div class="example-content">
+                        <p>某招聘考试分笔试和面试两项，笔试成绩和面试成绩按 3：2计算平均成绩．若小明笔试成绩为 85 分，面试成绩为 90 分，则他的加权平均成绩是多少分？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例6：加权平均考试】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>某招聘考试分笔试和面试两项，笔试成绩和面试成绩按 3：2计算平均成绩．若小明笔试成绩为 85 分，面试成绩为 90 分，则他的加权平均成绩是多少分？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>按权重比例分配计算</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>小明的加权平均成绩是：$\frac{85 \times 3+90 \times 2}{3+2}=87$（分）．</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>加权平均数考虑了不同项目的重要程度</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例7 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例7：两组合并】</div>
+                    <div class="example-content">
+                        <p>甲班有 20 人，平均分是 95 分；乙班有 30 人，平均分是 90 分。那么两班的平均分是多少？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例7：两组合并】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>甲班有 20 人，平均分是 95 分；乙班有 30 人，平均分是 90 分。那么两班的平均分是多少？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>先算总分，再算总平均分</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>两班总分： $20 \times 95+30 \times 90=4600$ 分，两班平均分： $4600 \div(30+20)=92$ 分。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>合并平均数不能直接用平均数求平均，要回到基本定义</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例8 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例8：已知总数求单数】</div>
+                    <div class="example-content">
+                        <p>某生产小组生产一批零件，一个星期中前 5 天平均每天生产 125 个，前 6 天平均每天生产 127 个，第 6 天生产了多少个？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例8：已知总数求单数】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>某生产小组生产一批零件，一个星期中前 5 天平均每天生产 125 个，前 6 天平均每天生产 127 个，第 6 天生产了多少个？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>用前6天总数减去前5天总数</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong> $127 \times 6-125 \times 5=137$（个）。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>通过总数差值求单个数据</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例9 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例9：容斥平均数】</div>
+                    <div class="example-content">
+                        <p>小永的三门功课的成绩，如果不算语文，平均分是 98 分；如果不算数学，平均分是 93 分；如果不算英语，平均分是 91 分。小永三门功课的平均成绩是多少分？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例9：容斥平均数】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>小永的三门功课的成绩，如果不算语文，平均分是 98 分；如果不算数学，平均分是 93 分；如果不算英语，平均分是 91 分。小永三门功课的平均成绩是多少分？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>构造和来求解</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong> $(98 \times 2+93 \times 2+91 \times 2) \div 2 \div 3=94$ 分。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>容斥平均数求总平均数时构造和</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例10 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例10：数据变化】</div>
+                    <div class="example-content">
+                        <p>有五个数，平均数是 9 ，如果把其中的一个数改为 1 ，那么这五个数的平均数是 8 ，这个改动的数原来是多少？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例10：数据变化】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>有五个数，平均数是 9 ，如果把其中的一个数改为 1 ，那么这五个数的平均数是 8 ，这个改动的数原来是多少？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>通过总数变化分析</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>由五个数的平均数是 9 ，可知这五个数的总和是： $9 \times 5=45$ ，其中一个数改为 1 后，五个数的平均数为 8 ，则现有五个数的总和是： $8 \times 5=40$ ，被改的这个数减少了 $45-40=5$ ，可见这个被改动的数原来是： $1+5=6$ ．</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>数据变化问题的核心是总量变化分析</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例11 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例11：平均分下降】</div>
+                    <div class="example-content">
+                        <p>小华期末考试时，语文、数学和自然三科成绩平均分是 96 分，英语成绩公布后，四科平均分下降了 2 分，小华英语成绩是多少分？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例11：平均分下降】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>小华期末考试时，语文、数学和自然三科成绩平均分是 96 分，英语成绩公布后，四科平均分下降了 2 分，小华英语成绩是多少分？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>先算三科总分，再算四科总分</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>三科的总分： $3 \times 96=288$ 分，<br>四科的总分： $4 \times(96-2)=376$ 分，<br>英语成绩： $376-288=88$ 分。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>平均数下降说明新增数据低于原平均数</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例12 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例12：目标平均分】</div>
+                    <div class="example-content">
+                        <p>小龙 5 次测验每次都得 84 分，小海前 4 次测验分别比小龙多出 1 分、 2 分、 3 分、 4 分，那么小海第五次测验至少应得多少分，才能确保 5 次测验平均成绩高于小龙至少 3 分？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例12：目标平均分】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>小龙 5 次测验每次都得 84 分，小海前 4 次测验分别比小龙多出 1 分、 2 分、 3 分、 4 分，那么小海第五次测验至少应得多少分，才能确保 5 次测验平均成绩高于小龙至少 3 分？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>先确定目标平均分，再逆推第五次成绩</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>小海理想的平均分： $84+3=87$ 分，<br>小海理想的总分： $87 \times 5=435$ 分，<br>小海前四次总分： $84+1+84+2+84+3+84+4=346$ 分，<br>小海第 5 次至少得分：435－346＝89分。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>目标导向的平均数问题需要逆推计算</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例13 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例13：四数平均数】</div>
+                    <div class="example-content">
+                        <p>有 $\mathrm{A} 、 \mathrm{~B} 、 \mathrm{C} 、 \mathrm{D}$ 四个数，计算得知 $\mathrm{B} 、 \mathrm{C} 、 \mathrm{D}$ 三个数的平均数是 $23, \mathrm{~A} 、 \mathrm{C} 、 \mathrm{D}$ 三个数的平均数是 $26, \mathrm{~A} 、 \mathrm{~B} 、 \mathrm{D}$ 三个数的平均数是 $30, \mathrm{~A} 、 \mathrm{~B} 、$ C 三个数的平均数是 33 。那么 $\mathrm{A} 、 \mathrm{~B} 、 \mathrm{C} 、 \mathrm{D}$ 四个数的平均数是多少？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例13：四数平均数】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>有 $\mathrm{A} 、 \mathrm{~B} 、 \mathrm{C} 、 \mathrm{D}$ 四个数，计算得知 $\mathrm{B} 、 \mathrm{C} 、 \mathrm{D}$ 三个数的平均数是 $23, \mathrm{~A} 、 \mathrm{C} 、 \mathrm{D}$ 三个数的平均数是 $26, \mathrm{~A} 、 \mathrm{~B} 、 \mathrm{D}$ 三个数的平均数是 $30, \mathrm{~A} 、 \mathrm{~B} 、$ C 三个数的平均数是 33 。那么 $\mathrm{A} 、 \mathrm{~B} 、 \mathrm{C} 、 \mathrm{D}$ 四个数的平均数是多少？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>先求各组合的总和，再求四数总和</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong> $\mathrm{B}+\mathrm{C}+\mathrm{D}: 23 \times 3=69$ ，<br>
+                            $\mathrm{A}+\mathrm{C}+\mathrm{D}: 26 \times 3=78$,<br>
+                            $\mathrm{A}+\mathrm{B}+\mathrm{D}: 30 \times 3=90$ ，<br>
+                            $\mathrm{A}+\mathrm{B}+\mathrm{C}: 33 \times 3=99$,<br>
+                            四个等式相加得： $3 \times(A+B+C+D)=69+78+90+99=336$ ，<br>
+                            从而 $\mathrm{A}+\mathrm{B}+\mathrm{C}+\mathrm{D}: 336 \div 3=112$ ，<br>
+                            所以 $\mathrm{A} 、 \mathrm{~B} 、 \mathrm{C} 、 \mathrm{D}$ 的平均数： $112 \div 4=28$ 。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>复杂容斥平均数问题通过构造和求解</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例14 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例14：五科成绩】</div>
+                    <div class="example-content">
+                        <p>小明在期末考试中，政治、语文、数学、英语、生物五科的平均分是 89 分。政治、数学两科的平均分是 91 分。语文、英语两科的平均分是 84 分。政治、英语两科的平均分是 86 分，而且英语比语文多 10 分。那么小明这次考试的各科成绩应是多少分？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例14：五科成绩】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>小明在期末考试中，政治、语文、数学、英语、生物五科的平均分是 89 分。政治、数学两科的平均分是 91 分。语文、英语两科的平均分是 84 分。政治、英语两科的平均分是 86 分，而且英语比语文多 10 分。那么小明这次考试的各科成绩应是多少分？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>利用英语比语文多10分这个关键条件</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>英语：$(84 \times 2+10) \div 2=89$ 分<br>语文： $89-10=79$ 分<br>政治： $86 \times 2-89=83$ 分<br>数学： $91 \times 2-83=99$ 分<br>生物： $89 \times 5-(89+79+83+99)=95$ 分。</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>多元素容斥平均数需要找到突破口</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 范例15 -->
+                <div class="example-card student-version">
+                    <div class="example-header">【范例15：篮球得分】</div>
+                    <div class="example-content">
+                        <p>某篮球运动员参加了 10 场比赛，他在第6、7、8、9场比赛中分别得到了 $23 、 14 、 11$ 和 20 分，他在前 9 场比赛的平均分比前 5 场比赛的平均分要高。如果他 10 场比赛的平均分超过 18 分，那么他在第 10 场比赛至少得多少分？</p>
+                    </div>
+                </div>
+
+                <div class="example-card teacher-version hidden">
+                    <div class="example-header">【范例15：篮球得分】</div>
+                    <div class="example-content">
+                        <p><strong>题目：</strong>某篮球运动员参加了 10 场比赛，他在第6、7、8、9场比赛中分别得到了 $23 、 14 、 11$ 和 20 分，他在前 9 场比赛的平均分比前 5 场比赛的平均分要高。如果他 10 场比赛的平均分超过 18 分，那么他在第 10 场比赛至少得多少分？</p>
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p><strong>🍓 解题提示：</strong>利用约束条件确定前5场的最高总分</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p><strong>✅ 解析：</strong>前 9 场比赛的平均分比前 5 场比赛的平均分要高，<br>所以 $6 、 7 、 8 、 9$ 场的平均分比前 5 场的平均分要高．<br>$6 、 7 、 8 、 9$ 场的平均分为 $(23+14+11+20) \div 4=17$ 分，<br>前 5 场的比赛平均分数小于 17 ，总分小于 $17 \times 5=85$ ，至多 84 分，所以前 9 场的总分最多 $84+68=152$ 分，<br>为了让总分大于 $18 \times 10=180$ ，即至少 181 分，<br>那么第 10 场至少 $181-152=29$ 分．</p>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                            <p><strong>💡 关键洞察：</strong>条件约束下的最值问题需要数学建模思维</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 section-light">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+                点击题目查看答案，检验你的学习成果
+            </p>
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+                <i class="fas fa-brain text-blue-500 mr-3"></i>
+                知识自测
+            </h2>
+            
+            <!-- 知识自测题目列表 -->
+            <div class="space-y-3">
+                <!-- 自测题1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- 左侧：题目 -->
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                                1. 什么是平均数？举个生活中的例子。
+                            </h4>
+                        </div>
+                        <!-- 右侧：答案 -->
+                        <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>把东西分成一样多，每个人分到的就是平均数。例：一人一半</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calculator text-green-500 mr-3 text-xl"></i>
+                                2. 平均数的计算公式是什么？
+                            </h4>
+                        </div>
+                        <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>平均数=总数 ÷ 份数。知道两个量，可以求第三个量。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-balance-scale text-purple-500 mr-3 text-xl"></i>
+                                3. 什么情况下要用加权平均数？举一个简单的例子。
+                            </h4>
+                        </div>
+                        <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>每部分的<u>份数</u>不一样时要用加权平均数。例：考试<u>占比</u>不同</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-sort-amount-up text-orange-500 mr-3 text-xl"></i>
+                                4. 什么是中位数？如果有两个中间数怎么办？
+                            </h4>
+                        </div>
+                        <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>从小到大排好，最中间的那个数。中间有两数，则取平均数。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-users text-indigo-500 mr-3 text-xl"></i>
+                                5. 计算总平均数时，为什么要先算出总数和总人数？
+                            </h4>
+                        </div>
+                        <div id="answer-5" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>总平均数=总数 ÷ 总份数，先算总和，再除以总份数。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calendar-alt text-red-500 mr-3 text-xl"></i>
+                                6. 如果知道前几天的平均数和总天数，怎么求出总共是多少？
+                            </h4>
+                        </div>
+                        <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>平均数✖️份数=总数，比如平均每天读 10 页，7 天就是 70 页。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-exchange-alt text-teal-500 mr-3 text-xl"></i>
+                                7. 如果有一组数，改变了其中一个数，平均数会怎么变？
+                            </h4>
+                        </div>
+                        <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>数变小，平均数变小；反之亦然。新总数➗份数=新平均数。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 自测题8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-target text-cyan-500 mr-3 text-xl"></i>
+                                8. 前四次平均68分，想让平均分达到70分，第五次要考多少分？
+                            </h4>
+                        </div>
+                        <div id="answer-8" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>以68为基准，累计要多2×5=10分，第五次=78分。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题9 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-minus text-pink-500 mr-3 text-xl"></i>
+                                9. 容斥平均数：求某一个数时，用什么方法？
+                            </h4>
+                        </div>
+                        <div id="answer-9" class="p-6 bg-pink-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>求某一个数时，用"差"的方法，构造（总和 ➖ 已知数）。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自测题10 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                            <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-plus text-yellow-500 mr-3 text-xl"></i>
+                                10. 容斥平均数：求总平均数，又该怎么做？
+                            </h4>
+                        </div>
+                        <div id="answer-10" class="p-6 bg-yellow-50 border-l border-gray-200 hidden">
+                            <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>求总平均数时，用"和"，构造（所有数加起来 ➗ 总人数）。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
+        <div class="max-w-6xl mx-auto text-center text-white">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">作者信息</h3>
+                    <p>魔渊国际数学教研团队</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">课程信息</h3>
+                    <p>2025年魔渊 Class 精品课程</p>
+                    <p>第13讲：平均数问题</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系方式</h3>
+                    <p>微信: MoYuanGuoJi</p>
+                    <p>GitHub: github.com/usyd2020</p>
+                    <p>邮箱: 8ai4kid@gmail.com</p>
+                </div>
+            </div>
+            <div class="border-t border-white border-opacity-20 pt-8">
+                <p>&copy; 2025 魔渊国际. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 悬浮按钮 -->
+    <div class="floating-button" onclick="scrollToTop()" title="返回顶部">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 知识自测答案切换功能
+        function toggleAnswer(questionId) {
+            const answerElement = document.getElementById('answer-' + questionId);
+            if (answerElement.classList.contains('hidden')) {
+                answerElement.classList.remove('hidden');
+            } else {
+                answerElement.classList.add('hidden');
+            }
+        }
+
+        // 进度条
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        }
+
+        window.addEventListener('scroll', updateProgressBar);
+
+        // 平滑滚动到指定section
+        function goToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // 返回顶部
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 范例版本切换功能
+        function initExampleVersionToggle() {
+            const studentBtn = document.getElementById("student-version-btn");
+            const teacherBtn = document.getElementById("teacher-version-btn");
+
+            studentBtn.addEventListener("click", () => showStudentVersion());
+            teacherBtn.addEventListener("click", () => showTeacherVersion());
+        }
+
+        function showStudentVersion() {
+            document.getElementById("student-version-btn").className =
+                "px-6 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-600 transition-all duration-300 mr-2 active-version";
+            document.getElementById("teacher-version-btn").className =
+                "px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300";
+
+            document.querySelectorAll(".student-version").forEach((el) => el.classList.remove("hidden"));
+            document.querySelectorAll(".teacher-version").forEach((el) => el.classList.add("hidden"));
+            
+            // 重新渲染MathJax
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function showTeacherVersion() {
+            document.getElementById("teacher-version-btn").className =
+                "px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 transition-all duration-300 active-version";
+            document.getElementById("student-version-btn").className =
+                "px-6 py-3 rounded-full text-gray-600 bg-gray-200 hover:bg-gray-300 transition-all duration-300 mr-2";
+
+            document.querySelectorAll(".teacher-version").forEach((el) => el.classList.remove("hidden"));
+            document.querySelectorAll(".student-version").forEach((el) => el.classList.add("hidden"));
+            
+            // 重新渲染MathJax
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // 粒子动画
+        function initParticles() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const container = document.getElementById('particles-canvas');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            container.appendChild(canvas);
+
+            const particles = [];
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    size: Math.random() * 3 + 1
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initExampleVersionToggle();
+            initParticles();
+
+            // 确保MathJax正确加载后重新渲染
+            if (typeof MathJax !== 'undefined') {
+                MathJax.startup.promise.then(() => {
+                    MathJax.typesetPromise();
+                });
+            }
+
+            // GSAP动画
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 淡入动画
+            gsap.from('.fade-in', {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '.fade-in',
+                    start: 'top 80%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

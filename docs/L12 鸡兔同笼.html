@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第12讲：鸡兔同笼 - 魔渊国际数学教研团队</title>
+    <link
+      href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+      :root {
+        /* 色彩系统 */
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --dark-gradient: linear-gradient(
+          135deg,
+          #0f0c29 0%,
+          #302b63 50%,
+          #24243e 100%
+        );
+        --glass-effect: rgba(255, 255, 255, 0.1);
+
+        /* 间距系统 */
+        --space-unit: 1.618rem;
+        --space-xs: calc(var(--space-unit) * 0.382);
+        --space-sm: calc(var(--space-unit) * 0.618);
+        --space-md: var(--space-unit);
+        --space-lg: calc(var(--space-unit) * 1.618);
+        --space-xl: calc(var(--space-unit) * 2.618);
+
+        /* 动画系统 */
+        --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+        /* 颜色变量 */
+        --color-primary: #667eea;
+        --color-accent: #f093fb;
+        --color-dark: #1a202c;
+        --color-light: #f7fafc;
+        --color-card: rgba(255, 255, 255, 0.95);
+        --shadow-md: 0 10px 25px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      body {
+        font-family: "Noto Sans SC", "Tahoma", "Arial", "Roboto",
+          "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC",
+          "Hiragino Sans GB", "Simsun", sans-serif;
+        line-height: 1.6;
+        background-color: #f7fafc;
+      }
+
+      /* 进度指示器 */
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: var(--primary-gradient);
+        z-index: 1000;
+        transition: width 0.3s ease;
+      }
+
+      /* 玻璃态效果 */
+      .glass-card {
+        background: var(--glass-effect);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 1rem;
+        transition: all 0.3s var(--transition-smooth);
+      }
+
+      /* 磁性悬停效果 */
+      .magnetic-hover {
+        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .magnetic-hover:hover {
+        transform: translateY(-8px) scale(1.05);
+      }
+
+      /* 概念卡片样式 */
+      .concept-card {
+        background: var(--color-card);
+        border-radius: 1rem;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s var(--transition-smooth);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .concept-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 范例卡片样式 */
+      .example-card {
+        background: var(--color-card);
+        border-radius: 1rem;
+        box-shadow: var(--shadow-md);
+        margin-bottom: 2rem;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .example-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 1.5rem;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      /* 特殊样式 */
+      .bridge-illustration {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem 0;
+        font-family: monospace;
+        font-size: 1.2rem;
+      }
+
+      .bridge-pier {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50%;
+        margin: 0 0.5rem;
+        font-weight: bold;
+      }
+
+      .bridge-span {
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        color: white;
+        padding: 0.2rem 0.8rem;
+        border-radius: 1rem;
+        font-size: 0.9rem;
+      }
+
+      /* 动画类 */
+      .fade-in {
+        animation: fadeIn 1s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 粒子背景 */
+      #particles-canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      /* 提示框样式 */
+      .hint-box {
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        border-left: 4px solid #f59e0b;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+        font-weight: 500;
+      }
+
+      .solution-steps {
+        background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+        border-left: 4px solid #10b981;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+      }
+
+      .key-insight {
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        border-left: 4px solid #3b82f6;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+        font-weight: 500;
+      }
+
+      /* 版本切换按钮样式 */
+      .version-btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        transition: all 0.3s var(--transition-smooth);
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .version-btn.active {
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* 数学公式样式 */
+      .math-formula {
+        text-align: center;
+        margin: 1rem 0;
+        padding: 1rem;
+        background: rgba(239, 246, 255, 0.5);
+        border-radius: 0.5rem;
+      }
+
+      /* 浮动按钮 */
+      .floating-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-gradient);
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s var(--transition-smooth);
+        z-index: 999;
+      }
+
+      .floating-btn:hover {
+        transform: translateY(-5px) scale(1.1);
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .hero-section h1 {
+          font-size: 3rem !important;
+        }
+        .hero-section h2 {
+          font-size: 1.5rem !important;
+        }
+        .grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* 暗色模式 */
+      body.dark-mode {
+        background-color: #1a202c;
+        color: #e2e8f0;
+      }
+
+      body.dark-mode .concept-card,
+      body.dark-mode .example-card {
+        background: rgba(45, 55, 72, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      body.dark-mode .glass-card {
+        background: rgba(45, 55, 72, 0.8);
+      }
+
+      /* 自定义滚动条 */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-gradient);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-gradient);
+      }
+
+      /* 知识自测紧凑布局样式 */
+      .quiz-compact {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .quiz-compact h3 {
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .quiz-compact .text-lg {
+        font-size: 18px;
+        line-height: 1.4;
+      }
+
+      .quiz-compact .text-base {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      .quiz-compact input[type="radio"] {
+        transform: scale(1.2);
+      }
+
+      .quiz-compact label:hover {
+        transition: background-color 0.2s ease;
+      }
+
+      .quiz-compact .border-l-4 {
+        border-left-width: 4px;
+      }
+
+      /* 减少边距和间距 */
+      .quiz-compact .mb-3 {
+        margin-bottom: 0.75rem;
+      }
+
+      .quiz-compact .p-3 {
+        padding: 0.75rem;
+      }
+
+      .quiz-compact .p-2 {
+        padding: 0.5rem;
+      }
+
+      .quiz-compact .mt-2 {
+        margin-top: 0.5rem;
+      }
+
+      .quiz-compact .space-y-1 > * + * {
+        margin-top: 0.25rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 进度指示器 -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Hero 区域 -->
+    <section
+      class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <!-- 渐变背景 -->
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-blue-600 via-green-600 to-orange-600"
+      ></div>
+
+      <!-- 粒子动画 -->
+      <canvas id="particles-canvas" class="absolute inset-0"></canvas>
+
+      <!-- Hero内容 -->
+      <div class="relative z-10 text-center text-white px-4">
+        <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in">
+          第12讲：鸡兔同笼
+        </h1>
+        <h2 class="text-2xl md:text-3xl mb-8 opacity-90 fade-in">
+          假设法，轻松掌握鸡兔同笼计算
+        </h2>
+
+        <!-- 磁性标签云 -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+          <span
+            class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover"
+          >
+            🎯 15个精选范例
+          </span>
+          <span
+            class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover"
+          >
+            🐔🐰 鸡兔同笼
+          </span>
+          <span
+            class="px-6 py-3 bg-white bg-opacity-20 rounded-full text-lg font-medium magnetic-hover"
+          >
+            🎭 互动式学习
+          </span>
+        </div>
+
+        <!-- CTA按钮 -->
+        <button
+          onclick="goToSection('concepts')"
+          class="px-8 py-4 bg-white text-blue-600 rounded-full text-xl font-bold hover:bg-opacity-90 transition-all duration-300 magnetic-hover"
+        >
+          <i class="fas fa-calculator mr-2"></i>开始学习
+        </button>
+      </div>
+
+      <!-- 滚动指示器 -->
+      <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce"
+      >
+        <i class="fas fa-chevron-down text-2xl opacity-60"></i>
+      </div>
+    </section>
+
+    <!-- 知识导航 -->
+    <section id="concepts" class="py-16 px-8 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+          <i class="fas fa-calculator text-blue-500 mr-3"></i>
+          知识导航
+        </h2>
+        <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+          掌握鸡兔同笼的核心概念，构建完整解题体系
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 鸡兔同笼问题 -->
+          <div
+            class="concept-card p-6 fade-in"
+            style="background: rgba(255, 255, 255, 0.9)"
+          >
+            <div class="text-3xl text-blue-500 mb-4">🐔🐰</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">鸡兔同笼问题</h3>
+            <p class="text-gray-600 text-sm">
+              中国古代著名趣题，已知总头数和总脚数，求鸡兔各有多少只
+            </p>
+          </div>
+
+          <!-- 假设法 -->
+          <div
+            class="concept-card p-6 fade-in"
+            style="background: rgba(255, 255, 255, 0.9)"
+          >
+            <div class="text-3xl text-green-500 mb-4">🎯</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">假设法</h3>
+            <p class="text-gray-600 text-sm">
+              先假设全是其中一种，再用总差÷每差计算另一种的数量
+            </p>
+          </div>
+
+          <!-- 画图法 -->
+          <div
+            class="concept-card p-6 fade-in"
+            style="background: rgba(255, 255, 255, 0.9)"
+          >
+            <div class="text-3xl text-purple-500 mb-4">✏️</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">画图法</h3>
+            <p class="text-gray-600 text-sm">
+              适合基础理解，先画头数，再添加腿数，直观展示解题过程
+            </p>
+          </div>
+
+          <!-- 分组法 -->
+          <div
+            class="concept-card p-6 fade-in"
+            style="background: rgba(255, 255, 255, 0.9)"
+          >
+            <div class="text-3xl text-yellow-500 mb-4">📦</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">分组法</h3>
+            <p class="text-gray-600 text-sm">
+              当两个量有确定倍数关系时，按倍数分组进行计算
+            </p>
+          </div>
+
+          <!-- 倒扣型问题 -->
+          <div
+            class="concept-card p-6 fade-in"
+            style="background: rgba(255, 255, 255, 0.9)"
+          >
+            <div class="text-3xl text-red-500 mb-4">⚠️</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">倒扣型问题</h3>
+            <p class="text-gray-600 text-sm">
+              答错要扣分的题型，分差由减变加，需特别注意计算方法
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 解题技巧 -->
+    <section id="techniques" class="py-16 px-8 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+          <i class="fas fa-lightbulb text-orange-500 mr-3"></i>
+          解题技巧
+        </h2>
+        <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+          六种核心技巧，掌握鸡兔同笼解题精髓
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- 基本解法技巧 -->
+          <div
+            class="glass-card p-8 fade-in"
+            style="background: rgba(255, 255, 255, 0.9)"
+          >
+            <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+              🍓 <span class="ml-3">基本解法技巧</span>
+            </h3>
+            <div class="space-y-4">
+              <!-- 画图法 -->
+              <div class="p-4 bg-blue-50 rounded-lg">
+                <h4 class="font-semibold text-blue-700 mb-2">✏️ 画图法</h4>
+                <p class="text-gray-600">
+                  先画头数，再添腿数，直观理解题意
+                </p>
+              </div>
+
+              <!-- 假设法 -->
+              <div class="p-4 bg-green-50 rounded-lg">
+                <h4 class="font-semibold text-green-700 mb-2">
+                  🎯 假设法（总差÷每差）
+                </h4>
+                <p class="text-gray-600">
+                  假设全是一种，用总差除以每差求另一种数量
+                </p>
+              </div>
+
+              <!-- 分组法 -->
+              <div class="p-4 bg-purple-50 rounded-lg">
+                <h4 class="font-semibold text-purple-700 mb-2">📦 分组法</h4>
+                <p class="text-gray-600">有倍数关系时，按倍数分组计算</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 高级应用技巧 -->
+          <div
+            class="glass-card p-8 fade-in"
+            style="background: rgba(255, 255, 255, 0.9)"
+          >
+            <h3 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+              🥝 <span class="ml-3">高级应用技巧</span>
+            </h3>
+            <div class="space-y-4">
+              <!-- 倒扣型 -->
+              <div class="p-4 bg-red-50 rounded-lg">
+                <h4 class="font-semibold text-red-700 mb-2">⚠️ 倒扣型问题</h4>
+                <p class="text-gray-600">答错要扣分，分差由减变加</p>
+              </div>
+
+              <!-- 总数未知 -->
+              <div class="p-4 bg-orange-50 rounded-lg">
+                <h4 class="font-semibold text-orange-700 mb-2">❓ 总数未知</h4>
+                <p class="text-gray-600">
+                  利用不变量或头腿和/差关系求总数
+                </p>
+              </div>
+
+              <!-- 多物种 -->
+              <div class="p-4 bg-pink-50 rounded-lg">
+                <h4 class="font-semibold text-pink-700 mb-2">
+                  🦎 多物种问题
+                </h4>
+                <p class="text-gray-600">
+                  分步骤，逐一转化为两物种问题
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 范例讲解 -->
+    <section id="examples" class="py-16 px-8 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+          <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+          范例讲解
+        </h2>
+        <p class="text-center text-gray-600 mb-8 text-lg fade-in">
+          15个精选范例，从基础到进阶，全面掌握鸡兔同笼问题
+        </p>
+
+        <!-- 版本切换按钮 -->
+        <div class="flex justify-center mb-12">
+          <div class="bg-white rounded-full p-2 shadow-lg">
+            <button
+              id="student-version-btn"
+              class="version-btn text-white bg-blue-500 hover:bg-blue-600 active mr-2"
+            >
+              <i class="fas fa-user-graduate mr-2"></i>学生版
+            </button>
+            <button
+              id="teacher-version-btn"
+              class="version-btn text-gray-600 bg-gray-200 hover:bg-gray-300"
+            >
+              <i class="fas fa-chalkboard-teacher mr-2"></i>教师版
+            </button>
+          </div>
+        </div>
+
+        <!-- 范例内容区域 -->
+        <div class="space-y-8" id="examples-container">
+          <!-- 范例1 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例1：基础鸡兔同笼】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                知识梳理中提到了《孙子算经》中的鸡兔同笼问题，用现在的话来说，就是"有若干只鸡兔同在一个笼子里，从上面数，有35个头；从下面数，有94只脚。求笼中各有几只鸡和兔？"请你也来试着求一下吧。
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例1：基础鸡兔同笼】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                知识梳理中提到了《孙子算经》中的鸡兔同笼问题，用现在的话来说，就是"有若干只鸡兔同在一个笼子里，从上面数，有35个头；从下面数，有94只脚。求笼中各有几只鸡和兔？"请你也来试着求一下吧。
+              </p>
+              <div class="hint-box">
+                🍓 提示：运用假设法，假设都是兔，然后计算总差÷每差
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设都是兔，则有 35 × 4 = 140 只脚，而实际只有 94 只脚。每假设少一只兔，多一只鸡，则总假设的脚会少 2 只，故鸡 = (140-94) ÷ 2 = 23 只，兔 = 35-23 = 12 只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：假设法的核心是找到"总差"和"每差"的关系
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例2 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例2：鸡兔总数已知】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                鸡、兔共有45只，关在同一个笼子中。每只鸡有两条腿，每只兔子有四条腿，笼中共有100条腿。试计算，笼中有鸡多少只？兔子多少只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例2：鸡兔总数已知】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                鸡、兔共有45只，关在同一个笼子中。每只鸡有两条腿，每只兔子有四条腿，笼中共有100条腿。试计算，笼中有鸡多少只？兔子多少只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：已知总数量和总腿数，用假设法求解
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设全是兔，鸡 = (45 × 4 - 100) ÷ 2 = 40 只，故兔 = 45 - 40 = 5 只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：当总数量已知时，直接用假设法最简便
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例3 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例3：眼睛脚数问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                鸡和兔共56只眼睛和92只脚，问：鸡和兔各有几只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例3：眼睛脚数问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                鸡和兔共56只眼睛和92只脚，问：鸡和兔各有几只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：先通过眼睛数求出总头数，再用假设法
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：56只眼睛就是鸡和兔共有28个头，假设全是兔，鸡 = (28 × 4 - 92) ÷ 2 = 10 只，兔 = 28 - 10 = 18 只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：眼睛数÷2=头数，这是隐含的关键信息
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例4 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例4：车轮问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                在一个停车场上，停了汽车和摩托车一共32辆。其中汽车有4个轮子，摩托车有3个轮子，这些车一共有108个轮子。求汽车和摩托车各有多少辆？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例4：车轮问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                在一个停车场上，停了汽车和摩托车一共32辆。其中汽车有4个轮子，摩托车有3个轮子，这些车一共有108个轮子。求汽车和摩托车各有多少辆？
+              </p>
+              <div class="hint-box">
+                🍓 提示：将问题转化为鸡兔同笼，摩托车相当于"鸡"，汽车相当于"兔"
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设都是摩托车，汽车：(108 - 32 × 3) ÷ (4 - 3) = 12 辆；摩托车：32 - 12 = 20 辆。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：鸡兔同笼问题的变式，关键是找准对应关系
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例5 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例5：宿舍问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                某学校有30间宿舍，大宿舍每间住6人，小宿舍每间住4人。已知这些宿舍中一共住了168人，那么其中有多少间大宿舍？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例5：宿舍问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                某学校有30间宿舍，大宿舍每间住6人，小宿舍每间住4人。已知这些宿舍中一共住了168人，那么其中有多少间大宿舍？
+              </p>
+              <div class="hint-box">
+                🍓 提示：假设都是大宿舍，计算人数差异
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设都是大宿舍，小宿舍 = (6 × 30 - 168) ÷ (6 - 4) = 6 间，大宿舍 = 30 - 6 = 24 间。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：生活场景中的鸡兔同笼，注意单位的对应
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例6 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例6：驼峰脚数】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                骆驼有两种，背上只有一个驼峰的单峰骆驼和背上有两个驼峰的双峰骆驼，单峰骆驼比较高大，四肢较长，在沙漠中可走可跑；双峰骆驼四肢短粗，适合在沙漠和雪地中行走。有一群骆驼有23个驼峰，60只脚，这两种骆驼各有多少只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例6：驼峰脚数】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                骆驼有两种，背上只有一个驼峰的单峰骆驼和背上有两个驼峰的双峰骆驼，单峰骆驼比较高大，四肢较长，在沙漠中可走可跑；双峰骆驼四肢短粗，适合在沙漠和雪地中行走。有一群骆驼有23个驼峰，60只脚，这两种骆驼各有多少只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：先求出骆驼总数，再用驼峰数建立方程
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：由于每只骆驼都有四只脚，单峰骆驼和双峰骆驼总数为：60 ÷ 4 = 15（只），假设全是单峰骆驼，双峰骆驼：(23 - 15 × 1) ÷ (2 - 1) = 8 只；单峰骆驼：15 - 8 = 7（只）。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：注意找到不变量（脚数）来确定总数
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例7 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例7：考试得分】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                某次数学竞赛有10道试题，若小宇得70分，根据对话可知小宇答对多少题？（答对一题得10分，答错一题扣5分）
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例7：考试得分】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                某次数学竞赛有10道试题，若小宇得70分，根据对话可知小宇答对多少题？（答对一题得10分，答错一题扣5分）
+              </p>
+              <div class="hint-box">
+                🍓 提示：这是倒扣型问题，分差要用加法：10+5=15
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设10题都是对的，错了：(10 × 10 - 70) ÷ (10 + 5) = 2 道；对了：10 - 2 = 8 道。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：倒扣型问题的分差由减变加，这是关键技巧
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例8 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例8：运输赔偿】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                货运公司运送50箱玻璃仪器，合同规定每箱运费20元，但如果有损坏，被损坏的那一箱不仅不给运费，还要赔偿60元。货运公司最后只得到了760元，请求出损坏了多少箱。
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例8：运输赔偿】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                货运公司运送50箱玻璃仪器，合同规定每箱运费20元，但如果有损坏，被损坏的那一箱不仅不给运费，还要赔偿60元。货运公司最后只得到了760元，请求出损坏了多少箱。
+              </p>
+              <div class="hint-box">
+                🍓 提示：这也是倒扣型，每损坏一箱损失20+60=80元
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设全送到无损坏，应得50 × 20 = 1000元，少得了1000 - 760 = 240（元），共破损240 ÷ (20 + 60) = 3（箱）
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：不仅不给钱还要赔偿，损失要累加计算
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例9 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例9：植树问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                植树节那天，语文老师和数学老师带着一（1）班同学去植树，总共42人。语文老师种了6棵树，数学老师种了12棵树。每名男生种了5棵树，每名女生种了3棵树，一共种了168棵树。全班有多少名男生？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例9：植树问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                植树节那天，语文老师和数学老师带着一（1）班同学去植树，总共42人。语文老师种了6棵树，数学老师种了12棵树。每名男生种了5棵树，每名女生种了3棵树，一共种了168棵树。全班有多少名男生？
+              </p>
+              <div class="hint-box">
+                🍓 提示：先去掉老师的人数和种树数，再对学生进行鸡兔同笼分析
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：男女生共种了：168 - 6 - 12 = 150（棵）树，男女生共42 - 2 = 40（人）。假设全是男生，女生有(40 × 5 - 150) ÷ (5 - 3) = 25（人），男生有40 - 25 = 15（人）。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：复杂问题要先简化，去掉无关量后再分析
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例10 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例10：脚数差问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                一群黄鼠狼给鸡拜年，黄鼠狼和鸡一共有25只，鸡的总腿数比黄鼠狼的总腿数多20条。求黄鼠狼和鸡各有几只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例10：脚数差问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                一群黄鼠狼给鸡拜年，黄鼠狼和鸡一共有25只，鸡的总腿数比黄鼠狼的总腿数多20条。求黄鼠狼和鸡各有几只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：利用脚数差建立方程，假设都是鸡时的脚数差
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设都是鸡，则鸡脚比黄鼠狼脚多25 × 2 = 50只，每少一只鸡，多一只黄鼠狼，则脚数差会减少2 + 4 = 6只，黄鼠狼：(50 - 20) ÷ 6 = 5只，鸡：25 - 5 = 20只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：脚数差问题需要理解差值的变化规律
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例11 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例11：兔脚比鸡脚多】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                鸡兔同笼，鸡、兔共有107只，兔的脚数比鸡的脚数多56只，问鸡、兔各多少只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例11：兔脚比鸡脚多】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                鸡兔同笼，鸡、兔共有107只，兔的脚数比鸡的脚数多56只，问鸡、兔各多少只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：与上题类似，但这次是兔脚比鸡脚多
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设都是兔，则兔脚比鸡脚多107 × 4 = 428只，每少一只兔，多一只鸡，则脚数差会减少4 + 2 = 6只，鸡：(428 - 56) ÷ 6 = 62只，兔：107 - 62 = 45只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：注意谁比谁多，假设的方向要正确
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例12 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例12：数量差问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                有一些鹤和龟在同一个池子里，细心的兰兰小朋友数了数后，发现鹤比龟多12只，鹤足和龟足共72只，那么你能知道鹤、龟各有多少只吗？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例12：数量差问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                有一些鹤和龟在同一个池子里，细心的兰兰小朋友数了数后，发现鹤比龟多12只，鹤足和龟足共72只，那么你能知道鹤、龟各有多少只吗？
+              </p>
+              <div class="hint-box">
+                🍓 提示：已知数量差和脚数和，用等量代换
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设没有龟，则鹤有12只，脚一共有24只，每多一只龟，就多一只鹤，则脚数增加4 + 2 = 6只，龟：(72 - 24) ÷ 6 = 8只，鹤：8 + 12 = 20只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：数量差问题可以用极端假设法求解
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例13 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例13：梅花鹿鸵鸟】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                动物园里养了一些梅花鹿和鸵鸟，共有脚206只，梅花鹿比鸵鸟多20只，梅花鹿和鸵鸟各有多少只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例13：梅花鹿鸵鸟】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                动物园里养了一些梅花鹿和鸵鸟，共有脚206只，梅花鹿比鸵鸟多20只，梅花鹿和鸵鸟各有多少只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：与上题相同的思路，先极端假设
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设没有鸵鸟，则梅花鹿有20只，脚一共有80只，每多一只鸵鸟，就多一只梅花鹿，则脚数增加4 + 2 = 6只，鸵鸟：(206 - 80) ÷ 6 = 21只，梅花鹿：21 + 20 = 41只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：相同的解题模式，举一反三很重要
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例14 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例14：互换问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                鸡、兔共有脚100只，若将鸡换成兔，兔换成鸡，则共有脚86只。问：鸡、兔各有几只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例14：互换问题】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                鸡、兔共有脚100只，若将鸡换成兔，兔换成鸡，则共有脚86只。问：鸡、兔各有几只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：互换前后的鸡兔总数不变，用这个关系求总数
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：互换前鸡兔数量与互换后鸡兔数量加在一起，是原来鸡兔数量之和的2倍，里面鸡的数量和兔的数量也相同。鸡＋兔：(100 + 86) ÷ (4 + 2) = 31只，假设都是鸡，兔：(100 - 31 × 2) ÷ (4 - 2) = 19只；鸡：31 - 19 = 12只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：互换问题需要找到不变的总量关系
+              </div>
+            </div>
+          </div>
+
+          <!-- 范例15 -->
+          <div class="example-card student-version">
+            <div class="example-header">【范例15：三种动物】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed">
+                有蜘蛛、蜻蜓、蝉三种动物共18只，共有腿118条，翅膀20对（蜘蛛8条腿；蜻蜓6条腿，两对翅膀；蝉6条腿，一对翅膀），求蜻蜓有多少只？
+              </p>
+            </div>
+          </div>
+
+          <div class="example-card teacher-version hidden">
+            <div class="example-header">【范例15：三种动物】</div>
+            <div class="p-6">
+              <p class="text-gray-700 leading-relaxed mb-4">
+                有蜘蛛、蜻蜓、蝉三种动物共18只，共有腿118条，翅膀20对（蜘蛛8条腿；蜻蜓6条腿，两对翅膀；蝉6条腿，一对翅膀），求蜻蜓有多少只？
+              </p>
+              <div class="hint-box">
+                🍓 提示：三种动物要分两步，先求出两种，再求第三种
+              </div>
+              <div class="solution-steps">
+                ✅ 解析：假设全是蜘蛛，蜻蜓＋蝉：(8 × 18 - 118) ÷ (8 - 6) = 13只；蜘蛛：18 - 13 = 5只；假设这13只都是蜻蜓，蝉：(13 × 2 - 20) ÷ (2 - 1) = 6只；蜻蜓：13 - 6 = 7只。
+              </div>
+              <div class="key-insight">
+                💡 关键洞察：多种动物问题要逐步化简为两种动物问题
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 知识自测 -->
+    <section id="quiz" class="py-16 px-8 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <p class="text-center text-gray-500 mb-4 text-sm fade-in">
+          点击题目查看答案，检验你的学习成果
+        </p>
+        <h2 class="text-4xl font-bold text-center mb-12 fade-in text-gray-800">
+          <i class="fas fa-brain text-blue-500 mr-3"></i>
+          知识自测
+        </h2>
+        
+        <!-- 知识自测题目列表 -->
+        <div class="space-y-3">
+          <!-- 自测题1 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <!-- 左侧：题目 -->
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(1)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-question-circle text-blue-500 mr-3 text-xl"></i>
+                  1. 鸡兔同笼问题是什么？
+                </h4>
+              </div>
+              <!-- 右侧：答案 -->
+              <div id="answer-1" class="p-6 bg-blue-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>已知鸡和兔的总只数和总腿数，求鸡和兔各有多少只。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题2 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(2)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-magic text-green-500 mr-3 text-xl"></i>
+                  2. 假设法怎么用？
+                </h4>
+              </div>
+              <div id="answer-2" class="p-6 bg-green-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>设鸡求兔，算总腿数，和实际腿数比，总差 ÷ 每差 = 兔数。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题3 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(3)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-pencil-alt text-purple-500 mr-3 text-xl"></i>
+                  3. 画图法有什么用？
+                </h4>
+              </div>
+              <div id="answer-3" class="p-6 bg-purple-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>画出鸡和兔，数头和腿，图解（基础题）理解更直观。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题4 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(4)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-exchange-alt text-orange-500 mr-3 text-xl"></i>
+                  4. 鸡兔同笼还有哪些变式？
+                </h4>
+              </div>
+              <div id="answer-4" class="p-6 bg-orange-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>汽车和摩托车（轮子数不同）、大小房间（住的人数不同）。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题5 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(5)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-question text-indigo-500 mr-3 text-xl"></i>
+                  5. 如果不知道总只数怎么办？
+                </h4>
+              </div>
+              <div id="answer-5" class="p-6 bg-indigo-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>转化其他信息，比如，总眼睛数➗2=总只数。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题6 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(6)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-exclamation-triangle text-red-500 mr-3 text-xl"></i>
+                  6. 什么是"倒扣型"问题？
+                </h4>
+              </div>
+              <div id="answer-6" class="p-6 bg-red-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>一种得分，一种扣分；每换一次，总分变化是两种分数的和。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题7 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(7)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-layer-group text-teal-500 mr-3 text-xl"></i>
+                  7. 什么是分组法？
+                </h4>
+              </div>
+              <div id="answer-7" class="p-6 bg-teal-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>当鸡和兔有倍数关系时，可以分成一组一组来算，简化计算。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题8 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(8)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-calculator text-cyan-500 mr-3 text-xl"></i>
+                  8. 为什么有时脚数差要用 2+4=6？
+                </h4>
+              </div>
+              <div id="answer-8" class="p-6 bg-cyan-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>每换1只鸡成狼，鸡总腿数➖狼总腿数的差，会减少 2+4=6 条。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题9 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(9)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-sync-alt text-pink-500 mr-3 text-xl"></i>
+                  9. 互换前后脚数怎么用来算总只数？
+                </h4>
+              </div>
+              <div id="answer-9" class="p-6 bg-pink-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>互换前后的总腿数相加 ➗ 鸡和兔腿数的和（6）= 总只数。</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自测题10 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+              <div class="p-6 cursor-pointer hover:bg-gray-50 transition-colors" onclick="toggleAnswer(10)">
+                <h4 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                  <i class="fas fa-spider text-amber-500 mr-3 text-xl"></i>
+                  10. 如果题目中有三种动物（如蜘蛛、蜻蜓、蝉），怎么解？
+                </h4>
+              </div>
+              <div id="answer-10" class="p-6 bg-amber-50 border-l border-gray-200 hidden">
+                <p class="text-gray-700 text-lg"><i class="fas fa-check text-green-500 mr-2"></i>分步计算。<br>先假设全是腿最多的动物，算出和实际腿数的差，算出有多少只不是这种动物；再用翅膀数等信息，继续分步算出其他各有几只。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 进一步阅读 -->
+    <section id="reading" class="py-16 px-8 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-4 fade-in text-gray-800">
+          <i class="fas fa-book text-purple-500 mr-3"></i>
+          进一步阅读
+        </h2>
+        <p class="text-center text-gray-600 mb-12 text-lg fade-in">
+          拓展思维，深入理解鸡兔同笼问题的数学思想
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="concept-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9)">
+            <div class="text-3xl text-blue-500 mb-4">📚</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">历史起源</h3>
+            <p class="text-gray-600 text-sm">
+              深入了解《孙子算经》中鸡兔同笼问题的历史背景和数学价值
+            </p>
+          </div>
+
+          <div class="concept-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9)">
+            <div class="text-3xl text-green-500 mb-4">🔗</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">相关问题</h3>
+            <p class="text-gray-600 text-sm">
+              探索与鸡兔同笼类似的其他经典数学问题及其解法
+            </p>
+          </div>
+
+          <div class="concept-card p-6 fade-in" style="background: rgba(255, 255, 255, 0.9)">
+            <div class="text-3xl text-purple-500 mb-4">🧮</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">现代应用</h3>
+            <p class="text-gray-600 text-sm">
+              了解鸡兔同笼问题在现代生活和其他学科中的应用实例
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- 作者信息 -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">作者信息</h3>
+            <p class="text-blue-100">魔渊国际数学教研团队</p>
+            <p class="text-blue-100">2025年魔渊 Class 精品课程</p>
+            <p class="text-blue-100">第12讲：鸡兔同笼</p>
+          </div>
+
+          <!-- 联系方式 -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">联系方式</h3>
+            <div class="space-y-2 text-blue-100">
+              <p><i class="fab fa-weixin mr-2"></i>微信: MoYuanGuoJi</p>
+              <p><i class="fab fa-github mr-2"></i>GitHub: github.com/usyd2020</p>
+              <p><i class="fas fa-envelope mr-2"></i>邮箱: 8ai4kid@gmail.com</p>
+            </div>
+          </div>
+
+          <!-- 版权信息 -->
+          <div>
+            <h3 class="text-xl font-bold mb-4">版权信息</h3>
+            <p class="text-blue-100">© 2025 魔渊国际. 保留所有权利。</p>
+            <p class="text-blue-100 mt-4">
+              本网页采用杂志级设计，融合多种视觉风格，为学生提供最佳的学习体验。
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 浮动按钮 -->
+    <div class="floating-btn" id="back-to-top" onclick="scrollToTop()">
+      <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <div
+      class="floating-btn"
+      id="theme-toggle"
+      onclick="toggleTheme()"
+      style="bottom: 140px"
+    >
+      <i class="fas fa-moon"></i>
+    </div>
+
+    <script>
+      // MathJax 配置
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        },
+        svg: {
+          fontCache: "global",
+        },
+      };
+
+      // 进度条更新
+      function updateProgressBar() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        document.getElementById("progress-bar").style.width = progress + "%";
+      }
+
+      // 滚动事件监听
+      window.addEventListener("scroll", updateProgressBar);
+
+      // 平滑滚动到指定section
+      function goToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      // 返回顶部
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // 主题切换
+      function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.querySelector("#theme-toggle i");
+
+        if (body.classList.contains("dark-mode")) {
+          body.classList.remove("dark-mode");
+          themeIcon.className = "fas fa-moon";
+        } else {
+          body.classList.add("dark-mode");
+          themeIcon.className = "fas fa-sun";
+        }
+      }
+
+      // 范例版本切换功能
+      function initExampleVersionToggle() {
+        const studentBtn = document.getElementById("student-version-btn");
+        const teacherBtn = document.getElementById("teacher-version-btn");
+
+        studentBtn.addEventListener("click", () => showStudentVersion());
+        teacherBtn.addEventListener("click", () => showTeacherVersion());
+      }
+
+      function showStudentVersion() {
+        // 切换按钮样式
+        const studentBtn = document.getElementById("student-version-btn");
+        const teacherBtn = document.getElementById("teacher-version-btn");
+
+        studentBtn.className =
+          "version-btn text-white bg-blue-500 hover:bg-blue-600 active mr-2";
+        teacherBtn.className =
+          "version-btn text-gray-600 bg-gray-200 hover:bg-gray-300";
+
+        // 显示/隐藏内容
+        document
+          .querySelectorAll(".student-version")
+          .forEach((el) => el.classList.remove("hidden"));
+        document
+          .querySelectorAll(".teacher-version")
+          .forEach((el) => el.classList.add("hidden"));
+      }
+
+      function showTeacherVersion() {
+        // 切换按钮样式
+        const studentBtn = document.getElementById("student-version-btn");
+        const teacherBtn = document.getElementById("teacher-version-btn");
+
+        teacherBtn.className =
+          "version-btn text-white bg-green-500 hover:bg-green-600 active";
+        studentBtn.className =
+          "version-btn text-gray-600 bg-gray-200 hover:bg-gray-300 mr-2";
+
+        // 显示/隐藏内容
+        document
+          .querySelectorAll(".teacher-version")
+          .forEach((el) => el.classList.remove("hidden"));
+        document
+          .querySelectorAll(".student-version")
+          .forEach((el) => el.classList.add("hidden"));
+      }
+
+      // 粒子动画
+      function initParticles() {
+        const canvas = document.getElementById("particles-canvas");
+        const ctx = canvas.getContext("2d");
+
+        // 设置画布大小
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        // 粒子数组
+        const particles = [];
+        const particleCount = 50;
+
+        // 粒子类
+        class Particle {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.radius = Math.random() * 3 + 1;
+            this.opacity = Math.random() * 0.5 + 0.3;
+          }
+
+          update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+          }
+
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.fill();
+          }
+        }
+
+        // 初始化粒子
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle());
+        }
+
+        // 连线函数
+        function drawLines() {
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+
+              if (distance < 100) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(255, 255, 255, ${
+                  0.1 * (1 - distance / 100)
+                })`;
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        // 动画循环
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          particles.forEach((particle) => {
+            particle.update();
+            particle.draw();
+          });
+
+          drawLines();
+          requestAnimationFrame(animate);
+        }
+
+        animate();
+      }
+
+      // GSAP 动画
+      function initGSAPAnimations() {
+        // 注册 ScrollTrigger 插件
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 卡片进入动画
+        gsap.fromTo(
+          ".concept-card",
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            scrollTrigger: {
+              trigger: ".concept-card",
+              start: "top 80%",
+            },
+          }
+        );
+
+        // 范例卡片动画
+        gsap.fromTo(
+          ".example-card",
+          { x: -50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: ".example-card",
+              start: "top 90%",
+            },
+          }
+        );
+      }
+
+      // 页面加载完成后初始化
+      document.addEventListener("DOMContentLoaded", function () {
+        initExampleVersionToggle();
+        initParticles();
+        initGSAPAnimations();
+
+        // 初始化 MathJax
+        if (window.MathJax) {
+          MathJax.typesetPromise();
+        }
+
+        // 浮动按钮显示/隐藏
+        window.addEventListener("scroll", function () {
+          const backToTopBtn = document.getElementById("back-to-top");
+          if (window.pageYOffset > 300) {
+            backToTopBtn.style.display = "flex";
+          } else {
+            backToTopBtn.style.display = "none";
+          }
+        });
+
+        // 磁性悬停效果
+        document.querySelectorAll(".magnetic-hover").forEach((element) => {
+          element.addEventListener("mouseenter", function () {
+            gsap.to(this, {
+              scale: 1.05,
+              y: -8,
+              duration: 0.3,
+              ease: "back.out(1.7)",
+            });
+          });
+
+          element.addEventListener("mouseleave", function () {
+            gsap.to(this, {
+              scale: 1,
+              y: 0,
+              duration: 0.3,
+              ease: "back.out(1.7)",
+            });
+          });
+        });
+      });
+
+      // 知识自测功能 - 简化版
+      function toggleAnswer(questionNumber) {
+        const answerElement = document.getElementById(`answer-${questionNumber}`);
+        
+        if (answerElement.classList.contains('hidden')) {
+          answerElement.classList.remove('hidden');
+        } else {
+          answerElement.classList.add('hidden');
+        }
+      }
+    </script>
+  </body>
+</html>
