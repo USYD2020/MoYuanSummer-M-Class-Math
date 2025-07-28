@@ -78,7 +78,7 @@
 - 内容难度递进，符合教学规律
 - 可根据学生情况选择性使用相关章节
 
-![image-20250728174724633](/Users/gogo/Library/Application Support/typora-user-images/image-20250728174724633.png)
+![image-20250728174724633](https://p.ipic.vip/86q91b.png)
 
 ---
 
